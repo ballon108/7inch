@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": { "contentSize": "1280px", "wideSize": "1280px" },
+    "color": {
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "palette": [
+        { "slug": "bg", "name": "Background", "color": "var(--bg)" },
+        { "slug": "ink", "name": "Ink", "color": "var(--ink)" },
+        { "slug": "ash", "name": "Ash", "color": "var(--ash)" },
+        { "slug": "mute", "name": "Mute", "color": "var(--mute)" },
+        { "slug": "card", "name": "Card", "color": "var(--card)" },
+        { "slug": "mp", "name": "My Philosophy (orange)", "color": "var(--mp)" },
+        { "slug": "lr", "name": "Lowrider Anthems (gold)", "color": "var(--lr)" }
+      ]
+    },
+    "spacing": {
+      "units": ["px", "%", "rem", "vw"],
+      "spacingSizes": [
+        { "slug": "20", "name": "XS", "size": "8px" },
+        { "slug": "30", "name": "S", "size": "16px" },
+        { "slug": "40", "name": "M", "size": "24px" },
+        { "slug": "50", "name": "L", "size": "32px" },
+        { "slug": "60", "name": "XL", "size": "56px" },
+        { "slug": "70", "name": "XXL", "size": "80px" }
+      ]
+    },
+    "typography": {
+      "fluid": false,
+      "fontFamilies": [
+        { "slug": "inter", "name": "Inter", "fontFamily": "Inter, system-ui, sans-serif" },
+        { "slug": "space-mono", "name": "Space Mono", "fontFamily": "\"Space Mono\", ui-monospace, monospace" }
+      ]
+    }
+  },
+  "styles": {
+    "color": { "background": "var(--bg)", "text": "var(--ink)" },
+    "typography": { "fontFamily": "var(--wp--preset--font-family--inter)", "fontSize": "16px", "lineHeight": "1.45" },
+    "spacing": { "blockGap": "0", "padding": { "top": "0", "right": "0", "bottom": "0", "left": "0" } },
+    "elements": {
+      "link": { "color": { "text": "var(--ink)" } },
+      "heading": { "typography": { "fontWeight": "400" }, "color": { "text": "var(--ink)" } }
+    }
+  }
+}

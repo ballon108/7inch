@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/record-viewer",
+	"title": "Record viewer (3D)",
+	"category": "design",
+	"icon": "format-image",
+	"description": "Interactive 3D sleeve and record for the current product.",
+	"keywords": ["7inch", "product", "record-viewer"],
+	"acf": { "mode": "preview", "renderTemplate": "render.php", "usesContext": ["postId", "postType"] },
+	"usesContext": ["postId", "postType"],
+	"supports": { "align": false, "anchor": false, "customClassName": false, "html": false }
+}

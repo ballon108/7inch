@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/series-panels",
+	"title": "Series panels",
+	"category": "design",
+	"icon": "columns",
+	"description": "Two series panels built from the Series taxonomy.",
+	"keywords": ["7inch", "series-panels"],
+	"acf": { "mode": "preview", "renderTemplate": "render.php" },
+	"supports": { "align": false, "anchor": false, "customClassName": false, "html": false }
+}

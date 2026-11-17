@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/release-badge",
+	"title": "Release badge",
+	"category": "design",
+	"icon": "tag",
+	"description": "Series · stock status badge for the current product.",
+	"keywords": ["7inch", "product", "release-badge"],
+	"acf": { "mode": "preview", "renderTemplate": "render.php", "usesContext": ["postId", "postType"] },
+	"usesContext": ["postId", "postType"],
+	"supports": { "align": false, "anchor": false, "customClassName": false, "html": false }
+}

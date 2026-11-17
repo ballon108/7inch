@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/more-from-series",
+	"title": "More from the series",
+	"category": "design",
+	"icon": "grid-view",
+	"description": "Other releases of the same series.",
+	"keywords": ["7inch", "product", "more-from-series"],
+	"acf": { "mode": "preview", "renderTemplate": "render.php", "usesContext": ["postId", "postType"] },
+	"usesContext": ["postId", "postType"],
+	"supports": { "align": false, "anchor": false, "customClassName": false, "html": false }
+}

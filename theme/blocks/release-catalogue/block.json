@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/release-catalogue",
+	"title": "Release catalogue",
+	"category": "design",
+	"icon": "grid-view",
+	"description": "Filterable catalogue of all releases.",
+	"keywords": ["7inch", "release-catalogue"],
+	"acf": { "mode": "preview", "renderTemplate": "render.php" },
+	"supports": { "align": false, "anchor": false, "customClassName": false, "html": false }
+}

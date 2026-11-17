@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/hero-carousel",
+	"title": "Hero carousel",
+	"category": "design",
+	"icon": "images-alt2",
+	"description": "Rotating hero of the releases marked as featured.",
+	"keywords": ["7inch", "hero-carousel"],
+	"acf": { "mode": "preview", "renderTemplate": "render.php" },
+	"supports": { "align": false, "anchor": false, "customClassName": false, "html": false }
+}

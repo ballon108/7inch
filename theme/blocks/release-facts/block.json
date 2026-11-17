@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/release-facts",
+	"title": "Release facts",
+	"category": "design",
+	"icon": "list-view",
+	"description": "Format, edition, year, cat. no., pressed in.",
+	"keywords": ["7inch", "product", "release-facts"],
+	"acf": { "mode": "preview", "renderTemplate": "render.php", "usesContext": ["postId", "postType"] },
+	"usesContext": ["postId", "postType"],
+	"supports": { "align": false, "anchor": false, "customClassName": false, "html": false }
+}

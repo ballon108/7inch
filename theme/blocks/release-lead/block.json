@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "acf/release-lead",
+	"title": "Release lead",
+	"category": "design",
+	"icon": "editor-paragraph",
+	"description": "Lead sentence under the product title.",
+	"keywords": ["7inch", "product", "release-lead"],
+	"acf": { "mode": "preview", "renderTemplate": "render.php", "usesContext": ["postId", "postType"] },
+	"usesContext": ["postId", "postType"],
+	"supports": { "align": false, "anchor": false, "customClassName": false, "html": false }
+}
