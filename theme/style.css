@@ -430,9 +430,9 @@ a.card{text-decoration:none}
 .menu-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:50%;background:none;color:var(--ink);cursor:pointer}
 .menu-toggle:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
 .menu-toggle svg path{transform-origin:12px 12px;transition:transform .2s,opacity .2s}
-.site-header.nav-open .menu-toggle .l1{transform:translateY(5px) rotate(45deg)}
+.site-header.nav-open .menu-toggle .l1{transform:rotate(45deg) translateY(5px)}
 .site-header.nav-open .menu-toggle .l2{opacity:0}
-.site-header.nav-open .menu-toggle .l3{transform:translateY(-5px) rotate(-45deg)}
+.site-header.nav-open .menu-toggle .l3{transform:rotate(-45deg) translateY(-5px)}
 .site-nav .nav-partners{display:none}
 @media(max-width:782px){
  .menu-toggle{display:inline-flex}
@@ -444,3 +444,18 @@ a.card{text-decoration:none}
  .site-nav .nav-partners a{font-weight:500}
 }
 @media(max-width:782px){.site-header .site-nav p{text-align:left}}
+
+.menu-toggle,.menu-toggle:focus,.menu-toggle:focus-visible,.menu-toggle:active{outline:none;box-shadow:none;-webkit-tap-highlight-color:transparent}
+@media(hover:none){.menu-toggle:hover{background:none}}
+.pp-contact p{margin:0 0 16px;font-size:16px;line-height:1.5;color:var(--ink)}
+.pp-contact .pp-note{color:var(--ash);font-size:13px}
+.pp-contact a{text-underline-offset:3px}
+.pp-boxed{padding:clamp(20px,3.5vw,32px);border:1px solid var(--line);border-radius:20px;background:var(--card)}
+.pp-boxed .pf-form,.pp-apply.pp-boxed .pf-form{padding:0;border:0;border-radius:0;background:none}
+.pp-boxed h2{margin:0 0 20px}
+
+/* selects: same look in Safari/Chrome/Firefox (native widget removed, custom chevron) */
+.pf-form select,.account-page select,.pp-login select,.shop-page select{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:100%;height:46px;min-height:46px;padding:0 42px 0 14px;border:1px solid var(--line);border-radius:12px;background-color:var(--bg);color:var(--ink);font:15px/46px Inter,system-ui,sans-serif;cursor:pointer;
+ background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 21px) 50%,calc(100% - 15px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;text-overflow:ellipsis}
+.pf-form select:focus,.account-page select:focus{outline:2px solid var(--ink);outline-offset:1px}
+.pf-form select option{color:var(--ink);background:var(--card)}

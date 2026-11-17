@@ -21,11 +21,6 @@ FORM = f"""<div class="pf">
 <div class="pf-wide"><label>Company address *[textarea* address 4x2 autocomplete:street-address]</label></div>
 
 
-<div class="pf-dist" hidden>
-<div><label>Distribution area (country / countries)[text area]</label></div>
-<div><label>Number of shops you supply[number shops min:0]</label></div>
-</div>
-
 <div class="pf-check">[acceptance consent] I accept the <a href="/trade-terms/" target="_blank" rel="noopener">Trade Terms</a> and the <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>, and agree that 7inch.rare may process my details to handle this application. [/acceptance]</div>
 <div class="pf-submit">[submit "Send application"]</div>
 </div>"""
@@ -42,10 +37,6 @@ EU VAT number: [vat]
 Address:
 [address]
 
-
-Distributor only
-Distribution area: [area]
-Shops supplied: [shops]
 
 --
 Sent from the "For partners" form on [_site_url]"""
@@ -83,8 +74,8 @@ $props = $cf->get_properties();
 $props['form'] = base64_decode('{B(FORM)}');
 $props['mail'] = array_merge($props['mail'], [
   'subject' => 'Partner application: [company] ([apply_as], [country])',
-  'sender'  => '[_site_title] <wordpress@7inchrare.com>',
-  'recipient' => 'peet@7inchrare.com',
+  'sender'  => '7inch.rare <shop@7inchrare.com>',
+  'recipient' => 'shop@7inchrare.com',
   'additional_headers' => 'Reply-To: [your-email]',
   'body' => base64_decode('{B(MAIL_BODY)}'),
   'use_html' => 0, 'exclude_blank' => 0,
@@ -125,8 +116,8 @@ PAGE = '''<!-- wp:group {"className":"wrap partner-page pp-wide","layout":{"type
 <!-- /wp:shortcode --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"pp-apply","layout":{"type":"default"}} -->
-<div class="wp-block-group pp-apply"><!-- wp:heading {"level":2} -->
+<!-- wp:group {"className":"pp-apply pp-boxed","layout":{"type":"default"}} -->
+<div class="wp-block-group pp-apply pp-boxed"><!-- wp:heading {"level":2} -->
 <h2 class="wp-block-heading">New partner? Register</h2>
 <!-- /wp:heading -->
 

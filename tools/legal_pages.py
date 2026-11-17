@@ -58,7 +58,7 @@ PAGES["terms"] = ("General Terms and Conditions", """
 
 (2) By clicking "Order and pay" you submit a binding offer to purchase the goods in your basket. You can check and correct your details at any time before submitting.
 
-(3) We confirm receipt of your order by email without delay. The contract is concluded with this order confirmation; for payment by PayPal, credit card, Klarna or another instant payment method, it is concluded on completion of the payment.
+(3) We confirm receipt of your order by email without delay. The contract is concluded with this order confirmation; for payment by PayPal, credit card, Apple Pay or Google Pay, it is concluded on completion of the payment.
 
 (4) The contract languages are German and English. We store the contract text and send you the order details and these terms by email.
 
@@ -72,7 +72,7 @@ PAGES["terms"] = ("General Terms and Conditions", """
 
 ## § 4 Payment
 
-(1) The available payment methods are shown at checkout for each destination country, for example credit card, Apple Pay, Google Pay, PayPal, Klarna, SEPA payments and local payment methods (e.g. iDEAL, Bancontact, EPS, Przelewy24).
+(1) We offer the following payment methods: credit card, Apple Pay, Google Pay, PayPal and SEPA bank transfer. Payments are processed by the payment service provider Mollie. For SEPA bank transfer, you receive the payment details at checkout; we ship once payment has been received.
 
 (2) We do not charge a surcharge for any payment method.
 
@@ -244,9 +244,8 @@ For orders, we process your name, address, email, phone number (optional), order
 
 Depending on the payment method chosen, we pass the data required for payment to:
 
-- Stripe Payments Europe Ltd., 1 Grand Canal Street Lower, Dublin 2, Ireland (credit card, Apple Pay, Google Pay, Klarna, iDEAL, Bancontact, EPS, Przelewy24 and others); Stripe may transfer data to the USA on the basis of the EU-US Data Privacy Framework or standard contractual clauses.
+- Mollie B.V., Keizersgracht 126, 1015 CW Amsterdam, Netherlands (credit card, Apple Pay, Google Pay, SEPA bank transfer and processing of PayPal payments). Mollie processes the data within the EU.
 - PayPal (Europe) S.à r.l. et Cie, S.C.A., 22–24 Boulevard Royal, 2449 Luxembourg.
-- For Klarna, additionally Klarna Bank AB (publ), Sveavägen 46, 111 34 Stockholm, Sweden, which may carry out an identity and credit check.
 
 The legal basis is Art. 6 (1) (b) GDPR. The privacy notices of the respective provider also apply.
 
@@ -290,7 +289,7 @@ For 11 or more records or other countries: shipping costs on request. No shippin
 
 ## Payment methods
 
-Credit card, Apple Pay, Google Pay, PayPal, Klarna (EU, United Kingdom, Switzerland), plus iDEAL, Bancontact, EPS and Przelewy24 depending on the country. No surcharges.
+Credit card, Apple Pay, Google Pay, PayPal, SEPA bank transfer (processed by Mollie). No surcharges.
 
 ## Customs and taxes
 
