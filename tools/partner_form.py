@@ -26,7 +26,7 @@ FORM = f"""<div class="pf">
 <div><label>Number of shops you supply[number shops min:0]</label></div>
 </div>
 
-<div class="pf-check">[acceptance consent] I agree that 7inch.rare may process my details to handle this application. [/acceptance]</div>
+<div class="pf-check">[acceptance consent] I accept the <a href="/trade-terms/" target="_blank" rel="noopener">Trade Terms</a> and the <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>, and agree that 7inch.rare may process my details to handle this application. [/acceptance]</div>
 <div class="pf-submit">[submit "Send application"]</div>
 </div>"""
 

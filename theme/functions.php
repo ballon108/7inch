@@ -5,8 +5,7 @@
 add_action( 'wp_enqueue_scripts', function () {
 	$dir = get_stylesheet_directory();
 	$uri = get_stylesheet_directory_uri();
-	wp_enqueue_style( '7inch-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono&display=swap', array(), null );
-	wp_enqueue_style( '7inch-style', get_stylesheet_uri(), array( '7inch-fonts' ), filemtime( $dir . '/style.css' ) );
+	wp_enqueue_style( '7inch-style', get_stylesheet_uri(), array(), filemtime( $dir . '/style.css' ) );
 	wp_enqueue_script( '7inch-site', $uri . '/assets/js/site.js', array(), filemtime( $dir . '/assets/js/site.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
 	if ( function_exists( 'is_product' ) && is_product() ) {
 		wp_enqueue_script( '7inch-product', $uri . '/assets/js/product.js', array(), filemtime( $dir . '/assets/js/product.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
@@ -15,8 +14,10 @@ add_action( 'wp_enqueue_scripts', function () {
 } );
 
 add_action( 'wp_head', function () {
-	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
-	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+	$f = get_stylesheet_directory_uri() . '/assets/fonts/';
+	foreach ( array( 'inter-latin-400', 'inter-latin-500' ) as $font ) {
+		echo '<link rel="preload" href="' . esc_url( $f . $font . '.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+	}
 	// Apply saved Day/Night choice before first paint.
 	echo '<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>' . "\n";
 }, 1 );
@@ -27,6 +28,7 @@ add_action( 'wp_head', function () {
  * Interface blocks live in /blocks (block.json + render.php, rendered by SCF). */
 require_once get_stylesheet_directory() . '/inc/helpers.php';
 require_once get_stylesheet_directory() . '/inc/partners.php';
+require_once get_stylesheet_directory() . '/inc/shipping.php';
 
 add_filter( 'acf/settings/save_json', fn() => get_stylesheet_directory() . '/acf-json' );
 add_filter( 'acf/settings/load_json', function ( $paths ) { $paths[] = get_stylesheet_directory() . '/acf-json'; return $paths; } );

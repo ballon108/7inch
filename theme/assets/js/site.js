@@ -121,4 +121,19 @@
     pForm.addEventListener('change', function (e) { if (e.target.name === 'apply_as') syncType(); });
     syncType();
   }
+  /* ── Mobile menu (hamburger) ─────────────────────────────────── */
+  var menuBtn = document.querySelector('.menu-toggle');
+  var siteHeader = document.querySelector('.site-header');
+  if (menuBtn && siteHeader) {
+    var setMenu = function (open) {
+      siteHeader.classList.toggle('nav-open', open);
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    menuBtn.addEventListener('click', function () { setMenu(!siteHeader.classList.contains('nav-open')); });
+    siteHeader.querySelectorAll('.site-nav a').forEach(function (a) {
+      a.addEventListener('click', function () { setMenu(false); });
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+    matchMedia('(min-width: 783px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
+  }
 })();
