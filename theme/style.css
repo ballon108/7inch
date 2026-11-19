@@ -705,3 +705,20 @@ body.woocommerce-checkout .shop-page .woocommerce,body.woocommerce-checkout .sho
 :is(.pf-form,.pp-login,.account-page,.shop-page,.woocommerce) :is(input[type=text],input[type=email],input[type=tel],input[type=number],input[type=password],input.input-text,textarea,select){background-color:var(--field)!important;border-color:var(--halo)!important;color:var(--ink)!important}
 :is(.pf-form,.pp-login,.account-page,.shop-page,.woocommerce) :is(input,textarea,select):-webkit-autofill{-webkit-box-shadow:0 0 0 100px var(--field) inset!important;-webkit-text-fill-color:var(--ink)!important;caret-color:var(--ink)}
 :is(.pf-form,.pp-login,.account-page,.shop-page,.woocommerce) :is(input,textarea)::placeholder{color:var(--mute)}
+
+/* ── Mollie Components (card form): readable labels, dark fields ── */
+.mollie-component-label,.mollie-components .mollie-component-label{color:var(--ash)!important;font-size:14px;font-weight:400;margin-bottom:6px}
+.mollie-components .mollie-component,.mollie-component{background-color:var(--field)!important;border:1px solid var(--halo)!important;border-radius:12px!important;box-shadow:none!important;color:var(--ink);min-height:46px;height:46px;padding:0 14px}
+.mollie-components .mollie-component.has-focus,.mollie-component.has-focus{border-color:var(--ink)!important;box-shadow:none!important}
+.mollie-components .mollie-component.is-invalid,.mollie-component.is-invalid{border-color:#ff6a6a!important;box-shadow:none!important}
+.mollie-component-error,.mollie-component-error-notice{color:#ff8a8a}
+.mollie-component-error-notice{background:rgba(255,106,106,.08);border-color:rgba(255,106,106,.5)}
+.mollie-components-description{color:var(--ash)}
+.mollie-components-description svg{fill:currentColor;color:var(--ash)}
+.mollie-components-description svg path{fill:currentColor}
+.mollie-loading{background:var(--field);border-color:var(--halo);color:var(--ash)}
+.mollie-error{background:rgba(255,106,106,.08)}
+/* Mollie iframes carry a light document: match the scheme so the browser does not paint an opaque white canvas */
+.mollie-component,.mollie-component iframe{color-scheme:light}
+.mollie-components .mollie-component,.mollie-component{height:46px!important;min-height:46px!important}
+.mollie-component iframe{border-radius:12px!important;filter:invert(.92) hue-rotate(180deg)}
