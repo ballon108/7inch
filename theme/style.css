@@ -722,3 +722,32 @@ body.woocommerce-checkout .shop-page .woocommerce,body.woocommerce-checkout .sho
 .mollie-component,.mollie-component iframe{color-scheme:light}
 .mollie-components .mollie-component,.mollie-component{height:46px!important;min-height:46px!important}
 .mollie-component iframe{border-radius:12px!important;filter:invert(.92) hue-rotate(180deg)}
+
+/* ── Order confirmation (order received) ───────────────────────── */
+.order-page{max-width:1000px;margin-inline:auto}
+.order-page .alignwide{max-width:none}
+.order-page .wc-block-order-confirmation-status{margin:0 0 28px}
+.order-page .wc-block-order-confirmation-status h1{font-size:clamp(38px,5vw,64px);line-height:.98;letter-spacing:-.045em;font-weight:400;margin:14px 0 16px}
+.order-page .wc-block-order-confirmation-status p{color:var(--ash);font-size:18px;line-height:1.4;margin:0}
+.order-page .wc-block-order-confirmation-summary{margin:0 0 clamp(32px,5vw,56px)}
+.order-page .wc-block-order-confirmation-summary-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.order-page .wc-block-order-confirmation-summary-list-item{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.order-page .wc-block-order-confirmation-summary-list-item__key{font:12px/1.2 "Space Mono",ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ash);font-weight:400}
+.order-page .wc-block-order-confirmation-summary-list-item__value{font-size:16px;font-weight:500;color:var(--ink);overflow-wrap:anywhere}
+.order-page h2.wp-block-heading,.order-page .wc-block-order-confirmation-totals-wrapper h2,.order-page .wc-block-order-confirmation-shipping-wrapper h2,.order-page .wc-block-order-confirmation-billing-wrapper h2{font-size:clamp(24px,2.8vw,32px);line-height:1.1;letter-spacing:-.035em;font-weight:400;margin:0 0 16px}
+.order-page .wc-block-order-confirmation-totals-wrapper{margin:0 0 clamp(32px,5vw,56px)}
+.order-page .wc-block-order-confirmation-totals__table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:20px;background:var(--card);overflow:hidden;font-size:15px}
+.order-page .wc-block-order-confirmation-totals__table th,.order-page .wc-block-order-confirmation-totals__table td{padding:14px 20px;border:0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;color:var(--ink)}
+.order-page .wc-block-order-confirmation-totals__table thead th{font:12px/1.2 "Space Mono",ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ash);font-weight:400}
+.order-page .wc-block-order-confirmation-totals__table th:last-child,.order-page .wc-block-order-confirmation-totals__table td:last-child{text-align:right}
+.order-page .wc-block-order-confirmation-totals__table tfoot th{font-weight:500}
+.order-page .wc-block-order-confirmation-totals__table tfoot tr:last-child th,.order-page .wc-block-order-confirmation-totals__table tfoot tr:last-child td{border-bottom:0;font-size:17px;font-weight:600}
+.order-page .wc-block-order-confirmation-totals__table a{color:var(--ink);text-decoration-color:var(--halo);text-underline-offset:3px}
+.order-page .wc-block-order-confirmation-address-wrapper{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:0 0 clamp(32px,5vw,56px)}
+.order-page .wc-block-order-confirmation-address-wrapper>.wp-block-column{margin:0;flex-basis:auto!important;padding:clamp(18px,3vw,26px);border:1px solid var(--line);border-radius:20px;background:var(--card)}
+.order-page .wc-block-order-confirmation-address-wrapper h2{font-size:clamp(20px,2.2vw,24px);margin-bottom:12px}
+.order-page .wc-block-order-confirmation-shipping-address address,.order-page .wc-block-order-confirmation-billing-address address{font-style:normal;color:var(--ash);line-height:1.55;border:0;padding:0}
+.order-page .wc-block-order-confirmation-shipping-address,.order-page .wc-block-order-confirmation-billing-address{border:0;padding:0}
+.order-page .woocommerce-customer-details--phone,.order-page .woocommerce-customer-details--email{color:var(--ash);margin:8px 0 0}
+.order-page .wc-block-order-confirmation-additional-information .woocommerce-info,.order-page .woocommerce-order-details.mollie-instructions{padding:clamp(18px,3vw,26px);border:1px solid var(--halo);border-radius:20px;background:var(--card);color:var(--ash);margin:0}
+.order-page .wc-block-order-confirmation-additional-information strong{color:var(--ink)}
