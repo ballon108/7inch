@@ -692,3 +692,13 @@ body.woocommerce-checkout .shop-page .woocommerce,body.woocommerce-checkout .sho
 .shop-page #ship-to-different-address{margin:0 0 24px!important}
 .pp-register-link{margin-top:20px}
 .pp-register-link a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+/* ── 404 (no header / footer) ───────────────────────────────────── */
+.e404{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(32px,6vw,80px) max(4vw,16px)}
+.e404 .e404-num{display:flex;align-items:center;justify-content:center;gap:clamp(4px,1.2vw,16px);font-size:clamp(120px,24vw,300px);line-height:1;font-weight:400;letter-spacing:-.06em;margin:clamp(12px,2vw,24px) 0 clamp(8px,2vw,20px);user-select:none}
+.e404 .e404-disc{position:relative;display:inline-block;width:.78em;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#0b0b0b 0 2px,#181818 2px 3.4px);box-shadow:0 24px 44px -22px rgba(0,0,0,.55);animation:spin 9s linear infinite}
+.e404 .e404-disc i{position:absolute;inset:34%;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--bg) 0 7%,transparent 7.5%),var(--mp)}
+.e404 .e404-title{font-size:clamp(32px,4.6vw,56px);line-height:1;letter-spacing:-.045em;margin:0 0 16px}
+.e404 .e404-lead{margin:0 auto}
+.e404 .wp-block-buttons{justify-content:center;margin-top:32px}
+@media (prefers-reduced-motion:reduce){.e404 .e404-disc{animation:none}}
