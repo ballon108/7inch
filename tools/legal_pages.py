@@ -40,7 +40,7 @@ We are neither willing nor obliged to participate in dispute resolution proceedi
 
 ## German Packaging Register LUCID
 
-Registration number DE25432816178102
+Registration number DE2543281617810
 """)
 
 PAGES["terms"] = ("General Terms and Conditions", """

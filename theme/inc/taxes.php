@@ -176,3 +176,18 @@ add_filter( 'woocommerce_find_rates', function ( $matched, $args ) {
 	$busy = false;
 	return $de ? $de : $matched;
 }, 5, 2 );
+
+/* UK consumers off (until further notice): no shipping rates for GB, so neither the normal checkout nor wallet buttons can complete an order. Partners and Northern Ireland (BT…) are not affected. */
+add_filter( 'woocommerce_package_rates', function ( $rates, $package ) {
+	if ( 'yes' === get_option( 'i7_uk_retail', 'no' ) ) { return $rates; }
+	$d = $package['destination'] ?? array();
+	if ( 'GB' !== ( $d['country'] ?? '' ) || i7_is_ni( 'GB', $d['postcode'] ?? '' ) ) { return $rates; }
+	if ( function_exists( 'i7_partner_type' ) && i7_partner_type() ) { return $rates; }
+	return array();
+}, 100, 2 );
+add_filter( 'woocommerce_no_shipping_available_html', function ( $html ) {
+	if ( 'GB' === ( function_exists( 'WC' ) && WC()->customer ? WC()->customer->get_shipping_country() : '' ) && 'yes' !== get_option( 'i7_uk_retail', 'no' ) && ! ( function_exists( 'i7_partner_type' ) && i7_partner_type() ) ) {
+		return '<p>Sorry, we cannot deliver to consumers in the United Kingdom at the moment. Record shops and distributors: please log in with your partner account.</p>';
+	}
+	return $html;
+} );

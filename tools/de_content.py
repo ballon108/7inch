@@ -86,7 +86,7 @@ PAGES = {
     'Consumer dispute resolution': 'Verbraucherstreitbeilegung',
     'We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board.':
         'Wir sind weder bereit noch verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
-    'German Packaging Register LUCID': 'Verpackungsregister LUCID', 'Registration number DE25432816178102': 'Registrierungsnummer DE25432816178102',
+    'German Packaging Register LUCID': 'Verpackungsregister LUCID', 'Registration number DE2543281617810': 'Registrierungsnummer DE2543281617810',
  })),
  100: ('versand-und-zahlung', 'Versand und Zahlung', dict(LEGAL, **{
     'Shipping and Payment': 'Versand und Zahlung',
