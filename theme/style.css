@@ -78,8 +78,8 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .htext{min-height:390px;display:flex;flex-direction:column;justify-content:center}
 .badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:7px 12px;border-radius:100px;box-shadow:inset 0 0 0 1px var(--halo);font:12px/1 "Space Mono",monospace!important;letter-spacing:.06em;text-transform:uppercase;margin:0}
 .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-.scene{position:relative;aspect-ratio:1/0.92;overflow:clip;overflow-clip-margin:100px}
-.pod{position:absolute;left:24%;right:24%;bottom:9%;height:9%;border-radius:50%;background:radial-gradient(closest-side,var(--podGlow),var(--podGlow2) 55%,transparent);filter:blur(3px)}
+.scene{position:relative;aspect-ratio:1/0.92;overflow:visible}
+.pod{position:absolute;left:20%;right:20%;bottom:7%;height:12%;background:radial-gradient(closest-side,var(--podGlow) 0%,color-mix(in srgb,var(--podGlow) 55%,transparent) 30%,var(--podGlow2) 58%,color-mix(in srgb,var(--podGlow2) 35%,transparent) 82%,transparent 100%);filter:blur(8px)}
 .float{position:absolute;inset:0;animation:bob 5s ease-in-out infinite}
 .disc{position:absolute;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#0b0b0b 0 2px,#181818 2px 3.4px);box-shadow:0 24px 40px -22px rgba(0,0,0,.55);display:grid;place-items:center;animation:spin 14s linear infinite}
 .disc .wp-block-image{width:37%;margin:0}
