@@ -78,14 +78,14 @@ addEventListener('rec-play', e => {
   else { spin = false; press('spin', false); }
 });
 const pts = new Map();
-stage.addEventListener('pointerdown', e => { stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); targetRotY = null; if (hint) hint.style.opacity = 0; });
+stage.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); targetRotY = null; if (hint) hint.style.opacity = 0; });
 stage.addEventListener('pointermove', e => {
-  if (!pts.has(e.pointerId)) return; const prev = pts.get(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
+  if (e.pointerType !== 'mouse' || !pts.has(e.pointerId)) return; const prev = pts.get(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
   if (pts.size === 2) { const [a, b] = [...pts.values()]; const d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (stage._pd) zoom = THREE.MathUtils.clamp(zoom * (stage._pd / d), 3.4, 8.5); stage._pd = d; return; }
   const dx = e.clientX - prev[0], dy = e.clientY - prev[1]; velY = dx * 0.008; velX = dy * 0.006; rotY += velY; rotX = THREE.MathUtils.clamp(rotX + velX, -0.9, 0.9);
 });
 const end = e => { pts.delete(e.pointerId); stage._pd = null; }; stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
-stage.addEventListener('dblclick', () => { targetRotY = -0.35; rotX = 0.12; zoom = BASEZ; targetOut = 0; spin = false; press('out', false); press('spin', false); });
+stage.addEventListener('dblclick', e => { if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return; targetRotY = -0.35; rotX = 0.12; zoom = BASEZ; targetOut = 0; spin = false; press('out', false); press('spin', false); });
 stage.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') rotY -= 0.2; if (e.key === 'ArrowRight') rotY += 0.2; });
 function resize() { const w = stage.clientWidth, h = stage.clientHeight; if (!w) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(stage); resize();
