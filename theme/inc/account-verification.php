@@ -28,9 +28,9 @@ function i7_send_verification( $user_id ) {
 	$token = wp_generate_password( 40, false, false );
 	update_user_meta( $user_id, I7_VERIFY_META, array( 'hash' => hash( 'sha256', $token ), 'exp' => time() + I7_VERIFY_TTL ) );
 	$link = add_query_arg( array( 'i7_verify' => $token, 'uid' => $user_id ), home_url( '/' ) );
-	$body = "Hello,\n\nthank you for registering at 7inch.rare. Please confirm your e-mail address to activate your trade account:\n\n"
-		. $link . "\n\nThe link is valid for 3 days. If you did not register, you can ignore this message.\n\n7inch.rare";
-	wp_mail( $user->user_email, 'Confirm your e-mail address – 7inch.rare', $body );
+	$body = "Hello,\n\nthank you for registering at Vibetown Entertainment (7inchrare.com). Please confirm your e-mail address to activate your trade account:\n\n"
+		. $link . "\n\nThe link is valid for 3 days. If you did not register, you can ignore this message.\n\nVibetown Entertainment";
+	wp_mail( $user->user_email, 'Confirm your e-mail address – Vibetown Entertainment', $body );
 }
 
 /* Registration creates the account as "pending" – send the link as soon as both facts are known (either order). */

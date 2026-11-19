@@ -97,7 +97,10 @@ function i7_is_vat_exempt() {
 	$k       = $country . '|' . $vat . '|' . (int) $partner;
 	if ( isset( $cache[ $k ] ) ) { return $cache[ $k ]; }
 	$exempt = false;
-	if ( $country && ! in_array( $country, I7_EU, true ) ) {
+	$ni = 'GB' === $country && i7_is_ni( $country, (string) i7_posted( 'billing_postcode' ) );
+	if ( $ni && 0 === strpos( $vat, 'XI' ) ) {
+		$exempt = i7_vies_valid( 'XI', $vat );
+	} elseif ( $country && ! in_array( $country, I7_EU, true ) ) {
 		$exempt = $partner;                                   // consumers outside the EU already hit the 0 % row; UK consumers get 20 %
 	} elseif ( $country && 'DE' !== $country && $vat ) {
 		$exempt = i7_vies_valid( $country, $vat );
@@ -105,14 +108,17 @@ function i7_is_vat_exempt() {
 	return $cache[ $k ] = $exempt;
 }
 
-add_filter( 'woocommerce_customer_get_is_vat_exempt', function ( $exempt ) {
-	if ( is_admin() && ! wp_doing_ajax() ) { return $exempt; }
-	return i7_is_vat_exempt() ? true : $exempt;
-} );
+/** WooCommerce reads a plain property here, so set it before every totals calculation (cart, checkout refresh, submit). */
+add_action( 'woocommerce_before_calculate_totals', function () {
+	if ( ! function_exists( 'WC' ) || ! WC()->customer ) { return; }
+	$manual = is_user_logged_in() && 'yes' === get_user_meta( get_current_user_id(), 'is_vat_exempt', true ); // exemption set by hand in the user profile
+	WC()->customer->set_is_vat_exempt( $manual || i7_is_vat_exempt() );
+}, 1 );
 
 /* ── UK consumers: off until UK VAT registration ────────────────────── */
 add_action( 'woocommerce_after_checkout_validation', function ( $data, $errors ) {
 	if ( 'yes' === get_option( 'i7_uk_retail', 'no' ) ) { return; }
+	if ( i7_is_ni( $data['billing_country'] ?? '', $data['billing_postcode'] ?? '' ) ) { return; }
 	$gb = 'GB' === ( $data['billing_country'] ?? '' ) || ( ! empty( $data['ship_to_different_address'] ) && 'GB' === ( $data['shipping_country'] ?? '' ) );
 	if ( $gb && ! ( function_exists( 'i7_partner_type' ) && i7_partner_type() ) ) {
 		$errors->add( 'uk_closed', 'Sorry, we cannot deliver to consumers in the United Kingdom at the moment. Record shops and distributors: please log in with your partner account.' );
@@ -146,4 +152,36 @@ add_action( 'woocommerce_order_details_after_order_table', function ( $order ) {
 add_action( 'woocommerce_admin_order_data_after_billing_address', function ( $order ) {
 	$n = $order->get_meta( '_i7_vat_note' );
 	if ( $n ) { echo '<p><strong>VAT note:</strong> ' . esc_html( $n ) . '</p>'; }
+} );
+
+/* ── Partners: prices are NET (VAT added on top; 0 % for EU reverse charge / export) ── */
+add_filter( 'woocommerce_prices_include_tax', function ( $incl ) {
+	return ( function_exists( 'i7_partner_type' ) && i7_partner_type() ) ? false : $incl;
+} );
+foreach ( array( 'shop', 'cart' ) as $i7_ctx ) {
+	add_filter( 'option_woocommerce_tax_display_' . $i7_ctx, function ( $v ) {
+		return ( function_exists( 'i7_partner_type' ) && i7_partner_type() ) ? 'excl' : $v;
+	} );
+}
+
+/* ── Northern Ireland (postcode BT…) is treated like the EU: German rate, EU business with an "XI" VAT ID is exempt ── */
+function i7_is_ni( $country, $postcode ) {
+	return 'GB' === strtoupper( (string) $country ) && 0 === stripos( trim( (string) $postcode ), 'BT' );
+}
+add_filter( 'woocommerce_find_rates', function ( $matched, $args ) {
+	static $busy = false;
+	if ( $busy || ! i7_is_ni( $args['country'] ?? '', $args['postcode'] ?? '' ) ) { return $matched; }
+	$busy = true;
+	$de   = WC_Tax::find_rates( array_merge( $args, array( 'country' => 'DE', 'state' => '', 'postcode' => '', 'city' => '' ) ) );
+	$busy = false;
+	return $de ? $de : $matched;
+}, 5, 2 );
+
+/* ── US import duty (prepaid): 10 % of goods value + 2.00 € ── */
+add_action( 'woocommerce_cart_calculate_fees', function ( $cart ) {
+	if ( is_admin() && ! wp_doing_ajax() ) { return; }
+	if ( 'US' !== WC()->customer->get_shipping_country() ) { return; }
+	$goods = (float) $cart->get_subtotal();
+	if ( $goods <= 0 ) { return; }
+	$cart->add_fee( 'US import duty (prepaid)', round( $goods * 0.10 + 2.00, 2 ), false );
 } );

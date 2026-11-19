@@ -1,9 +1,9 @@
 <?php
 /**
  * "DHL" shipping method for retail orders (rates from the User Journey brief).
- * Cost depends on the number of records: 1–3 (small parcel) or 4+ (DHL Paket).
- * Partners (shops / distributors) get delivery included, except ex-works countries (DE, BR).
- * Rates are editable per shipping zone in WooCommerce → Settings → Shipping.
+ * Consumers: 1–5 records (untracked outside Germany, tracked option at the higher price) or 6+.
+ * Partners: per parcel by weight (0.1 kg per record; up to 5 kg / up to 10 kg, more parcels above), net prices.
+ *  * Rates are editable per shipping zone in WooCommerce → Settings → Shipping.
  */
 add_action( 'woocommerce_shipping_init', function () {
 	if ( class_exists( 'I7_Shipping_DHL' ) ) { return; }
@@ -13,14 +13,16 @@ add_action( 'woocommerce_shipping_init', function () {
 			$this->id                 = 'i7_dhl';
 			$this->instance_id        = absint( $instance_id );
 			$this->method_title       = 'DHL';
-			$this->method_description = 'DHL shipping priced by number of records (1–3 / 4+).';
+			$this->method_description = 'DHL shipping priced by number of records (1–5 / 6+).';
 			$this->supports           = array( 'shipping-zones', 'instance-settings' );
 			$this->instance_form_fields = array(
 				'title'       => array( 'title' => 'Method title', 'type' => 'text', 'default' => 'DHL' ),
-				'cost_small'  => array( 'title' => 'Cost, 1–3 records (€)', 'type' => 'price', 'default' => '0' ),
-				'cost_large'  => array( 'title' => 'Cost, 4+ records (€)', 'type' => 'price', 'default' => '0' ),
-				'small_label' => array( 'title' => 'Label, 1–3 records', 'type' => 'text', 'default' => 'DHL Päckchen XS' ),
-				'large_label' => array( 'title' => 'Label, 4+ records', 'type' => 'text', 'default' => 'DHL Paket' ),
+				'cost_small'  => array( 'title' => 'Consumers: 1–5 records (€, gross)', 'type' => 'price', 'default' => '0' ),
+				'cost_large'  => array( 'title' => 'Consumers: 6+ records, or tracked 1–5 (€, gross)', 'type' => 'price', 'default' => '0' ),
+				'small_label' => array( 'title' => 'Label, 1–5 records', 'type' => 'text', 'default' => 'untracked' ),
+				'large_label' => array( 'title' => 'Label, 6+ records (tracked)', 'type' => 'text', 'default' => 'tracked' ),
+				'b2b_5kg'     => array( 'title' => 'Partners: parcel up to 5 kg (€, net)', 'type' => 'price', 'default' => '0' ),
+				'b2b_10kg'    => array( 'title' => 'Partners: parcel up to 10 kg (€, net)', 'type' => 'price', 'default' => '0' ),
 			);
 			$this->title = $this->get_option( 'title', 'DHL' );
 			add_action( 'woocommerce_update_options_shipping_' . $this->id, array( $this, 'process_admin_options' ) );
@@ -30,23 +32,37 @@ add_action( 'woocommerce_shipping_init', function () {
 			$qty = 0;
 			foreach ( $package['contents'] as $item ) { $qty += (int) $item['quantity']; }
 			$country = $package['destination']['country'] ?? '';
-			$large   = $qty > 3;
-			$cost    = (float) $this->get_option( $large ? 'cost_large' : 'cost_small', 0 );
-			$label   = $this->get_option( $large ? 'large_label' : 'small_label', 'DHL' );
-			if ( function_exists( 'i7_partner_type' ) && i7_partner_type() && ! in_array( $country, array( 'DE', 'BR' ), true ) ) {
-				$cost  = 0;
-				$label = 'delivery included';
+			$partner = function_exists( 'i7_partner_type' ) && i7_partner_type();
+			if ( $partner ) {
+				// 0.1 kg per record: every full 100 records = one 10 kg parcel, the rest = one 5 kg (≤ 50) or 10 kg parcel.
+				$c5 = (float) $this->get_option( 'b2b_5kg', 0 );
+				$c10 = (float) $this->get_option( 'b2b_10kg', 0 );
+				$full = intdiv( $qty, 100 );
+				$rem  = $qty - $full * 100;
+				$n    = $full + ( $rem ? 1 : 0 );
+				$cost = $full * $c10 + ( $rem ? ( $rem <= 50 ? $c5 : $c10 ) : 0 );
+				if ( $n < 1 || $cost <= 0 ) { return; }
+				$this->add_rate( array( 'id' => $this->get_rate_id(), 'label' => 'DHL – ' . $n . ( 1 === $n ? ' parcel' : ' parcels' ), 'cost' => $cost ) );
+				return;
 			}
-			// Consumer shipping costs are gross (VAT included): split the VAT out so the customer pays exactly the listed amount.
-			if ( $cost > 0 && wc_tax_enabled() && wc_prices_include_tax() && ! ( function_exists( 'i7_partner_type' ) && i7_partner_type() ) ) {
-				$rates = function_exists( 'i7_is_vat_exempt' ) && i7_is_vat_exempt() ? WC_Tax::get_base_tax_rates( '' ) : WC_Tax::get_shipping_tax_rates();
-				$cost -= array_sum( WC_Tax::calc_inclusive_tax( $cost, $rates ) );
+			$small = (float) $this->get_option( 'cost_small', 0 );
+			$large = (float) $this->get_option( 'cost_large', 0 );
+			$rates = array();
+			if ( $qty > 5 ) {
+				$rates[] = array( $large, $this->get_option( 'large_label', 'tracked' ), 'large' );
+			} else {
+				$rates[] = array( $small, $this->get_option( 'small_label', 'untracked' ), 'small' );
+				if ( 'DE' !== $country && $large > $small ) { $rates[] = array( $large, $this->get_option( 'large_label', 'tracked' ), 'large' ); }
 			}
-			$this->add_rate( array(
-				'id'    => $this->get_rate_id(),
-				'label' => 'DHL – ' . $label,
-				'cost'  => $cost,
-			) );
+			foreach ( $rates as $r ) {
+				$cost = $r[0];
+				// Consumer shipping costs are gross (VAT included): split the VAT out so the customer pays exactly the listed amount.
+				if ( $cost > 0 && wc_tax_enabled() && wc_prices_include_tax() ) {
+					$trates = function_exists( 'i7_is_vat_exempt' ) && i7_is_vat_exempt() ? WC_Tax::get_base_tax_rates( '' ) : WC_Tax::get_shipping_tax_rates();
+					$cost  -= array_sum( WC_Tax::calc_inclusive_tax( $cost, $trates ) );
+				}
+				$this->add_rate( array( 'id' => $this->get_rate_id( $r[2] ), 'label' => 'DHL – ' . $r[1], 'cost' => $cost ) );
+			}
 		}
 	}
 } );
