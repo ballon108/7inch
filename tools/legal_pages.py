@@ -259,7 +259,20 @@ If you contact us, we process your details to handle your enquiry (Art. 6 (1) (b
 
 ## 7. Cookies and local storage
 
-We use only technically necessary cookies and local storage (basket, login, language setting, light/dark mode; § 25 (2) TDDDG). Fonts are loaded locally from our server, not from Google.
+We use only technically necessary cookies and local storage (§ 25 (2) TDDDG, Art. 6 (1) (f) GDPR). We do not use analytics, advertising or tracking cookies, and fonts are loaded locally from our server, not from Google. Because only necessary cookies are used, no cookie consent banner is required. You can block or delete cookies in your browser settings; the basket, login and checkout may then no longer work.
+
+The following cookies and storage entries are set by the shop:
+
+| Name | Purpose | Duration |
+| woocommerce_cart_hash, woocommerce_items_in_cart | Detect changes to the basket so that it is displayed correctly | Session |
+| wp_woocommerce_session_* | Stores your basket and checkout data (also for guests) | 2 days |
+| woocommerce_recently_viewed | Remembers recently viewed products | Session |
+| wordpress_logged_in_*, wordpress_sec_*, wordpress_test_cookie | Login to your customer account and check that cookies are enabled | Session, up to 14 days with "Remember me" |
+| wp-settings-*, wp-settings-time-* | Stores interface settings for logged-in users | 1 year |
+| pll_language | Stores the selected language | 1 year |
+| theme (local storage) | Stores your light/dark mode choice; stays in your browser and is not sent to us | Until deleted |
+
+Payment is made on the page of the payment provider (see section 4), which may set its own cookies there.
 
 ## 8. Links to social networks
 

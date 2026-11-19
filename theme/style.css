@@ -422,8 +422,11 @@ a.card{text-decoration:none}
 .about-page p{margin:0 0 16px}
 .about-page .pp-lead,.about-page .pp-note{margin-bottom:24px}
 .legal-page .legal-table table,.legal-page .legal-table th,.legal-page .legal-table td{border:0;border-bottom:1px solid var(--line)}
-.legal-page .legal-table table{min-width:520px}
-.legal-page .legal-table th,.legal-page .legal-table td{white-space:nowrap}
+.legal-page .legal-table table{min-width:0;table-layout:auto}
+.legal-page .legal-table th,.legal-page .legal-table td{white-space:normal;vertical-align:top;overflow-wrap:anywhere;line-height:1.5}
+.legal-page .legal-table td:first-child{font:13px/1.5 "Space Mono",ui-monospace,monospace;width:34%}
+.legal-page .legal-table td:last-child,.legal-page .legal-table th:last-child{width:22%}
+@media(max-width:640px){.legal-page .legal-table table{font-size:14px}.legal-page .legal-table td:first-child{font-size:12px}.legal-page .legal-table th,.legal-page .legal-table td{padding:10px 8px}}
 .legal-page ul{margin:0 0 16px;padding-left:22px}
 
 /* mobile navigation: hamburger */
