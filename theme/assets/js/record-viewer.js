@@ -44,15 +44,12 @@ record.rotation.x = Math.PI / 2; record.rotation.y = Math.PI / 2;
 const disc = new THREE.Group(); disc.add(record);
 const group = new THREE.Group(); group.add(sleeve); group.add(disc); scene.add(group);
 const PY = -1.38;
-function blobTex(rgb, a0, a1) { const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'); const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128); gr.addColorStop(0, `rgba(${rgb},${a0})`); gr.addColorStop(0.55, `rgba(${rgb},${a1})`); gr.addColorStop(1, `rgba(${rgb},0)`); g.fillStyle = gr; g.fillRect(0, 0, 256, 256); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
+function blobTex(rgb, a0, a1) { const N = 256, [r, g, b] = rgb.split(',').map(Number), d = new Uint8Array(N * N * 4); const ss = (lo, hi, x) => { x = Math.min(1, Math.max(0, (x - lo) / (hi - lo))); return x * x * (3 - 2 * x); }; for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) { const t = Math.min(1, Math.hypot(x + 0.5 - N / 2, y + 0.5 - N / 2) / (N / 2)); const f = 1 - ss(0, 1, t), a = (a0 * f * f * f + a1 * f * f * f * f * f) / 1.3; const k = (y * N + x) * 4; d[k] = r; d[k + 1] = g; d[k + 2] = b; d[k + 3] = Math.round(a * 255); } const t = new THREE.DataTexture(d, N, N, THREE.RGBAFormat); t.colorSpace = THREE.SRGBColorSpace; t.magFilter = t.minFilter = THREE.LinearFilter; t.generateMipmaps = false; t.needsUpdate = true; return t; }
 const shadowMat = new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, fog: false });
-const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 0.95), shadowMat); shadow.rotation.x = -Math.PI / 2; shadow.position.y = PY; scene.add(shadow);
-const halo = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 1.7), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, fog: false, blending: THREE.AdditiveBlending })); halo.rotation.x = -Math.PI / 2; halo.position.y = PY - 0.01; scene.add(halo);
-function shadePod(dark) {
-  if (dark) { shadowMat.map = blobTex('255,236,200', 0.34, 0.10); shadowMat.blending = THREE.AdditiveBlending; halo.material.map = blobTex('255,220,170', 0.10, 0.03); halo.visible = true; }
-  else { shadowMat.map = blobTex('0,0,0', 0.34, 0.09); shadowMat.blending = THREE.NormalBlending; halo.visible = false; }
-  shadowMat.needsUpdate = true; halo.material.needsUpdate = true;
-}
+const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 0.95), shadowMat); shadow.visible = false; /* shadow removed */
+const halo = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 1.7), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, fog: false, blending: THREE.AdditiveBlending })); halo.visible = false; /* halo removed */
+function shadePod() {}
+
 
 const mode = stage.dataset.mode === 'lr' ? 'lr' : 'mp';
 let rotY = -0.35, rotX = 0.12, velY = 0, velX = 0, targetOut = 0, out = 0, spin = false, zoom = BASEZ, targetRotY = null, idle = 0;
@@ -106,7 +103,7 @@ function tick() {
   if (mode === 'lr') { disc.position.x = out * 1.05 - out * 0.5; sleeve.position.x = -out * 0.5; } else { disc.position.x = 0; }
   if (spin) record.rotation.y += dt * (reduce ? 0 : 3.5);
   const bob = reduce ? 0 : Math.sin(clock.elapsedTime * 1.3) * 0.025;
-  group.position.y = (mode === 'mp' ? -0.3 : -0.43) + bob; shadow.scale.setScalar(1 - bob * 2); shadow.material.opacity = 0.9 - bob * 4;
+  group.position.y = (mode === 'mp' ? -0.3 : -0.43) + bob;
   group.rotation.set(rotX, rotY, 0);
   camera.position.z += (zoom - camera.position.z) * 0.15;
   renderer.render(scene, camera);

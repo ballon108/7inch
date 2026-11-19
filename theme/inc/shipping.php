@@ -37,6 +37,11 @@ add_action( 'woocommerce_shipping_init', function () {
 				$cost  = 0;
 				$label = 'delivery included';
 			}
+			// Consumer shipping costs are gross (VAT included): split the VAT out so the customer pays exactly the listed amount.
+			if ( $cost > 0 && wc_tax_enabled() && wc_prices_include_tax() && ! ( function_exists( 'i7_partner_type' ) && i7_partner_type() ) ) {
+				$rates = function_exists( 'i7_is_vat_exempt' ) && i7_is_vat_exempt() ? WC_Tax::get_base_tax_rates( '' ) : WC_Tax::get_shipping_tax_rates();
+				$cost -= array_sum( WC_Tax::calc_inclusive_tax( $cost, $rates ) );
+			}
 			$this->add_rate( array(
 				'id'    => $this->get_rate_id(),
 				'label' => 'DHL – ' . $label,

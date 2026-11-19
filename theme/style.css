@@ -169,6 +169,7 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .stage{position:relative;aspect-ratio:1/1;touch-action:pan-y;border-radius:10px}
 @media (hover:hover) and (pointer:fine){.stage{touch-action:none;cursor:grab}.stage:active{cursor:grabbing}}
 @media (hover:none),(pointer:coarse){.hint{display:none}}
+.stage,.stage:focus,.stage:focus-visible,.stage canvas,.stage canvas:focus,.stage canvas:focus-visible{outline:none;-webkit-tap-highlight-color:transparent}
 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .stage .fallback{position:absolute;inset:14%;width:72%;height:72%;object-fit:cover;display:none;border-radius:2px}
 .stage.nogl .fallback{display:block}.stage.nogl canvas{display:none}
@@ -751,3 +752,22 @@ body.woocommerce-checkout .shop-page .woocommerce,body.woocommerce-checkout .sho
 .order-page .woocommerce-customer-details--phone,.order-page .woocommerce-customer-details--email{color:var(--ash);margin:8px 0 0}
 .order-page .wc-block-order-confirmation-additional-information .woocommerce-info,.order-page .woocommerce-order-details.mollie-instructions{padding:clamp(18px,3vw,26px);border:1px solid var(--halo);border-radius:20px;background:var(--card);color:var(--ash);margin:0}
 .order-page .wc-block-order-confirmation-additional-information strong{color:var(--ink)}
+
+/* partner form: country select2 */
+.pf-form .select2-container{width:100%!important}
+.pf-form .select2-container--default .select2-selection--single{height:46px;display:flex;align-items:center;box-sizing:border-box;background:var(--bg);border:1px solid var(--line);border-radius:12px}
+.pf-form .select2-container--default .select2-selection--single .select2-selection__rendered{display:block;width:100%;height:auto;margin:0;padding:0 38px 0 14px!important;line-height:44px!important;color:var(--ink)!important;font:15px/44px Inter,system-ui,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pf-form .select2-container--default .select2-selection--single .select2-selection__arrow{top:0;right:8px;height:44px;width:24px}
+.pf-form .select2-container--default.select2-container--focus .select2-selection--single,.pf-form .select2-container--default.select2-container--open .select2-selection--single{outline:2px solid var(--ink);outline-offset:1px}
+.pf-form .select2-container--default.select2-container--open .select2-selection--single,.pf-form .select2-container--default.select2-container--focus .select2-selection--single{outline:0;border-color:var(--ink)}
+.pf-form .select2-container{display:block}
+
+/* select2: same field background / border as the other inputs */
+.select2-container--default .select2-selection--single,.select2-container--default.select2-container--open .select2-selection--single{background-color:var(--field)!important;border-color:var(--halo)!important}
+.select2-container--default .select2-search--dropdown .select2-search__field{background-color:var(--field)!important;border-color:var(--halo)!important}
+
+/* consent checkbox: larger, in the field style */
+.pf-form .pf-check label{gap:14px;font-size:14px;line-height:1.5;align-items:flex-start}
+.pf-form .pf-check input[type=checkbox]{-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;border:1px solid var(--halo);border-radius:8px;background-color:var(--field);cursor:pointer;display:inline-grid;place-content:center;transition:background-color .15s,border-color .15s}
+.pf-form .pf-check input[type=checkbox]:hover{border-color:var(--ink)}
+.pf-form .pf-check input[type=checkbox]:checked{background-color:var(--ink);border-color:var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2306090A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:70%}

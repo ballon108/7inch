@@ -32,6 +32,7 @@ require_once get_stylesheet_directory() . '/inc/partners.php';
 require_once get_stylesheet_directory() . '/inc/shipping.php';
 require_once get_stylesheet_directory() . '/inc/checkout-fields.php';
 require_once get_stylesheet_directory() . '/inc/images.php';
+require_once get_stylesheet_directory() . '/inc/taxes.php';
 
 add_filter( 'acf/settings/save_json', fn() => get_stylesheet_directory() . '/acf-json' );
 add_filter( 'acf/settings/load_json', function ( $paths ) { $paths[] = get_stylesheet_directory() . '/acf-json'; return $paths; } );
@@ -137,3 +138,14 @@ add_action( 'woocommerce_after_customer_login_form', function () {
 
 /* Dark mode only: no Day/Night switch, the theme is fixed. */
 add_filter( 'language_attributes', function ( $out ) { return $out . ' data-theme="dark"'; } );
+
+
+/* Partner application form: searchable country select (WooCommerce's selectWoo, same look as checkout / account). */
+add_action( 'wp_enqueue_scripts', function () {
+	if ( ! is_page( 'partners-register' ) || ! wp_script_is( 'selectWoo', 'registered' ) ) { return; }
+	wp_enqueue_style( 'select2' );
+	wp_enqueue_script( 'selectWoo' );
+	wp_add_inline_script( 'selectWoo', "jQuery(function($){var s=$('.pf-form select[name=country]');if(!s.length||!$.fn.selectWoo)return;"
+		. "var init=function(){s.selectWoo({width:'100%',placeholder:'Select country',dropdownParent:s.closest('.pf')});};init();"
+		. "document.addEventListener('wpcf7reset',function(){s.val('').trigger('change');});});" );
+}, 20 );
