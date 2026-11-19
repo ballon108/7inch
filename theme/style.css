@@ -167,7 +167,7 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 @media(prefers-reduced-motion:reduce){.float,.disc,.dot.on span b{animation:none}.hero-slide{transition:none}html{scroll-behavior:auto}}
 
 /* ══ Product page (WooCommerce single product) ═════════════════════ */
-a.card{text-decoration:none}
+
 .crumb,.crumb a{font-size:13px;color:var(--mute);text-decoration:none;margin:0}
 .crumb{padding-block:24px 0}
 .crumb a:hover{text-decoration:underline}
@@ -198,7 +198,9 @@ a.card{text-decoration:none}
 .buy .price .woocommerce-Price-amount,.buy .price bdi{font-size:inherit}
 .buy .wp-block-woocommerce-add-to-cart-form{flex:1 1 200px;margin:0}
 .buy form.cart{display:flex;margin:0}
-.buy .quantity,.buy .wc-block-add-to-cart-form .quantity{display:none!important}
+.buy .quantity{flex:none;display:inline-flex}
+.buy .quantity input.qty{width:76px;height:50px;border:1px solid var(--halo);border-radius:100px;background:none;color:var(--ink);text-align:center;font:500 15px Inter,system-ui,sans-serif;padding:0 8px}
+.buy form.cart{gap:8px;align-items:center}
 .buy .single_add_to_cart_button,.buy .wp-element-button{flex:1;min-height:50px;border:0;border-radius:100px;background:var(--ink);color:var(--bg);font:500 15px Inter,system-ui,sans-serif;padding:0 28px;cursor:pointer;width:100%}
 .buy .single_add_to_cart_button:hover{opacity:.88}
 .buy .stock{margin:0;color:var(--ash);font-size:14px}
@@ -260,7 +262,7 @@ a.card{text-decoration:none}
 /* ── My account ─────────────────────────────────────────────────── */
 .account-page{padding-block:clamp(36px,6vw,80px)}
 .account-page .pp-title{font-size:clamp(38px,5vw,64px);line-height:.98;letter-spacing:-.045em;font-weight:400;margin:14px 0 34px}
-.account-page .woocommerce{display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.account-page .woocommerce{display:grid;grid-template-columns:230px minmax(0,800px);gap:clamp(24px,4vw,56px);align-items:start}
 .account-page .woocommerce>*:not(.woocommerce-MyAccount-navigation):not(.woocommerce-MyAccount-content){grid-column:1/-1}
 .account-page .woocommerce-MyAccount-navigation,.account-page .woocommerce-MyAccount-content{float:none!important;width:auto!important;margin:0}
 .account-page .woocommerce-MyAccount-navigation ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
@@ -529,3 +531,157 @@ a.card{text-decoration:none}
 .shop-page .select2-container--default .select2-selection--single .select2-selection__arrow{top:0;right:8px;height:44px;width:24px}
 .shop-page .select2-container--default.select2-container--focus .select2-selection--single,.shop-page .select2-container--default.select2-container--open .select2-selection--single{outline:2px solid var(--ink);outline-offset:1px}
 .shop-page .select2-container .select2-selection--single .select2-selection__clear{display:none}
+
+/* card: link on title (stretched), purchase form above it */
+.card{position:relative}
+.card .ct a{color:inherit;text-decoration:none}
+.card .ct a::after{content:"";position:absolute;inset:0;border-radius:10px;z-index:1}
+.card-buy{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:auto;padding-top:6px;position:relative;z-index:2}
+.card .qty{display:inline-flex;align-items:center;border:1px solid var(--halo);border-radius:100px;height:44px;flex:none}
+.card .qty button{width:34px;height:42px;border:0;background:none;color:var(--ink);font:500 18px Inter,system-ui,sans-serif;cursor:pointer;padding:0;border-radius:100px}
+.card .qty button:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.card .qty input{width:34px;border:0;background:none;color:var(--ink);text-align:center;font:500 14px Inter,system-ui,sans-serif;padding:0;-moz-appearance:textfield;appearance:textfield}
+.card .qty input::-webkit-outer-spin-button,.card .qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.card-add{flex:1 1 112px;min-height:44px;border:0;border-radius:100px;background:var(--ink);color:var(--bg);font:500 14px Inter,system-ui,sans-serif;cursor:pointer;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+.card-add:hover{opacity:.88}
+.card-add.is-added{background:var(--lr)}
+.card-add.is-disabled{background:none;box-shadow:inset 0 0 0 1px var(--halo);color:var(--mute);cursor:default}
+.card-add:disabled{opacity:.6;cursor:progress}
+
+/* price on cards (B2BKing may replace it with group / tier prices) */
+.card-meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.card-meta .st{margin:0}
+.card-price{margin:0;font-size:15px;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+.card-price del{color:var(--mute);font-weight:400;margin-right:4px}
+.card-price ins{text-decoration:none}
+.card-price small,.card-price .b2bking_tiered_price_html{font-size:12px;font-weight:400;color:var(--mute)}
+a.card-add{text-decoration:none}
+
+/* shop / series archive */
+.shop-notices:empty,.shop-notices .wp-block-woocommerce-store-notices:empty{display:none}
+.shop-notices{padding-top:24px}
+.b2b-note{margin:-16px 0 24px;padding:14px 18px;border-radius:10px;background:var(--card);box-shadow:inset 0 0 0 1px var(--halo);color:var(--ash);font-size:14px}
+.b2b-note strong{color:var(--ink);font-weight:500}
+
+/* WooCommerce notices (My account, cart, checkout) — readable in Day and Night */
+.woocommerce-error,.woocommerce-message,.woocommerce-info,
+.wc-block-components-notice-banner,.wc-block-components-notice-banner.is-error,.wc-block-components-notice-banner.is-info,
+.wc-block-components-notice-banner.is-success,.wc-block-components-notice-banner.is-warning{background:var(--card)!important;color:var(--ink)!important;border:1px solid var(--halo)!important;border-radius:10px;padding:14px 18px;margin:0 0 16px;list-style:none}
+.woocommerce-error,.wc-block-components-notice-banner.is-error{border-color:var(--mp)!important}
+.woocommerce-message,.wc-block-components-notice-banner.is-success{border-color:var(--lr)!important}
+.woocommerce-error::before,.woocommerce-message::before,.woocommerce-info::before{color:var(--ink)}
+.wc-block-components-notice-banner>.wc-block-components-notice-banner__content,
+.wc-block-components-notice-banner .wc-block-components-notice-banner__summary,
+.woocommerce-error li,.woocommerce-message,.woocommerce-info{color:var(--ink)!important}
+.wc-block-components-notice-banner a,.wc-block-components-notice-banner button,.wc-block-components-notice-banner .wc-block-components-button,
+.woocommerce-message a,.woocommerce-info a,.woocommerce-error a{color:var(--ink)!important;text-decoration-color:var(--mute)}
+.woocommerce-message .button,.woocommerce-info .button,.woocommerce-error .button{background:var(--ink)!important;color:var(--bg)!important;border-radius:100px}
+/* notice action links (e.g. "Browse products", "Confirm email address") */
+.wc-block-components-notice-banner a.button,.wc-block-components-notice-banner .wc-forward,.wc-block-components-notice-banner a.wc-forward.button,
+.woocommerce-info .wc-forward,.woocommerce-message .wc-forward{color:var(--ink)!important;opacity:1!important;background:none!important;font-weight:500;text-decoration:underline;text-underline-offset:4px;border:0;padding:0}
+.wc-block-components-notice-banner a.button:hover,.wc-block-components-notice-banner .wc-forward:hover{text-decoration-color:var(--ink)}
+/* B2BKing account tabs (purchase lists, etc.) – readable in both themes */
+.account-page .woocommerce-MyAccount-content :is(h1,h2,h3,h4,h5,[class*=b2bking][class*=title],[class*=b2bking][class*=header]){color:var(--ink)}
+.account-page .woocommerce-MyAccount-content :is(.dataTables_wrapper,.dataTables_wrapper .dataTables_length,.dataTables_wrapper .dataTables_filter,.dataTables_wrapper .dataTables_info,.dataTables_wrapper .dataTables_paginate,table.dataTable,table.dataTable td,table.dataTable tr,.dt-container,.dt-container .dt-info,.dt-container .dt-search,.dt-container .dt-length,.dt-container .dt-paging){background:none!important;color:var(--ink)!important}
+.account-page .woocommerce-MyAccount-content :is(.dataTables_wrapper,.dt-container) :is(input,select){background:var(--bg)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:10px;width:auto;min-width:64px}
+.account-page .woocommerce-MyAccount-content :is(.dataTables_paginate a,.dt-paging button,.paginate_button){color:var(--ink)!important;background:none!important}
+.account-page .woocommerce-MyAccount-content table.dataTable thead th{background:var(--ink)!important;color:var(--bg)!important}
+.account-page .woocommerce-MyAccount-content table.dataTable td{border-bottom:1px solid var(--line)}
+.account-page .woocommerce-MyAccount-content table.dataTable td.dataTables_empty,.account-page .woocommerce-MyAccount-content table.dataTable td.dt-empty{color:var(--mute)!important}
+/* B2BKing bulk order form */
+.account-page .woocommerce-MyAccount-content{--b2bking-order-form-cream-text:var(--ink);--b2bking-order-form-cream-surface:var(--bg);--b2bking-order-form-cream-surface-hover:var(--card);--b2bking-order-form-cream-border:var(--line)}
+.account-page #b2bking_myaccount_bulkorder_title,.account-page .woocommerce-MyAccount-content [class*=b2bking_bulkorder] :is(h1,h2,h3,h4,label,span,div,p,a,td,th){color:var(--ink)}
+.account-page .woocommerce-MyAccount-content [class*=b2bking_bulkorder]:not(button):not(input):not(select){background-color:transparent}
+.account-page .woocommerce-MyAccount-content [class*=b2bking_bulkorder] :is(input,select,textarea){background:var(--bg)!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+.account-page .woocommerce-MyAccount-content [class*=b2bking_bulkorder] :is(button,.button){color:var(--ink)}
+/* My account address forms: dark-theme inputs + select2 */
+.account-page .woocommerce form .form-row :is(input.input-text,input[type=text],input[type=email],input[type=tel],input[type=password],textarea){background:var(--bg)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:12px!important;min-height:46px;padding:10px 14px!important;box-shadow:none;box-sizing:border-box;font:15px Inter,system-ui,sans-serif}
+.account-page .woocommerce form .form-row ::placeholder{color:var(--mute);opacity:1}
+.account-page .woocommerce form .form-row :is(input,textarea):focus{outline:2px solid var(--ink);outline-offset:1px}
+.account-page .select2-container{width:100%!important}
+.account-page .select2-container--default .select2-selection--single{height:46px;display:flex;align-items:center;box-sizing:border-box;background:var(--bg);border:1px solid var(--line);border-radius:12px}
+.account-page .select2-container--default .select2-selection--single .select2-selection__rendered{display:block;width:100%;height:auto;margin:0;padding:0 38px 0 14px!important;line-height:44px!important;color:var(--ink)!important;font:15px/44px Inter,system-ui,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.account-page .select2-container--default .select2-selection--single .select2-selection__arrow{top:0;right:8px;height:44px;width:24px}
+.account-page .select2-container--default.select2-container--focus .select2-selection--single,.account-page .select2-container--default.select2-container--open .select2-selection--single{outline:2px solid var(--ink);outline-offset:1px}
+/* select2 dropdown – readable options (checkout, account, shop) */
+.select2-container--open .select2-dropdown{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:12px!important;margin-top:6px;box-shadow:0 12px 32px rgba(0,0,0,.35);overflow:hidden}
+.select2-container--default .select2-results>.select2-results__options{max-height:260px;padding:6px}
+.select2-container--default .select2-results__option{color:var(--ink)!important;background:none!important;padding:10px 12px;border-radius:8px;font:15px/1.3 Inter,system-ui,sans-serif}
+.select2-container--default .select2-results__option--selected,.select2-container--default .select2-results__option[aria-selected=true]{background:color-mix(in srgb,var(--ink) 10%,transparent)!important;color:var(--ink)!important}
+.select2-container--default .select2-results__option--highlighted,.select2-container--default .select2-results__option--highlighted[aria-selected],.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{background:var(--ink)!important;color:var(--bg)!important}
+.select2-container--default .select2-results__option--disabled{color:var(--mute)!important}
+.select2-search--dropdown{padding:8px 8px 4px}
+.select2-container--default .select2-search--dropdown .select2-search__field{background:var(--bg)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:10px;padding:10px 12px;font:15px Inter,system-ui,sans-serif;outline:0}
+.select2-container--default .select2-search--dropdown .select2-search__field:focus{border-color:var(--ink)!important}
+.account-page .select2-container--default.select2-container--open .select2-selection--single,.account-page .select2-container--default.select2-container--focus .select2-selection--single{outline:0;border-color:var(--ink)}
+/* My account → Addresses: one box per row, billing first */
+.account-page .woocommerce-Addresses{grid-template-columns:minmax(0,1fr)!important}
+.account-page .woocommerce-Addresses .woocommerce-Address{grid-column:auto!important;width:auto!important;float:none!important;margin:0}
+.account-page .woocommerce-Addresses .u-column1{order:1}
+.account-page .woocommerce-Addresses .u-column2{order:2}
+.account-page .woocommerce-Address-title{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.account-page .woocommerce-Address-title h2,.account-page .woocommerce-Address-title h3{margin:0}
+.account-page .woocommerce-Address-title .edit{float:none;font-size:14px;white-space:nowrap}
+/* My account → Account details: same field look as the address forms */
+.account-page .woocommerce-EditAccountForm :is(input.input-text,input[type=text],input[type=email],input[type=tel],input[type=password]){background:var(--bg)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:12px!important;min-height:46px;padding:10px 14px!important;box-shadow:none;box-sizing:border-box;width:100%;font:15px Inter,system-ui,sans-serif}
+.account-page .woocommerce-EditAccountForm :is(input):focus{outline:2px solid var(--ink);outline-offset:1px}
+.account-page .woocommerce-EditAccountForm :is(.form-row,.woocommerce-form-row){margin:0 0 16px;padding:0;float:none;display:block;width:100%}
+.account-page .woocommerce-EditAccountForm :is(.form-row-first,.form-row-last){width:calc(50% - 8px);display:inline-block;vertical-align:top}
+.account-page .woocommerce-EditAccountForm .form-row-first{margin-right:12px}
+.account-page .woocommerce-EditAccountForm label{display:block;font-size:13px;color:var(--ash);margin:0 0 6px}
+.account-page .woocommerce-EditAccountForm .required,.account-page .woocommerce-EditAccountForm .optional{color:var(--ash);text-decoration:none}
+.account-page .woocommerce-EditAccountForm em,.account-page .woocommerce-EditAccountForm span em{display:block;margin-top:6px;font-size:13px;font-style:normal;color:var(--mute)}
+.account-page .woocommerce-EditAccountForm .password-input{display:block;position:relative}
+.account-page .woocommerce-EditAccountForm .password-input input{padding-right:46px!important}
+.account-page .woocommerce-EditAccountForm fieldset{border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:24px 0 16px}
+.account-page .woocommerce-EditAccountForm fieldset legend{padding:0 8px;font-size:15px;color:var(--ink)}
+.account-page .woocommerce-EditAccountForm .clear{display:none}
+@media(max-width:600px){.account-page .woocommerce-EditAccountForm :is(.form-row-first,.form-row-last){width:100%;margin-right:0}}
+/* B2BKing account pages (conversations, offers, purchase lists, bulk order): page titles */
+.account-page .woocommerce-MyAccount-content :is([class*=b2bking][class*=title],[id*=b2bking][id*=title],[class*=b2bking][class*=top_header],[class*=b2bking_myaccount] :is(h1,h2,h3)){color:var(--ink)!important;font-family:Inter,system-ui,sans-serif!important;font-size:clamp(24px,3vw,32px)!important;font-weight:400!important;letter-spacing:-.03em;line-height:1.1;margin:0 0 16px}
+/* My account: right column is 800px wide on every tab (B2BKing inner containers must not push it wider) */
+.account-page .woocommerce{grid-template-columns:230px 800px;max-width:100%}
+.account-page .woocommerce-MyAccount-content{width:800px!important;max-width:100%!important;min-width:0;box-sizing:border-box;overflow-x:auto}
+.account-page .woocommerce-MyAccount-content [class*=b2bking]{max-width:100%;box-sizing:border-box}
+@media(max-width:1100px){.account-page .woocommerce{grid-template-columns:minmax(0,1fr)}.account-page .woocommerce-MyAccount-content{width:auto!important}}
+/* classic checkout: fields (incl. order notes) must beat WooCommerce's white defaults */
+.shop-page .woocommerce form.checkout :is(input.input-text,input[type=text],input[type=email],input[type=tel],textarea){background:var(--bg)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:12px!important;padding:12px 14px!important;box-shadow:none;box-sizing:border-box;width:100%;font:15px/1.5 Inter,system-ui,sans-serif}
+.shop-page .woocommerce form.checkout textarea{min-height:120px;resize:vertical}
+.shop-page .woocommerce form.checkout ::placeholder{color:var(--mute)!important;opacity:1}
+.shop-page .woocommerce form.checkout :is(input,textarea):focus{outline:0;border-color:var(--ink)!important}
+.shop-page .woocommerce-additional-fields h3{margin:0 0 16px}
+.shop-page .woocommerce-additional-fields,.shop-page .woocommerce-shipping-fields{padding:0}
+/* "Another address for shipping" toggle: comfortable padding inside the pill */
+.shop-page #ship-to-different-address{padding:0!important}
+.shop-page #ship-to-different-address label{padding:16px 24px!important;margin:0!important;gap:14px;line-height:1.2;box-sizing:border-box;width:100%}
+.shop-page #ship-to-different-address input{flex:none}
+.shop-page .woocommerce-shipping-fields #ship-to-different-address+.shipping_address,.shop-page .woocommerce-shipping-fields .shipping_address{margin-top:20px}
+/* mini-cart drawer: even padding */
+.wc-block-mini-cart__drawer .wc-block-components-drawer__content{padding:0!important}
+.wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-contents{padding:0!important}
+.wc-block-mini-cart__drawer :is(.wp-block-woocommerce-mini-cart-title-block,.wp-block-woocommerce-mini-cart-items-block,.wp-block-woocommerce-mini-cart-footer-block){padding-left:28px!important;padding-right:28px!important;box-sizing:border-box}
+.wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-title-block{padding-top:28px!important;padding-bottom:16px!important}
+.wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-title-block :is(h2,.wc-block-mini-cart__title){margin:0;padding:0!important;font-size:24px;line-height:1.2}
+.wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-items-block{padding-top:8px!important;padding-bottom:16px!important}
+.wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-footer-block{padding-top:20px!important;padding-bottom:28px!important;border-top:1px solid var(--line)}
+.wc-block-mini-cart__drawer .wc-block-cart-items td{padding-top:18px;padding-bottom:18px}
+.wc-block-mini-cart__drawer .wc-block-components-drawer__close{top:24px;right:24px}
+/* checkout: main content column is 1180px wide */
+body.woocommerce-checkout .shop-page.wrap{max-width:1180px!important;width:100%;margin-inline:auto;box-sizing:border-box}
+/* checkout: wider address column, slimmer order summary */
+body.woocommerce-checkout .shop-page .woocommerce form.checkout{grid-template-columns:minmax(0,1fr) minmax(400px,420px);column-gap:32px}
+@media(max-width:900px){body.woocommerce-checkout .shop-page .woocommerce form.checkout{grid-template-columns:minmax(0,1fr)}}
+/* checkout: main and its contents fill the full width of the 1180px container */
+body.woocommerce-checkout main.site-main{width:100%;max-width:none}
+body.woocommerce-checkout .shop-page.wrap>*{max-width:none!important;width:100%;margin-inline:0!important}
+body.woocommerce-checkout .shop-page .woocommerce,body.woocommerce-checkout .shop-page .woocommerce form.checkout{width:100%;max-width:none}
+/* checkout: paired fields in two columns (name, postcode/city, phone/email) */
+.shop-page form.checkout :is(#billing_first_name_field,#billing_last_name_field,#billing_postcode_field,#billing_city_field,#billing_phone_field,#billing_email_field,#shipping_first_name_field,#shipping_last_name_field,#shipping_postcode_field,#shipping_city_field){grid-column:span 1!important;width:auto!important;margin-right:0!important}
+@media(max-width:600px){.shop-page form.checkout :is(#billing_first_name_field,#billing_last_name_field,#billing_postcode_field,#billing_city_field,#billing_phone_field,#billing_email_field,#shipping_first_name_field,#shipping_last_name_field,#shipping_postcode_field,#shipping_city_field){grid-column:1/-1!important}}
+/* checkout: shipping box padding (the box itself carries the padding, the toggle label sits inside it) */
+.shop-page .woocommerce-shipping-fields,.shop-page .woocommerce-additional-fields{padding:clamp(18px,3vw,28px)!important}
+.shop-page #ship-to-different-address label{padding:0!important}
+.shop-page .woocommerce-shipping-fields .shipping_address{margin-top:22px}
+.shop-page #ship-to-different-address{margin:0 0 24px!important}
+.pp-register-link{margin-top:20px}
+.pp-register-link a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}

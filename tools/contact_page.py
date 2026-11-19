@@ -55,6 +55,10 @@ PAGE = """<!-- wp:group {"className":"wrap partner-page pp-wide","layout":{"type
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
+<p>Bank account:<br>IBAN DE20 4005 0150 0000 0725 46<br>BIC WELADED1MST</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
 <p>Shop &amp; orders:<br><a href="mailto:shop@7inchrare.com">shop@7inchrare.com</a></p>
 <!-- /wp:paragraph -->
 
@@ -63,7 +67,7 @@ PAGE = """<!-- wp:group {"className":"wrap partner-page pp-wide","layout":{"type
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"pp-note"} -->
-<p class="pp-note">Returns only to: Philipp Mühlen, Birkenweg 16 B, 48155 Münster, Germany. Faulty record? Please send your order number, a short description and photos. See our <a href="/terms/">terms</a>.</p>
+<p class="pp-note">Returns only to: 7inch.rare, Birkenweg 16 B, 48155 Münster, Germany. Faulty record? Please send your order number, a short description and photos. See our <a href="/terms/">terms</a>.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 

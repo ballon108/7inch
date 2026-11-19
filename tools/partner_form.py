@@ -92,8 +92,8 @@ return ['form_id'=>$id, 'log'=>$log, 'cf7'=>defined('WPCF7_VERSION') ? WPCF7_VER
 """
 print(deploy.php(code))
 
-PAGE = '''<!-- wp:group {"className":"wrap partner-page pp-wide","layout":{"type":"default"}} -->
-<div class="wp-block-group wrap partner-page pp-wide"><!-- wp:paragraph {"className":"eyebrow"} -->
+PAGE_LOGIN = '''<!-- wp:group {"className":"wrap partner-page","layout":{"type":"default"}} -->
+<div class="wp-block-group wrap partner-page"><!-- wp:paragraph {"className":"eyebrow"} -->
 <p class="eyebrow">Wholesale &amp; distribution</p>
 <!-- /wp:paragraph -->
 
@@ -102,12 +102,11 @@ PAGE = '''<!-- wp:group {"className":"wrap partner-page pp-wide","layout":{"type
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"pp-lead"} -->
-<p class="pp-lead">Record shops order from 50 copies, distributors from 100. Log in to see wholesale prices, or apply for a partner account.</p>
+<p class="pp-lead">Record shops order from 50 copies, distributors from 100. Log in to see wholesale prices.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:group {"className":"pp-grid","layout":{"type":"default"}} -->
-<div class="wp-block-group pp-grid"><!-- wp:group {"className":"pp-login","layout":{"type":"default"}} -->
-<div class="wp-block-group pp-login"><!-- wp:heading {"level":2} -->
+<!-- wp:group {"className":"pp-login pp-boxed","layout":{"type":"default"}} -->
+<div class="wp-block-group pp-login pp-boxed"><!-- wp:heading {"level":2} -->
 <h2 class="wp-block-heading">Partner login</h2>
 <!-- /wp:heading -->
 
@@ -116,26 +115,46 @@ PAGE = '''<!-- wp:group {"className":"wrap partner-page pp-wide","layout":{"type
 <!-- /wp:shortcode --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"pp-apply pp-boxed","layout":{"type":"default"}} -->
-<div class="wp-block-group pp-apply pp-boxed"><!-- wp:heading {"level":2} -->
-<h2 class="wp-block-heading">New partner? Register</h2>
-<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"pp-note pp-register-link"} -->
+<p class="pp-note pp-register-link">New partner? <a href="/partners-register/">Register new account</a></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->'''
 
-<!-- wp:paragraph {"className":"pp-note"} -->
-<p class="pp-note">Fill in the form below. We review every application and activate your account within 48 hours.</p>
+PAGE_REGISTER = '''<!-- wp:group {"className":"wrap partner-page","layout":{"type":"default"}} -->
+<div class="wp-block-group wrap partner-page"><!-- wp:paragraph {"className":"eyebrow"} -->
+<p class="eyebrow">Wholesale &amp; distribution</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:shortcode -->
+<!-- wp:heading {"level":1,"className":"pp-title"} -->
+<h1 class="wp-block-heading pp-title">Register a partner account</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"pp-lead"} -->
+<p class="pp-lead">Fill in the form below. We review every application and activate your account within 48 hours.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"pp-apply pp-boxed","layout":{"type":"default"}} -->
+<div class="wp-block-group pp-apply pp-boxed"><!-- wp:shortcode -->
 [contact-form-7 id="%ID%" html_class="pf-form"]
 <!-- /wp:shortcode --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:paragraph {"className":"pp-note pp-register-link"} -->
+<p class="pp-note pp-register-link">Already have an account? <a href="/partners/">Log in</a></p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group -->'''
-print(deploy.php(f"""
-$id = (int) get_option('_7inch_partner_form');
-$c = str_replace('%ID%', $id, base64_decode('{B(PAGE)}'));
-$ex = get_page_by_path('for-partners');
-$arr = ['post_title'=>'For partners','post_name'=>'for-partners','post_content'=>wp_slash($c),'post_status'=>'publish','post_type'=>'page'];
-if ($ex) {{ $arr['ID'] = $ex->ID; $pid = wp_update_post($arr, true); }} else {{ $pid = wp_insert_post($arr, true); }}
-return is_wp_error($pid) ? $pid->get_error_message() : ['page'=>$pid, 'url'=>get_permalink($pid)];
-"""))
+
+UPSERT = """
+$c = str_replace('%ID%', (int) get_option('_7inch_partner_form'), base64_decode('@@B64@@'));
+$ex = get_page_by_path('@@SLUG@@')@@OLD@@;
+$arr = ['post_title'=>'@@TITLE@@','post_name'=>'@@SLUG@@','post_content'=>wp_slash($c),'post_status'=>'publish','post_type'=>'page'];
+if ($ex) { $arr['ID'] = $ex->ID; $pid = wp_update_post($arr, true); } else { $pid = wp_insert_post($arr, true); }
+$out[] = is_wp_error($pid) ? $pid->get_error_message() : ['page'=>$pid, 'url'=>get_permalink($pid)];
+"""
+
+def upsert(old, slug, title, content):
+    return (UPSERT.replace('@@B64@@', B(content)).replace('@@SLUG@@', slug).replace('@@TITLE@@', title)
+            .replace('@@OLD@@', (" ?: get_page_by_path('%s')" % old) if old else ''))
+
+print(deploy.php("$out=[];" + upsert('for-partners', 'partners', 'For partners', PAGE_LOGIN)
+                 + upsert(None, 'partners-register', 'Register a partner account', PAGE_REGISTER) + "return $out;"))

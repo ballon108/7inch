@@ -136,4 +136,29 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
     matchMedia('(min-width: 783px)').addEventListener('change', function (e) { if (e.matches) setMenu(false); });
   }
+
+  /* ── Card: quantity stepper + add to cart (AJAX, falls back to a normal POST) ── */
+  document.querySelectorAll('.card-buy').forEach(function (f) {
+    var input = f.querySelector('input[name=quantity]');
+    f.querySelectorAll('.qty button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var min = parseInt(input.min, 10) || 1, max = parseInt(input.max, 10) || Infinity;
+        var v = parseInt(input.value, 10) || min;
+        input.value = Math.min(max, Math.max(min, v + parseInt(b.dataset.step, 10)));
+      });
+    });
+    if (f.tagName !== 'FORM') return;
+    f.addEventListener('submit', function (e) {
+      var btn = f.querySelector('.card-add'), label = btn.textContent;
+      e.preventDefault();
+      var data = new FormData(f); data.append('add-to-cart', btn.value);
+      btn.disabled = true;
+      fetch(f.action, { method: 'POST', body: data, credentials: 'same-origin' }).then(function (r) {
+        if (!r.ok) throw new Error('add failed');
+        document.body.dispatchEvent(new CustomEvent('wc-blocks_added_to_cart', { bubbles: true, detail: { preserveCartData: false } }));
+        btn.textContent = 'Added \u2713'; btn.classList.add('is-added');
+        setTimeout(function () { btn.textContent = label; btn.classList.remove('is-added'); btn.disabled = false; }, 1800);
+      }).catch(function () { f.submit(); });
+    });
+  });
 })();
