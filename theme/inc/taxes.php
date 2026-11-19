@@ -176,12 +176,3 @@ add_filter( 'woocommerce_find_rates', function ( $matched, $args ) {
 	$busy = false;
 	return $de ? $de : $matched;
 }, 5, 2 );
-
-/* ── US import duty (prepaid): 10 % of goods value + 2.00 € ── */
-add_action( 'woocommerce_cart_calculate_fees', function ( $cart ) {
-	if ( is_admin() && ! wp_doing_ajax() ) { return; }
-	if ( 'US' !== WC()->customer->get_shipping_country() ) { return; }
-	$goods = (float) $cart->get_subtotal();
-	if ( $goods <= 0 ) { return; }
-	$cart->add_fee( 'US import duty (prepaid)', round( $goods * 0.10 + 2.00, 2 ), false );
-} );

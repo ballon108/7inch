@@ -10,7 +10,7 @@ $url0 = i7_field( 'cta_url', '' );
 
 $releases = i7_releases( array(
 	'meta_query' => array( array( 'key' => 'featured', 'value' => '1' ) ),
-	'meta_key' => 'hero_order', 'orderby' => 'meta_value_num', 'order' => 'ASC',
+	'meta_key' => 'hero_order', 'orderby' => 'meta_value_num', 'order' => 'ASC', 'numberposts' => 4,
 ) );
 if ( ! $releases ) { echo '<p class="i7-empty">Mark releases as “Show in hero carousel” to fill this block.</p>'; return; }
 ?>
