@@ -234,7 +234,7 @@ Vibetown Entertainment (7inch.rare), owner Philipp Mühlen, Harkortstr. 29, 4816
 
 ## 2. Hosting and server log files
 
-The website is hosted by ALL-INKL.COM – Neue Medien Münnich, Hauptstraße 68, 02742 Friedersdorf, Germany, on servers in Germany. When you visit the site, technically necessary data is processed (IP address, date and time, page accessed, browser, operating system, referrer). The legal basis is Art. 6 (1) (f) GDPR (secure operation). A data processing agreement is in place with ALL-INKL. Log files are deleted after [7] days. The connection is encrypted via SSL/TLS.
+The website is hosted by ALL-INKL.COM – Neue Medien Münnich, Hauptstraße 68, 02742 Friedersdorf, Germany, on servers in Germany. When you visit the site, technically necessary data is processed (IP address, date and time, page accessed, browser, operating system, referrer). The legal basis is Art. 6 (1) (f) GDPR (secure operation). A data processing agreement is in place with ALL-INKL. Log files are deleted after 7 days. The connection is encrypted via SSL/TLS.
 
 ## 3. Orders and customer account
 
@@ -290,15 +290,17 @@ November 2026
 PAGES["shipping-and-payment"] = ("Shipping and Payment", """
 Shipping costs including packaging, per order. Items in stock ship within 3 days of receipt of payment; pre-orders by the date stated on the product page.
 
-For 11 or more records or other countries: shipping costs on request. No shipping to Russia.
+Outside Germany, orders of 1–5 records ship untracked; you can choose tracked shipping at the price shown for 6 or more records. Other countries on request. No shipping to Russia. At the moment we cannot deliver to consumers in the United Kingdom.
 
-| Destination | 1–3 records | 4–10 records | Delivery within |
-| Germany | €3.90 | €6.90 | up to [4] days |
-| EU | €8.90 | €16.90 | up to [10] days |
-| United Kingdom, Switzerland | €10.90 | €21.90 | up to [12] days |
-| USA, Canada, Mexico, Brazil | €17.90 | €28.90 | up to [21] days |
-| Japan, Asia | €16.90 | €27.90 | up to [21] days |
-| Australia, New Zealand | €18.90 | €29.90 | up to [28] days |
+| Destination | 1–5 records | 6 or more records | Delivery within |
+| Germany | €4.90 | €6.90 | up to 4 days |
+| EU | €7.90 | €15.90 | up to 10 days |
+| United Kingdom, Switzerland | €11.90 | €20.90 | up to 12 days |
+| Rest of Europe | €14.50 | €24.90 | up to 12 days |
+| USA | €31.90 | €31.90 | up to 21 days |
+| Canada, Mexico, Brazil | €18.90 | €27.90 | up to 21 days |
+| Japan, Asia | €17.90 | €26.90 | up to 21 days |
+| Australia, New Zealand | €18.90 | €28.90 | up to 28 days |
 
 ## Payment methods
 

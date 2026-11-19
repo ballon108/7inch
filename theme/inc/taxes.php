@@ -191,3 +191,17 @@ add_filter( 'woocommerce_no_shipping_available_html', function ( $html ) {
 	}
 	return $html;
 } );
+
+/* ── Price notes: "incl. VAT, plus shipping" (consumers, gross prices) / "excl. VAT, plus shipping" (partners, net prices) ── */
+function i7_price_note() {
+	return ( function_exists( 'i7_partner_type' ) && i7_partner_type() ) ? 'excl. VAT, plus shipping' : 'incl. VAT, plus shipping';
+}
+add_filter( 'option_woocommerce_price_display_suffix', function () {
+	return '<span class="i7-price-note">' . esc_html( i7_price_note() ) . '</span>';
+} );
+add_filter( 'woocommerce_cart_item_price', function ( $html ) {
+	return $html . ' <span class="i7-price-note">' . esc_html( i7_price_note() ) . '</span>';
+} );
+add_filter( 'render_block_woocommerce/cart-items-block', function ( $html ) {
+	return $html . '<p class="i7-price-note i7-price-note-cart">Prices ' . esc_html( i7_price_note() ) . '.</p>';
+} );
