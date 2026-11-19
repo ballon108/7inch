@@ -78,17 +78,17 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .htext{min-height:390px;display:flex;flex-direction:column;justify-content:center}
 .badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:7px 12px;border-radius:100px;box-shadow:inset 0 0 0 1px var(--halo);font:12px/1 "Space Mono",monospace!important;letter-spacing:.06em;text-transform:uppercase;margin:0}
 .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-.scene{position:relative;aspect-ratio:1/0.92;overflow:clip;overflow-clip-margin:20px}
+.scene{position:relative;aspect-ratio:1/0.92;overflow:clip;overflow-clip-margin:100px}
 .pod{position:absolute;left:24%;right:24%;bottom:9%;height:9%;border-radius:50%;background:radial-gradient(closest-side,var(--podGlow),var(--podGlow2) 55%,transparent);filter:blur(3px)}
 .float{position:absolute;inset:0;animation:bob 5s ease-in-out infinite}
-.disc{position:absolute;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#0b0b0b 0 2px,#181818 2px 3.4px);box-shadow:0 30px 50px -22px rgba(0,0,0,.65);display:grid;place-items:center;animation:spin 14s linear infinite}
+.disc{position:absolute;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#0b0b0b 0 2px,#181818 2px 3.4px);box-shadow:0 24px 40px -22px rgba(0,0,0,.55);display:grid;place-items:center;animation:spin 14s linear infinite}
 .disc .wp-block-image{width:37%;margin:0}
 .disc img{width:100%;aspect-ratio:1;border-radius:50%;object-fit:cover;display:block}
 .disc::after{content:"";position:absolute;width:2.2%;aspect-ratio:1;border-radius:50%;background:#0b0b0b}
 .lr .disc{width:58%;right:0;top:6%}
 .mp .disc{width:70%;left:15%;top:2%}
 .mp .disc .wp-block-image{width:38%}
-.sleeve{position:absolute;width:58%;aspect-ratio:1;left:4%;top:13%;border-radius:2px;margin:0;box-shadow:0 40px 60px -26px rgba(0,0,0,.7);transform:rotate(-3deg);overflow:hidden}
+.sleeve{position:absolute;width:58%;aspect-ratio:1;left:4%;top:13%;border-radius:2px;margin:0;box-shadow:0 30px 46px -26px rgba(0,0,0,.6);transform:rotate(-3deg);overflow:hidden}
 .sleeve img{width:100%;height:100%;object-fit:cover;display:block}
 .pre{position:absolute;right:4%;top:4%;z-index:2;font:12px/1 "Space Mono",monospace!important;letter-spacing:.06em;text-transform:uppercase;padding:9px 13px;border-radius:100px;background:var(--ink);color:var(--bg);margin:0}
 @keyframes bob{50%{transform:translateY(-8px)}}@keyframes spin{to{transform:rotate(360deg)}}
