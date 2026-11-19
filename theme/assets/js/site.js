@@ -2,26 +2,6 @@
   'use strict';
   var root = document.documentElement;
 
-  /* ── Day / Night ─────────────────────────────────────────────── */
-  var themeBtns = document.querySelectorAll('#themes button');
-  function curTheme() {
-    return root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  }
-  function paintTheme() {
-    var c = curTheme();
-    themeBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.th === c); });
-    window.dispatchEvent(new Event('themechange'));
-  }
-  themeBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      root.dataset.theme = b.dataset.th;
-      try { localStorage.setItem('theme', b.dataset.th); } catch (e) {}
-      paintTheme();
-    });
-  });
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintTheme);
-  paintTheme();
-
   /* ── Hero carousel ───────────────────────────────────────────── */
   var hero = document.getElementById('home');
   var slides = hero ? Array.prototype.slice.call(hero.querySelectorAll('.hero-slide')) : [];

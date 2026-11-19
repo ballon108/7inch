@@ -18,13 +18,12 @@ Text Domain: 7inch
 @font-face{font-family:"Space Mono";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/space-mono-latin-400.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
 /* ── tokens (day / night) ───────────────────────────────────────── */
-:root{color-scheme:light dark;
+:root{color-scheme:dark;
  --bg:light-dark(#F4F2EE,#06090A);--ink:light-dark(#0E1512,#FCFCFA);--mute:light-dark(#5C6560,#8A928D);--ash:light-dark(#3F4843,#A9B0AB);
  --line:light-dark(#DCD9D2,#1E2623);--halo:light-dark(#CFC8B6,#2E3A2F);--card:light-dark(#FFFFFF,#0A0F0D);
  --mp:light-dark(#C23D00,#FF6A2B);--lr:light-dark(#8A6414,#E2B04A);
  --glowMP:light-dark(rgba(254,80,0,.10),rgba(254,80,0,.15));--glowLR:light-dark(rgba(226,176,74,.14),rgba(28,92,58,.42));
  --podGlow:light-dark(rgba(0,0,0,.30),rgba(255,232,190,.30));--podGlow2:light-dark(rgba(0,0,0,.08),rgba(255,225,180,.08))}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 
 /* ── base ───────────────────────────────────────────────────────── */
 *{box-sizing:border-box;min-width:0}
@@ -61,11 +60,6 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .site-nav a{font-size:14px;padding:12px 0;display:inline-block;text-decoration:none;color:var(--ink)}
 .site-nav a:hover{text-decoration:underline;text-underline-offset:5px}
 .tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.seg{display:flex;border:1px solid var(--line);border-radius:100px;padding:3px}
-.seg button{border:0;background:none;color:var(--ash);min-height:36px;min-width:44px;padding:0 12px;border-radius:100px;font:500 13px Inter,system-ui,sans-serif;cursor:pointer}
-.seg button{display:inline-grid;place-items:center;min-width:40px;padding:0 10px}
-.seg button svg{display:block}
-.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 
 /* ── bands ──────────────────────────────────────────────────────── */
 .band{padding-block:80px;border-top:1px solid var(--line)}
@@ -204,6 +198,7 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .buy form.cart{gap:8px;align-items:center}
 .buy .single_add_to_cart_button,.buy .wp-element-button{flex:1;min-height:50px;border:0;border-radius:100px;background:var(--ink);color:var(--bg);font:500 15px Inter,system-ui,sans-serif;padding:0 28px;cursor:pointer;width:100%}
 .buy .single_add_to_cart_button:hover{opacity:.88}
+.buy form.cart,.buy .wp-block-add-to-cart-form form.cart{margin:0!important;padding:0!important}
 .buy>.price,.buy>form.cart{align-self:center}
 .buy .wc-block-components-product-price{margin:0;padding:0;line-height:1;display:flex;align-items:center}
 .buy .price .amount,.buy .price bdi{display:inline-block;line-height:1;vertical-align:middle}
@@ -702,3 +697,6 @@ body.woocommerce-checkout .shop-page .woocommerce,body.woocommerce-checkout .sho
 .e404 .e404-lead{margin:0 auto}
 .e404 .wp-block-buttons{justify-content:center;margin-top:32px}
 @media (prefers-reduced-motion:reduce){.e404 .e404-disc{animation:none}}
+
+.i7-create-account{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:28px}
+.i7-create-account .pp-note{margin:0}

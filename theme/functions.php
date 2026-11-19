@@ -18,8 +18,8 @@ add_action( 'wp_head', function () {
 	foreach ( array( 'inter-latin-400', 'inter-latin-500' ) as $font ) {
 		echo '<link rel="preload" href="' . esc_url( $f . $font . '.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
 	}
-	// Apply saved Day/Night choice before first paint.
-	echo '<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>' . "\n";
+	// Dark mode only.
+	echo '<meta name="color-scheme" content="dark">' . "\n";
 }, 1 );
 
 /* ── SCF / ACF integration ─────────────────────────────────────────
@@ -94,3 +94,46 @@ add_action( 'template_redirect', function () {
 		exit;
 	}
 } );
+
+/* ── Customer registration: /register/ page + "Create account" button on My account ────────────
+ * WooCommerce's own handler processes the POST (nonce "woocommerce-register"); the combined
+ * login/register columns stay off, so My account shows only the login form plus a button. */
+add_shortcode( 'i7_register_form', function () {
+	if ( is_user_logged_in() ) {
+		return '<p class="pp-note">You already have an account. <a href="' . esc_url( wc_get_page_permalink( 'myaccount' ) ) . '">Go to My account</a></p>';
+	}
+	ob_start();
+	wc_print_notices();
+	?>
+	<div class="woocommerce"><form method="post" class="woocommerce-form woocommerce-form-register register" action="<?php echo esc_url( get_permalink() ); ?>">
+		<?php do_action( 'woocommerce_register_form_start' ); ?>
+		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+			<label for="reg_email">Email address&nbsp;<span class="required" aria-hidden="true">*</span></label>
+			<input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" required value="<?php echo ! empty( $_POST['email'] ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; // phpcs:ignore ?>" />
+		</p>
+		<?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+		<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+			<label for="reg_password">Password&nbsp;<span class="required" aria-hidden="true">*</span></label>
+			<input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password" required />
+		</p>
+		<?php else : ?>
+		<p class="pp-note">A link to set your password will be sent to your email address.</p>
+		<?php endif; ?>
+		<?php do_action( 'woocommerce_register_form' ); ?>
+		<p class="woocommerce-form-row form-row">
+			<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
+			<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="Register">Create account</button>
+		</p>
+		<?php do_action( 'woocommerce_register_form_end' ); ?>
+	</form></div>
+	<?php
+	return ob_get_clean();
+} );
+
+add_action( 'woocommerce_after_customer_login_form', function () {
+	echo '<div class="wp-block-buttons ctas i7-create-account"><p class="pp-note">For distributors and shops</p><div class="wp-block-button btn-ghost"><a class="wp-block-button__link wp-element-button" href="' . esc_url( home_url( '/partners-register/' ) ) . '">Create account</a></div></div>';
+} );
+
+
+/* Dark mode only: no Day/Night switch, the theme is fixed. */
+add_filter( 'language_attributes', function ( $out ) { return $out . ' data-theme="dark"'; } );
