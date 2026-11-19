@@ -1,35 +1,47 @@
 <?php
 /**
- * Optional "EU VAT number" field in the block checkout (WooCommerce Additional Checkout Fields API).
- * Shown once under "Contact information" (location 'address' would repeat it in both the billing and the shipping form),
- * saved on the order and visible in admin and e-mails.
- * It is only stored and format-checked here; VAT/reverse-charge handling comes with the invoicing/B2B setup.
+ * Classic checkout customisations.
+ * - Billing address is the main address; shipping is an optional "Another address for shipping".
+ * - Optional "EU VAT number" billing field: normalised, format-checked, saved on the order,
+ *   shown in the admin billing box and in e-mails. (VAT / reverse-charge handling comes with invoicing/B2B.)
  */
-add_action( 'woocommerce_init', function () {
-	if ( ! function_exists( 'woocommerce_register_additional_checkout_field' ) ) { return; }
-	woocommerce_register_additional_checkout_field( array(
-		'id'            => 'i7/vat_number',
-		'label'         => 'EU VAT number (optional)',
-		'optionalLabel' => 'EU VAT number (optional)',
-		'location'      => 'contact',
-		'type'          => 'text',
-		'required'      => false,
-		'attributes'    => array( 'autocomplete' => 'off', 'maxLength' => '20', 'data-i7-vat' => '1' ),
-	) );
+add_filter( 'gettext', function ( $translated, $text, $domain ) {
+	if ( 'woocommerce' === $domain && 'Ship to a different address?' === $text ) { return 'Another address for shipping'; }
+	return $translated;
+}, 10, 3 );
+
+add_filter( 'woocommerce_checkout_fields', function ( $fields ) {
+	$fields['billing']['billing_vat_number'] = array(
+		'label'        => 'EU VAT number (optional)',
+		'required'     => false,
+		'class'        => array( 'form-row-wide' ),
+		'priority'     => 125,
+		'autocomplete' => 'off',
+		'maxlength'    => 20,
+	);
+	return $fields;
 } );
 
-/** Normalise: uppercase, no spaces/dots/dashes (e.g. "de 207.201-101" → "DE207201101"). */
-add_filter( 'woocommerce_sanitize_additional_field', function ( $value, $key ) {
-	if ( 'i7/vat_number' === $key ) {
-		$value = strtoupper( preg_replace( '/[\s.\-]+/', '', (string) $value ) );
-	}
-	return $value;
-}, 10, 2 );
+/** Uppercase, no spaces/dots/dashes ("de 207.201-101" → "DE207201101"). */
+add_filter( 'woocommerce_process_checkout_field_billing_vat_number', function ( $value ) {
+	return strtoupper( preg_replace( '/[\s.\-]+/', '', (string) $value ) );
+} );
 
 /** Light format check (country prefix + 2–12 letters/digits); empty is fine. */
-add_action( 'woocommerce_validate_additional_field', function ( $errors, $key, $value ) {
-	if ( 'i7/vat_number' === $key && '' !== $value && ! preg_match( '/^[A-Z]{2}[A-Z0-9]{2,12}$/', $value ) ) {
-		$errors->add( 'i7_invalid_vat', 'Please enter the VAT number with its country prefix, e.g. DE123456789.' );
+add_action( 'woocommerce_after_checkout_validation', function ( $data, $errors ) {
+	$v = $data['billing_vat_number'] ?? '';
+	if ( '' !== $v && ! preg_match( '/^[A-Z]{2}[A-Z0-9]{2,12}$/', $v ) ) {
+		$errors->add( 'billing_vat_number_format', '<strong>EU VAT number</strong> must start with the country code, e.g. DE123456789.' );
 	}
-	return $errors;
+}, 10, 2 );
+
+add_filter( 'woocommerce_admin_billing_fields', function ( $fields ) {
+	$fields['vat_number'] = array( 'label' => 'EU VAT number', 'show' => true );
+	return $fields;
+} );
+
+add_filter( 'woocommerce_email_order_meta_fields', function ( $fields, $sent_to_admin, $order ) {
+	$vat = $order->get_meta( '_billing_vat_number' );
+	if ( $vat ) { $fields['billing_vat_number'] = array( 'label' => 'EU VAT number', 'value' => $vat ); }
+	return $fields;
 }, 10, 3 );

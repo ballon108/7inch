@@ -30,6 +30,7 @@ require_once get_stylesheet_directory() . '/inc/helpers.php';
 require_once get_stylesheet_directory() . '/inc/partners.php';
 require_once get_stylesheet_directory() . '/inc/shipping.php';
 require_once get_stylesheet_directory() . '/inc/checkout-fields.php';
+require_once get_stylesheet_directory() . '/inc/images.php';
 
 add_filter( 'acf/settings/save_json', fn() => get_stylesheet_directory() . '/acf-json' );
 add_filter( 'acf/settings/load_json', function ( $paths ) { $paths[] = get_stylesheet_directory() . '/acf-json'; return $paths; } );
