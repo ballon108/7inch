@@ -68,6 +68,8 @@ if ( ! function_exists( 'i7de_on' ) ) {
 			// Checkout fields / buttons / notices (also used by filters below).
 			'EU VAT number' => 'EU-USt-IdNr.', 'Company name' => 'Firmenname', 'Another address for shipping' => 'Andere Lieferadresse',
 			'Order with obligation to pay' => 'Zahlungspflichtig bestellen',
+			'incl. VAT, plus shipping' => 'inkl. MwSt., zzgl. Versand', 'excl. VAT, plus shipping' => 'zzgl. MwSt. und Versand',
+			'Prices incl. VAT, plus shipping.' => 'Preise inkl. MwSt., zzgl. Versand.', 'Prices excl. VAT, plus shipping.' => 'Preise zzgl. MwSt. und Versand.',
 			'<strong>EU VAT number</strong> must start with the country code, e.g. DE123456789.' => '<strong>EU-USt-IdNr.</strong> muss mit dem Ländercode beginnen, z. B. DE123456789.',
 			'Sorry, we cannot deliver to consumers in the United Kingdom at the moment. Record shops and distributors: please log in with your partner account.' => 'Leider können wir derzeit keine Verbraucher im Vereinigten Königreich beliefern. Plattenläden und Vertriebe: Bitte melden Sie sich mit Ihrem Partnerkonto an.',
 			'Thank you – your e-mail address is confirmed and your account is active. You can log in now.' => 'Vielen Dank – Ihre E-Mail-Adresse ist bestätigt und Ihr Konto ist aktiv. Sie können sich jetzt anmelden.',

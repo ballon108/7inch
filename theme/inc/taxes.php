@@ -126,28 +126,31 @@ add_action( 'woocommerce_after_checkout_validation', function ( $data, $errors )
 }, 10, 2 );
 
 /* ── Note for the invoice when no VAT is charged ────────────────────── */
-function i7_vat_note_for( $order ) {
+function i7_is_de() { return 0 === strpos( determine_locale(), 'de' ); }
+function i7_vat_note_for( $order, $de = null ) {
 	if ( (float) $order->get_total_tax() > 0 ) { return ''; }
+	$de      = null === $de ? i7_is_de() : $de;
 	$country = $order->get_billing_country();
-	if ( ! in_array( $country, I7_EU, true ) ) { return 'Steuerfreie Ausfuhrlieferung (tax-free export).'; }
+	if ( ! in_array( $country, I7_EU, true ) ) { return $de ? 'Steuerfreie Ausfuhrlieferung.' : 'Steuerfreie Ausfuhrlieferung (tax-free export).'; }
 	$vat = $order->get_meta( '_billing_vat_number' );
+	if ( $de ) { return 'Steuerfreie innergemeinschaftliche Lieferung. USt-IdNr. Verkäufer: ' . I7_SELLER_VAT . ( $vat ? ' · USt-IdNr. Käufer: ' . $vat : '' ); }
 	return 'Steuerfreie innergemeinschaftliche Lieferung (tax-free intra-community supply). Seller VAT ID: ' . I7_SELLER_VAT . ( $vat ? ' · Buyer VAT ID: ' . $vat : '' );
 }
 
 add_action( 'woocommerce_checkout_order_processed', function ( $order_id ) {
 	$order = wc_get_order( $order_id );
 	if ( ! $order ) { return; }
-	$order->update_meta_data( '_i7_vat_note', i7_vat_note_for( $order ) );
+	$order->update_meta_data( '_i7_vat_note', i7_vat_note_for( $order, false ) );
 	$order->save_meta_data();
 }, 20 );
 
 add_action( 'woocommerce_email_after_order_table', function ( $order ) {
-	$n = $order->get_meta( '_i7_vat_note' );
-	if ( $n ) { echo '<p><strong>VAT:</strong> ' . esc_html( $n ) . '</p>'; }
+	$n = i7_vat_note_for( $order );
+	if ( $n ) { echo '<p><strong>' . ( i7_is_de() ? 'MwSt.' : 'VAT' ) . ':</strong> ' . esc_html( $n ) . '</p>'; }
 } );
 add_action( 'woocommerce_order_details_after_order_table', function ( $order ) {
-	$n = $order->get_meta( '_i7_vat_note' );
-	if ( $n ) { echo '<p class="pp-note"><strong>VAT:</strong> ' . esc_html( $n ) . '</p>'; }
+	$n = i7_vat_note_for( $order );
+	if ( $n ) { echo '<p class="pp-note"><strong>' . ( i7_is_de() ? 'MwSt.' : 'VAT' ) . ':</strong> ' . esc_html( $n ) . '</p>'; }
 } );
 add_action( 'woocommerce_admin_order_data_after_billing_address', function ( $order ) {
 	$n = $order->get_meta( '_i7_vat_note' );
