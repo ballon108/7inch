@@ -66,8 +66,8 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 @media(max-width:600px){.site-header .lang-switch a{font-size:13px;padding:8px 11px}}
 /* the cart icon (28px) sits 8px inside its 44px button: pull it out so the visible gaps are all 20px and it ends flush with the layout edge */
 @media(min-width:783px){.site-header .tools .cart-icon{margin-inline:-8px}}
-/* mobile: icons sit 8px (cart) / 11px (hamburger) inside their 44px buttons; 12px gap + the hamburger pulled in = 20px visible gaps */
-@media(max-width:782px){.site-header .tools{gap:12px}.site-header .menu-toggle{margin-left:-11px}}
+/* mobile: icons (28px) sit 8px inside their 44px buttons; 12px gap = 20px visible between switch and cart, ~28px (22px from the count badge) between cart and hamburger */
+@media(max-width:782px){.site-header .tools{gap:12px}.site-header .menu-toggle svg{width:28px;height:28px}}
 
 /* ── bands ──────────────────────────────────────────────────────── */
 .band{padding-block:80px;border-top:1px solid var(--line)}
