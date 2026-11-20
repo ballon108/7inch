@@ -386,6 +386,11 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .shop-page .wc-block-components-radio-control__option-checked{background:color-mix(in srgb,var(--ink) 5%,transparent)}
 .shop-page .wc-block-components-radio-control__input{border-color:var(--halo);background:var(--bg)}
 .shop-page .wc-block-components-radio-control__input:checked::before{background:var(--ink)}
+/* checkout: payment methods in two columns (one column on phones) */
+.shop-page #payment ul.payment_methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.shop-page #payment ul.payment_methods::before,.shop-page #payment ul.payment_methods::after{display:none}
+.shop-page #payment ul.payment_methods li{margin:0}
+@media(max-width:600px){.shop-page #payment ul.payment_methods{grid-template-columns:minmax(0,1fr)}}
 /* summary / totals card */
 .shop-page .wc-block-components-sidebar .wp-block-woocommerce-checkout-order-summary-block,.shop-page .wc-block-cart__sidebar .wp-block-woocommerce-cart-order-summary-block,.shop-page .wp-block-woocommerce-cart-order-summary-block{padding:clamp(18px,3vw,28px);border:1px solid var(--line)!important;border-radius:20px;background:var(--card)}
 .shop-page .wc-block-components-order-summary,.shop-page .wc-block-components-totals-wrapper{border-color:var(--line)!important}
