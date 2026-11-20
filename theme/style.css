@@ -378,6 +378,12 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .pp-side{display:flex;flex-direction:column;gap:24px}
 .pp-side .pp-lead{margin:0 0 24px;max-width:none;font-size:20px;line-height:1.4}
 .pp-register.pp-boxed{padding:0;border:0;border-radius:0;background:none}
+/* partner application form: 40px above the box, less padding at the top of it */
+.pp-apply.pp-boxed{margin-top:40px;padding-top:16px}
+/* grid row gap is 16px; +4px = 20px between the Record shop / Distributor choice and the first field */
+.pf-form .pf-type{margin-bottom:4px}
+/* the "I am applying as" label is not shown (kept for screen readers as the name of the radio group) */
+.pf-form .pf-type legend{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .pp-register h2{font-size:clamp(22px,2.6vw,28px);font-weight:400;letter-spacing:-.03em;line-height:1.1;margin:0 0 16px}
 .pp-login .form-row-first,.pp-login .form-row-last,.pp-login .form-row{float:none!important;width:100%!important;display:block;margin-right:0}
 .about-page h2{font-size:clamp(24px,3vw,32px);font-weight:400;letter-spacing:-.03em;margin:40px 0 12px}
