@@ -141,4 +141,35 @@
       }).catch(function () { f.submit(); });
     });
   });
+
+  /* ── B2BKing bulk order form (My account): refresh the header mini-cart after "Add" ──
+     B2BKing signals via jQuery events (wc_fragment_refresh / added_to_cart); the block mini-cart only
+     listens to the DOM event "wc-blocks_added_to_cart". */
+  var bridgeTimer;
+  function refreshMiniCart() {
+    clearTimeout(bridgeTimer);
+    bridgeTimer = setTimeout(function () {
+      document.body.dispatchEvent(new CustomEvent('wc-blocks_added_to_cart', { bubbles: true, detail: { preserveCartData: false } }));
+    }, 150);
+  }
+  if (window.jQuery && document.querySelector('.woocommerce-MyAccount-content, .account-page')) {
+    window.jQuery(document.body).on('wc_fragment_refresh added_to_cart', refreshMiniCart);
+  }
+
+  /* ── Bulk order form: minimum quantity per line = one pack of 10 ── */
+  var BULK_MIN = 10, BULK_QTY = '.b2bking_bulkorder_form_container_content_line_qty';
+  function bulkClamp(i) {
+    var max = parseInt(i.max, 10);
+    if (i.disabled || i.type === 'hidden' || (!isNaN(max) && max < BULK_MIN)) { return; } // sold out / less than a pack in stock
+    var v = parseInt(i.value, 10);
+    if (isNaN(v) || v < BULK_MIN) { i.value = BULK_MIN; }
+    i.min = BULK_MIN;
+  }
+  var isPartner = function () { return document.body.classList.contains('i7-partner'); }; // shops & distributors only
+  function bulkInit() { if (isPartner()) { document.querySelectorAll(BULK_QTY).forEach(bulkClamp); } }
+  bulkInit();
+  new MutationObserver(function (m) { if (isPartner() && document.querySelector(BULK_QTY + ':not([min="' + BULK_MIN + '"])')) { bulkInit(); } })
+    .observe(document.body, { childList: true, subtree: true });
+  // Before B2BKing reads the quantity on "Add" (capture phase runs ahead of its delegated handler).
+  document.addEventListener('click', bulkInit, true);
 })();
