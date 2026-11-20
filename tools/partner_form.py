@@ -32,8 +32,8 @@ FORM = f"""<div class="pf">
 
 MAIL_BODY = """New partner application
 
-Status: the applicant was e-mailed a summary to verify. The account is created automatically once the applicant
-confirms the link (you will get a separate "Partner account created" e-mail).
+Status: the account is created automatically and the applicant receives a welcome e-mail with a link to set the
+password (you also get a separate "Partner account created" e-mail).
 
 Type: [apply_as]
 Company: [company]
@@ -94,7 +94,7 @@ $props['mail'] = array_merge($props['mail'], [
   'use_html' => 0, 'exclude_blank' => 0,
 ]);
 $props['messages'] = array_merge($props['messages'], [
-  'mail_sent_ok' => "Thank you. We have sent you an e-mail: please check your details and confirm them with the link in the message. After that your account is created and you can log in.",
+  'mail_sent_ok' => "Thank you. We have sent you a welcome e-mail with a link to set your password. After that you can log in to My account.",
   'validation_error' => 'Please check the highlighted fields and try again.',
   'accept_terms' => 'Please confirm that we may process your details.',
 ]);

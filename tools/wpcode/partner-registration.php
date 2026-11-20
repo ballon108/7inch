@@ -1,17 +1,18 @@
-/* WPCode snippet "Partner: application -> e-mail confirmation -> account". Location: Run everywhere (PHP).
+/* WPCode snippet "Partner: application -> account + welcome e-mail". Location: Run everywhere (PHP).
  * Source of truth is kept in the 7inch repo (tools/wpcode/partner-registration.php); the live copy is the WPCode snippet.
  *
  * Flow:
  *  1. A record shop / distributor sends the application form (Contact Form 7: id 86 = EN, id 202 = DE).
  *     Contact Form 7 mails the application to shop@7inchrare.com (form setting).
- *  2. This snippet stores the application for 3 days under a one-time token and e-mails the applicant a summary
- *     of the data to verify, with a confirmation link.
- *  3. Opening the link creates the WooCommerce customer (billing address from the form), puts it into the B2BKing group
- *     (Shop 130 / Distributor 131, so group prices apply), sends the "set your password" e-mail and tells shop@7inchrare.com.
- *     The applicant can then log in to My account and sees the offer of the group.
- * Existing accounts are never touched: if the e-mail address is already registered, nothing is changed and shop@ is informed.
+ *  2. This snippet immediately creates the WooCommerce customer (billing address from the form), puts it into the B2BKing
+ *     group (Shop 130 / Distributor 131, so group prices apply) and sends ONE welcome e-mail (the WooCommerce "new account"
+ *     e-mail with a welcome subject / text) containing the link to set the password. Only the owner of the mailbox can set
+ *     the password, so this also confirms the address. shop@7inchrare.com gets a "Partner account created" notice.
+ *  3. After setting the password the partner logs in to My account and sees the offer of the group.
+ * Existing accounts are never touched: if the e-mail address is already registered, nothing is changed, the applicant gets a
+ * short "you already have an account" e-mail and shop@ is informed.
  * To undo: deactivate this snippet. */
-if ( ! function_exists( 'i7pr_start' ) ) {
+if ( ! function_exists( 'i7pr_register' ) ) {
 
 	function i7pr_forms() { return array( 86 => 'en', 202 => 'de' ); }
 	function i7pr_admin_mail() { return 'shop@7inchrare.com'; }
@@ -20,23 +21,14 @@ if ( ! function_exists( 'i7pr_start' ) ) {
 	function i7pr_t( $lang ) {
 		$de = ( 'de' === $lang );
 		return array(
-			'subject' => $de ? 'Bitte bestätigen Sie Ihre Angaben – Vibetown Entertainment' : 'Please confirm your details – Vibetown Entertainment',
-			'hello'   => $de ? 'Guten Tag %s,' : 'Hello %s,',
-			'intro'   => $de ? "vielen Dank für Ihre Anfrage für ein Händlerkonto (%s) bei Vibetown Entertainment (7inchrare.com).\n\nBitte prüfen Sie Ihre Angaben:" : "thank you for applying for a trade account (%s) at Vibetown Entertainment (7inchrare.com).\n\nPlease check the details you entered:",
-			'confirm' => $de ? 'Wenn alles stimmt, bestätigen Sie Ihre Angaben mit diesem Link:' : 'If everything is correct, confirm your details with this link:',
-			'after'   => $de ? "Nach der Bestätigung wird Ihr Konto angelegt und Sie erhalten eine weitere E-Mail mit einem Link, um Ihr Passwort festzulegen. Danach können Sie sich unter „Mein Konto“ anmelden und das Angebot für Ihr Konto sehen.\n\nDer Link ist 3 Tage gültig. Wenn Sie sich nicht beworben haben, ignorieren Sie diese Nachricht einfach." : "After you confirm, your account is created and we send you another e-mail with a link to set your password. You can then log in to My account and see the offer for your account.\n\nThe link is valid for 3 days. If you did not apply, simply ignore this message.",
-			'labels'  => $de ? array( 'company' => 'Firma', 'contact' => 'Ansprechpartner', 'email' => 'E-Mail', 'phone' => 'Telefon', 'address' => 'Adresse', 'vat' => 'EU-USt-IdNr.' ) : array( 'company' => 'Company', 'contact' => 'Contact person', 'email' => 'E-mail', 'phone' => 'Phone', 'address' => 'Address', 'vat' => 'EU VAT number' ),
-			'shop'    => $de ? 'Plattenladen' : 'Record shop',
-			'dist'    => $de ? 'Vertrieb' : 'Distributor',
-			'ok'      => $de ? 'Ihr Konto ist bestätigt. Sie können sich jetzt anmelden – legen Sie dafür zuerst über den Link in der soeben gesendeten E-Mail Ihr Passwort fest.' : 'Your account is confirmed. You can log in now – first set your password with the link in the e-mail we have just sent you.',
-			'exists'  => $de ? 'Für diese E-Mail-Adresse gibt es bereits ein Konto. Bitte melden Sie sich an oder nutzen Sie „Passwort vergessen?“. Wir haben Ihre Anfrage notiert.' : 'An account with this e-mail address already exists. Please log in, or use “Lost your password?”. We have noted your application.',
-			'invalid' => $de ? 'Dieser Bestätigungslink ist ungültig, abgelaufen oder wurde bereits verwendet. Falls Sie schon bestätigt haben, prüfen Sie Ihr Postfach auf die E-Mail zum Festlegen des Passworts; andernfalls bewerben Sie sich bitte erneut oder kontaktieren Sie uns.' : 'This confirmation link is invalid, expired or has already been used. If you have already confirmed, check your inbox for the e-mail to set your password; otherwise please apply again or contact us.',
-			'error'   => $de ? 'Wir konnten Ihr Konto nicht automatisch anlegen. Wir haben Ihre Anfrage notiert und melden uns in Kürze.' : 'We could not create your account automatically. We have noted your application and will contact you shortly.',
+			'shop'          => $de ? 'Plattenladen' : 'Record shop',
+			'dist'          => $de ? 'Vertrieb' : 'Distributor',
+			'wel_subject'   => $de ? 'Willkommen bei Vibetown Entertainment – Passwort festlegen' : 'Welcome to Vibetown Entertainment – set your password',
+			'wel_heading'   => $de ? 'Willkommen bei Vibetown Entertainment' : 'Welcome to Vibetown Entertainment',
+			'wel_text'      => $de ? 'Dein Händlerkonto (%s) ist angelegt. Lege mit dem Link oben dein Passwort fest. Danach meldest du dich unter „Mein Konto“ an und siehst das Angebot und die Preise für dein Konto.' : 'Your trade account (%s) is ready. Set your password with the link above, then log in to My account to see the offer and prices for your account.',
+			'ex_subject'    => $de ? 'Ihr Konto bei Vibetown Entertainment' : 'Your account at Vibetown Entertainment',
+			'ex_body'       => $de ? "Hallo %s,\n\nvielen Dank für deine Anfrage. Für diese E-Mail-Adresse gibt es bereits ein Konto.\n\nAnmelden: %s\nPasswort vergessen? %s\n\nVibetown Entertainment" : "Hello %s,\n\nthank you for your application. An account with this e-mail address already exists.\n\nLog in: %s\nForgot your password? %s\n\nVibetown Entertainment",
 		);
-	}
-
-	function i7pr_headers() {
-		return array( 'Content-Type: text/plain; charset=UTF-8', 'From: Vibetown Entertainment <' . i7pr_admin_mail() . '>', 'Reply-To: ' . i7pr_admin_mail() );
 	}
 
 	function i7pr_address_lines( $d ) {
@@ -47,31 +39,6 @@ if ( ! function_exists( 'i7pr_start' ) ) {
 		if ( '' !== $d['state'] ) { $l[] = $d['state']; }
 		$l[] = $d['country'];
 		return $l;
-	}
-
-	/** Stores the application under a one-time token and mails the applicant the confirmation link. Returns the token. */
-	function i7pr_start( array $d ) {
-		$token = wp_generate_password( 40, false, false );
-		set_transient( 'i7pr_' . hash( 'sha256', $token ), $d, 3 * DAY_IN_SECONDS );
-		$t    = i7pr_t( $d['lang'] );
-		$L    = $t['labels'];
-		$link = add_query_arg( 'i7_partner_verify', $token, home_url( '/' ) );
-		$body = sprintf( $t['hello'], $d['contact'] ) . "\n\n" . sprintf( $t['intro'], 'distributor' === $d['type'] ? $t['dist'] : $t['shop'] ) . "\n\n"
-			. $L['company'] . ': ' . $d['company'] . "\n"
-			. $L['contact'] . ': ' . $d['contact'] . "\n"
-			. $L['email'] . ': ' . $d['email'] . "\n"
-			. ( '' !== $d['phone'] ? $L['phone'] . ': ' . $d['phone'] . "\n" : '' )
-			. $L['address'] . ":\n  " . implode( "\n  ", i7pr_address_lines( $d ) ) . "\n"
-			. ( '' !== $d['vat'] ? $L['vat'] . ': ' . $d['vat'] . "\n" : '' )
-			. "\n" . $t['confirm'] . "\n" . $link . "\n\n" . $t['after'] . "\n\nVibetown Entertainment";
-		$err = '';
-		$cap = static function ( $e ) use ( &$err ) { $err = $e->get_error_message(); };
-		add_action( 'wp_mail_failed', $cap );
-		$sent = wp_mail( $d['email'], $t['subject'], $body, i7pr_headers() );
-		remove_action( 'wp_mail_failed', $cap );
-		// result of the last confirmation mail (for troubleshooting; no address stored)
-		update_option( 'i7pr_last_send', array( 'time' => current_time( 'mysql' ), 'ok' => (bool) $sent, 'error' => $err, 'lang' => $d['lang'], 'domain' => substr( strrchr( $d['email'], '@' ), 1 ) ), false );
-		return $token;
 	}
 
 	/** Country name (as submitted: English) -> ISO code, independent of the current locale. */
@@ -97,7 +64,23 @@ if ( ! function_exists( 'i7pr_start' ) ) {
 		return '';
 	}
 
-	/** Creates the customer from a confirmed application. Returns user id or WP_Error. */
+	/** Welcome wording for the WooCommerce "new account" e-mail, only while this snippet creates an account. */
+	add_filter( 'woocommerce_email_subject_customer_new_account', function ( $s ) {
+		$w = $GLOBALS['i7pr_welcome'] ?? null;
+		return $w ? i7pr_t( $w['lang'] )['wel_subject'] : $s;
+	}, 20 );
+	add_filter( 'woocommerce_email_heading_customer_new_account', function ( $s ) {
+		$w = $GLOBALS['i7pr_welcome'] ?? null;
+		return $w ? i7pr_t( $w['lang'] )['wel_heading'] : $s;
+	}, 20 );
+	add_filter( 'woocommerce_email_additional_content_customer_new_account', function ( $c ) {
+		$w = $GLOBALS['i7pr_welcome'] ?? null;
+		if ( ! $w ) { return $c; }
+		$t = i7pr_t( $w['lang'] );
+		return sprintf( $t['wel_text'], 'distributor' === $w['type'] ? $t['dist'] : $t['shop'] );
+	}, 20 );
+
+	/** Creates the customer from an application. Returns user id or WP_Error. */
 	function i7pr_create_account( array $d ) {
 		$parts = array( $d['first_name'] ?? '', $d['last_name'] ?? '' );
 		if ( '' === $parts[0] ) { $parts = preg_split( '/\s+/', trim( $d['contact'] ), 2 ); } // fallback: single "contact" value
@@ -110,7 +93,9 @@ if ( ! function_exists( 'i7pr_start' ) ) {
 		// so validation errors of other plugins on the registration are ignored here.
 		$ignore = static function () { return new WP_Error(); };
 		add_filter( 'woocommerce_registration_errors', $ignore, 9999 );
+		$GLOBALS['i7pr_welcome'] = $d; // welcome wording for the "new account" e-mail
 		$uid = wc_create_new_customer( $d['email'], '', '', array( 'first_name' => $parts[0], 'last_name' => $parts[1] ?? '' ) );
+		unset( $GLOBALS['i7pr_welcome'] );
 		remove_filter( 'woocommerce_registration_errors', $ignore, 9999 );
 		foreach ( $off as $f ) { remove_filter( $f, '__return_false' ); }
 		remove_filter( 'pre_option_woocommerce_registration_generate_password', $yes );
@@ -141,36 +126,40 @@ if ( ! function_exists( 'i7pr_start' ) ) {
 		wp_mail( i7pr_admin_mail(), $subject, $body, array( 'Content-Type: text/plain; charset=UTF-8' ) );
 	}
 
-	/** Validates the token and creates the account. Returns array( status, lang, user_id ). */
-	function i7pr_process( $token ) {
-		$key = 'i7pr_' . hash( 'sha256', (string) $token );
-		$d   = get_transient( $key );
-		if ( ! is_array( $d ) ) { return array( 'invalid', 'en', 0 ); }
-		$lang   = $d['lang'];
+	/** Application -> account + welcome e-mail. Returns array( status, user_id ): created | exists | error. */
+	function i7pr_register( array $d ) {
+		$lang            = $d['lang'];
 		$d['cc']         = i7pr_country_code( $d['country'] );
 		$d['state_code'] = i7pr_state_code( $d['cc'], $d['state'] );
-		$locale = ( 'de' === $lang ) ? 'de_DE' : 'en_US';
-		$sw     = function_exists( 'switch_to_locale' ) ? switch_to_locale( $locale ) : false;
+		$sw              = function_exists( 'switch_to_locale' ) ? switch_to_locale( 'de' === $lang ? 'de_DE' : 'en_US' ) : false;
+		$uid             = 0;
 		if ( email_exists( $d['email'] ) ) {
-			delete_transient( $key );
-			i7pr_notify_admin( 'Partner application: e-mail already registered (' . $d['company'] . ')', $d, 'The applicant confirmed the e-mail address, but an account with this address already exists. Nothing was changed.' );
-			if ( $sw ) { restore_previous_locale(); }
-			return array( 'exists', $lang, 0 );
+			$status = 'exists';
+			$t      = i7pr_t( $lang );
+			$my     = function_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'myaccount' ) : 0;
+			if ( $my && function_exists( 'pll_get_post' ) ) { $my = pll_get_post( $my, $lang ) ?: $my; }
+			$login = $my ? get_permalink( $my ) : home_url( '/' );
+			wp_mail( $d['email'], $t['ex_subject'], sprintf( $t['ex_body'], $d['first_name'] ?: $d['contact'], $login, trailingslashit( $login ) . 'lost-password/' ), array( 'Content-Type: text/plain; charset=UTF-8' ) );
+			i7pr_notify_admin( 'Partner application: e-mail already registered (' . $d['company'] . ')', $d, 'An account with this address already exists. Nothing was changed; the applicant was e-mailed the login / password reset links.' );
+		} else {
+			$uid = i7pr_create_account( $d );
+			if ( is_wp_error( $uid ) ) {
+				$status = 'error';
+				update_option( 'i7pr_last_error', array( 'time' => current_time( 'mysql' ), 'code' => $uid->get_error_code(), 'message' => $uid->get_error_message() ), false );
+				i7pr_notify_admin( 'Partner application: account could not be created (' . $d['company'] . ')', $d, 'Error: ' . $uid->get_error_message() );
+				$uid = 0;
+			} else {
+				$status = 'created';
+				i7pr_notify_admin( 'Partner account created: ' . $d['company'], $d, 'The account was created automatically (group ' . ( 'distributor' === $d['type'] ? 'Distributor' : 'Shop' ) . ') and the applicant received the welcome e-mail with the link to set the password.' . "\nEdit: " . admin_url( 'user-edit.php?user_id=' . $uid ) );
+			}
 		}
-		$uid = i7pr_create_account( $d );
-		if ( is_wp_error( $uid ) ) {
-			update_option( 'i7pr_last_error', array( 'time' => current_time( 'mysql' ), 'code' => $uid->get_error_code(), 'message' => $uid->get_error_message() ), false ); // the token stays valid, the link can be opened again
-			i7pr_notify_admin( 'Partner application: account could not be created (' . $d['company'] . ')', $d, 'Error: ' . $uid->get_error_message() );
-			if ( $sw ) { restore_previous_locale(); }
-			return array( 'error', $lang, 0 );
-		}
-		delete_transient( $key ); // one use
-		i7pr_notify_admin( 'Partner account created: ' . $d['company'], $d, 'The applicant confirmed the data; the account was created automatically (group ' . ( 'distributor' === $d['type'] ? 'Distributor' : 'Shop' ) . ').' . "\nEdit: " . admin_url( 'user-edit.php?user_id=' . $uid ) );
 		if ( $sw ) { restore_previous_locale(); }
-		return array( 'ok', $lang, $uid );
+		// result of the last application (for troubleshooting; no address stored)
+		update_option( 'i7pr_last_result', array( 'time' => current_time( 'mysql' ), 'status' => $status, 'lang' => $lang, 'domain' => substr( strrchr( $d['email'], '@' ), 1 ) ), false );
+		return array( $status, $uid );
 	}
 
-	/** Contact Form 7 -> store the application and mail the confirmation link. */
+	/** Contact Form 7 -> create the account and send the welcome e-mail. */
 	add_action( 'wpcf7_mail_sent', function ( $form ) {
 		$forms = i7pr_forms();
 		$id    = (int) $form->id();
@@ -185,7 +174,7 @@ if ( ! function_exists( 'i7pr_start' ) ) {
 		};
 		$email = sanitize_email( $g( 'your-email' ) );
 		if ( ! is_email( $email ) ) { return; }
-		i7pr_start( array(
+		i7pr_register( array(
 			'type'      => ( 'Distributor' === $g( 'apply_as' ) ) ? 'distributor' : 'shop',
 			'company'   => $g( 'company' ), 'first_name' => $g( 'first_name' ), 'last_name' => $g( 'last_name' ),
 			'contact'   => trim( $g( 'first_name' ) . ' ' . $g( 'last_name' ) ) ?: $g( 'contact' ), 'email' => $email, 'phone' => $g( 'phone' ),
@@ -193,23 +182,5 @@ if ( ! function_exists( 'i7pr_start' ) ) {
 			'state'     => $g( 'state' ), 'country' => $g( 'country' ), 'vat' => $g( 'vat' ),
 			'lang'      => $forms[ $id ],
 		) );
-	} );
-
-	/** Confirmation link. */
-	add_action( 'template_redirect', function () {
-		if ( empty( $_GET['i7_partner_verify'] ) ) { return; } // phpcs:ignore WordPress.Security.NonceVerification
-		list( $status, $lang ) = i7pr_process( sanitize_text_field( wp_unslash( $_GET['i7_partner_verify'] ) ) ); // phpcs:ignore
-		if ( 'invalid' === $status && function_exists( 'pll_current_language' ) && in_array( pll_current_language( 'slug' ), array( 'en', 'de' ), true ) ) {
-			$lang = pll_current_language( 'slug' ); // unknown token: use the language of the URL
-		}
-		$t = i7pr_t( $lang );
-		if ( function_exists( 'WC' ) && WC()->session ) {
-			WC()->session->set_customer_session_cookie( true );
-			wc_add_notice( $t[ $status ], 'ok' === $status ? 'success' : 'error' );
-		}
-		$page = function_exists( 'wc_get_page_id' ) ? wc_get_page_id( 'myaccount' ) : 0;
-		if ( $page && function_exists( 'pll_get_post' ) ) { $page = pll_get_post( $page, $lang ) ?: $page; }
-		wp_safe_redirect( $page ? get_permalink( $page ) : home_url( '/' ) );
-		exit;
 	} );
 }
