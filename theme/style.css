@@ -66,6 +66,8 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 @media(max-width:600px){.site-header .lang-switch a{font-size:13px;padding:8px 11px}}
 /* the cart icon (28px) sits 8px inside its 44px button: pull it out so the visible gaps are all 20px and it ends flush with the layout edge */
 @media(min-width:783px){.site-header .tools .cart-icon{margin-inline:-8px}}
+/* mobile: icons sit 8px (cart) / 11px (hamburger) inside their 44px buttons; 12px gap + the hamburger pulled in = 20px visible gaps */
+@media(max-width:782px){.site-header .tools{gap:12px}.site-header .menu-toggle{margin-left:-11px}}
 
 /* ── bands ──────────────────────────────────────────────────────── */
 .band{padding-block:80px;border-top:1px solid var(--line)}
@@ -79,6 +81,7 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .htext{min-height:390px;display:flex;flex-direction:column;justify-content:center}
 .badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:7px 12px;border-radius:100px;box-shadow:inset 0 0 0 1px var(--halo);font:12px/1 "Space Mono",monospace!important;letter-spacing:.06em;text-transform:uppercase;margin:0}
 .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.hero .badge.has-lr-color,.hero .badge.has-mp-color{color:var(--mp)!important}
 .scene{position:relative;aspect-ratio:1/0.92;overflow:visible}
 .pod{position:absolute;left:20%;right:20%;bottom:7%;height:12%;background:radial-gradient(closest-side,var(--podGlow) 0%,color-mix(in srgb,var(--podGlow) 55%,transparent) 30%,var(--podGlow2) 58%,color-mix(in srgb,var(--podGlow2) 35%,transparent) 82%,transparent 100%);filter:blur(8px)}
 .float{position:absolute;inset:0;animation:bob 5s ease-in-out infinite}
