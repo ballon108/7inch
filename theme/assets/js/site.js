@@ -70,6 +70,37 @@
     go(0);
   }
 
+  /* ── Scroll reveal (home page, below the first screen) ───────── */
+  if (hero && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var targets = [];
+    ['series', 'releases', 'trade'].forEach(function (id) {
+      var sec = document.getElementById(id);
+      var wrap = sec && sec.querySelector('.wrap');
+      if (!wrap) return;
+      var items = wrap.classList.contains('trade') ? Array.prototype.slice.call(wrap.children) : Array.prototype.slice.call(wrap.children).filter(function (c) { return !c.querySelector('.card, .panel') && !c.classList.contains('series'); });
+      items.forEach(function (c) { targets.push(c); });
+      Array.prototype.forEach.call(sec.querySelectorAll('.card, .panel'), function (c) { targets.push(c); });
+    });
+    var vh = window.innerHeight;
+    targets = targets.filter(function (el) { return el.getBoundingClientRect().top > vh * 0.92; });
+    if (targets.length) {
+      root.classList.add('js-rv');
+      targets.forEach(function (el) { el.classList.add('rv'); });
+      var io = new IntersectionObserver(function (entries) {
+        var n = 0;
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          io.unobserve(el);
+          el.style.setProperty('--rv-d', Math.min(n++ * 0.07, 0.35) + 's');
+          el.classList.add('rv-in');
+          setTimeout(function () { el.classList.remove('rv', 'rv-in'); el.style.removeProperty('--rv-d'); }, 1300);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      targets.forEach(function (el) { io.observe(el); });
+    }
+  }
+
   /* ── Catalogue filter ────────────────────────────────────────── */
   var filterBtns = document.querySelectorAll('.filters .wp-block-button');
   var cards = document.querySelectorAll('#releases .card');

@@ -60,6 +60,12 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .site-nav a{font-size:14px;padding:12px 0;display:inline-block;text-decoration:none;color:var(--ink)}
 .site-nav a:hover{text-decoration:underline;text-underline-offset:5px}
 .tools{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+/* language switch: larger (base styles come from the Polylang WPCode snippet; higher specificity here) */
+.site-header .lang-switch{padding:4px;margin-right:0}
+.site-header .lang-switch a{font-size:14px;padding:9px 14px}
+@media(max-width:600px){.site-header .lang-switch a{font-size:13px;padding:8px 11px}}
+/* the cart icon sits 11px inside its 44px button: pull it out so the visible gaps are all 20px and it ends flush with the layout edge */
+@media(min-width:783px){.site-header .tools .cart-icon{margin-inline:-11px}}
 
 /* ── bands ──────────────────────────────────────────────────────── */
 .band{padding-block:80px;border-top:1px solid var(--line)}
@@ -558,6 +564,10 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 
 /* card: link on title (stretched), purchase form above it */
 .card{position:relative}
+/* scroll reveal (site.js adds .js-rv / .rv / .rv-in; nothing is hidden without JS or with reduced motion) */
+.js-rv .rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1),box-shadow .2s;transition-delay:var(--rv-d,0s)}
+.js-rv .rv.rv-in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js-rv .rv{opacity:1;transform:none;transition:none}}
 .card .ct a{color:inherit;text-decoration:none}
 .card .ct a::after{content:"";position:absolute;inset:0;border-radius:10px;z-index:1}
 .card-buy{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:auto;padding-top:6px;position:relative;z-index:2}
