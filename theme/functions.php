@@ -27,7 +27,6 @@ add_action( 'wp_head', function () {
  * /acf-json and is loaded by Secure Custom Fields as Local JSON.
  * Interface blocks live in /blocks (block.json + render.php, rendered by SCF). */
 require_once get_stylesheet_directory() . '/inc/helpers.php';
-require_once get_stylesheet_directory() . '/inc/account-verification.php';
 require_once get_stylesheet_directory() . '/inc/partners.php';
 require_once get_stylesheet_directory() . '/inc/shipping.php';
 require_once get_stylesheet_directory() . '/inc/checkout-fields.php';
