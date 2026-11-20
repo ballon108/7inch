@@ -314,7 +314,7 @@ For deliveries outside the EU, import duties and carrier fees may apply and are 
 
 ## Returns
 
-Returns only to: Philipp Mühlen, Birkenweg 16 B, 48155 Münster, Germany.
+Returns only to: Vibetown Entertainment, Philipp Mühlen, Birkenweg 16 B, 48155 Münster, Germany.
 """)
 
 # ── conversion to Gutenberg blocks ──────────────────────────────────
