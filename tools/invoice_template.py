@@ -71,7 +71,7 @@ def item(kind, attrs=''):
 TABLE = ('<!-- wp:storeabill/item-table {"className":"is-style-even","customBorderColor":"#a9a9a9","borders":["horizontal"],"headingTextColor":"black","customHeadingBackgroundColor":"#e5e5e5","showPricesIncludingTax":false,"hasDenseLayout":false} -->'
          '<div class="wp-block-storeabill-item-table is-style-even has-border-horizontal">'
          + column('Description', item('name') + '<!-- wp:storeabill/item-attributes {"customTextColor":"#a9a9a9","fontSize":"small"} /-->', 40)
-         + column('HS code', '<!-- wp:storeabill/item-meta {"metaType":"hs_code"} --><p class="wp-block-storeabill-item-meta sab-block-item-content">{content}</p><!-- /wp:storeabill/item-meta -->', 16, 'center')
+         + column('HS code', '<!-- wp:paragraph --><p>8523.80.1000</p><!-- /wp:paragraph -->', 16, 'center')
          + column('Qty', item('quantity'), 9, 'center')
          + column('Unit (net)', item('price', '{"showPricesIncludingTax":false}'), 17, 'center')
          + column('Total (net)', item('line-total', '{"discountTotalType":"before_discounts","showPricesIncludingTax":false}'), 18, 'right')
