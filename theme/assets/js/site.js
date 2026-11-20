@@ -7,6 +7,7 @@
   var slides = hero ? Array.prototype.slice.call(hero.querySelectorAll('.hero-slide')) : [];
   if (slides.length) {
     var DUR = 6500, cur = 0, timer = null, paused = false;
+    slides[0].parentNode.classList.add('ready'); // hands the first slide's visibility over to .on (CSS shows it without JS)
     var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     var ARROW_L = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>';
     var ARROW_R = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>';

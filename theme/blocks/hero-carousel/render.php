@@ -15,7 +15,7 @@ $releases = i7_releases( array(
 if ( ! $releases ) { echo '<p class="i7-empty">Mark releases as “Show in hero carousel” to fill this block.</p>'; return; }
 ?>
 <section id="home" class="wp-block-group hero"><div class="wp-block-group wrap"><div class="wp-block-group hero-slides">
-<?php foreach ( $releases as $r ) :
+<?php foreach ( $releases as $i => $r ) :
 	$term = i7_series_of( $r->ID );
 	$s    = i7_accent( $term );
 	$st   = i7_status( $r->ID );
@@ -40,8 +40,8 @@ if ( ! $releases ) { echo '<p class="i7-empty">Mark releases as “Show in hero 
 		<div class="wp-block-group scene <?php echo esc_attr( $s ); ?>">
 			<?php if ( $ispre ) : ?><p class="pre"><?php echo esc_html( $pre ); ?></p><?php endif; ?>
 			<div class="wp-block-group float">
-				<div class="wp-block-group disc"><?php echo i7_img( get_field( 'label_a', $r->ID ), 'lr' === $s ? '' : $title . ' label', '', false ); // phpcs:ignore ?></div>
-				<?php if ( 'lr' === $s ) { echo i7_img( get_field( 'cover_front', $r->ID ), $title . ' cover', 'sleeve', false ); } // phpcs:ignore ?>
+				<div class="wp-block-group disc"><?php echo i7_img( get_field( 'label_a', $r->ID ), 'lr' === $s ? '' : $title . ' label', '', $i > 0 ); // phpcs:ignore ?></div>
+				<?php if ( 'lr' === $s ) { echo i7_img( get_field( 'cover_front', $r->ID ), $title . ' cover', 'sleeve', $i > 0 ); } // phpcs:ignore ?>
 			</div>
 			<div class="wp-block-group pod"></div>
 		</div>
