@@ -102,8 +102,8 @@ PAGES = {
     'Credit card, Apple Pay, Google Pay, PayPal, SEPA bank transfer (processed by Mollie). No surcharges.':
         'Kreditkarte, Apple Pay, Google Pay, PayPal, SEPA-Überweisung (abgewickelt über Mollie). Keine Aufpreise.',
     'Customs and taxes': 'Zoll und Steuern',
-    'For deliveries outside the EU, import duties and carrier fees may apply and are borne by the recipient. United Kingdom up to GBP 135: UK VAT is already included in the price.':
-        'Bei Lieferungen außerhalb der EU können Einfuhrzölle und Gebühren des Transportunternehmens anfallen; diese trägt der Empfänger. Vereinigtes Königreich bis 135 GBP: Die britische Umsatzsteuer ist bereits im Preis enthalten.',
+    'For deliveries outside the EU, import duties and carrier fees may apply and are borne by the recipient.':
+        'Bei Lieferungen außerhalb der EU können Einfuhrzölle und Gebühren des Transportunternehmens anfallen; diese trägt der Empfänger.',
     'Returns': 'Rücksendungen', 'Returns only to: ' + RN + '.': 'Rücksendungen nur an: ' + RN_DE + '.',
  })),
  97: ('widerrufsbelehrung', 'Widerrufsbelehrung', dict(LEGAL, **{
@@ -170,8 +170,8 @@ PAGES = {
     '(1) All prices are final prices in euros and include statutory VAT.': '(1) Alle Preise sind Endpreise in Euro und enthalten die gesetzliche Umsatzsteuer.',
     '(2) Shipping costs including packaging are added depending on the destination country; they are shown on the "Shipping and payment" page and in the basket before you order.':
         '(2) Je nach Bestimmungsland kommen Versandkosten einschließlich Verpackung hinzu; sie werden vor der Bestellung auf der Seite „Versand und Zahlung“ und im Warenkorb angezeigt.',
-    '(3) For deliveries to countries outside the EU, customs duties, import taxes and carrier fees may apply. These are borne by the recipient. Exception: deliveries to the United Kingdom with a value of up to GBP 135, where UK VAT is already included in the final price.':
-        '(3) Bei Lieferungen in Länder außerhalb der EU können Zölle, Einfuhrabgaben und Gebühren des Transportunternehmens anfallen. Diese trägt der Empfänger. Ausnahme: Lieferungen in das Vereinigte Königreich mit einem Wert von bis zu 135 GBP, bei denen die britische Umsatzsteuer bereits im Endpreis enthalten ist.',
+    '(3) For deliveries to countries outside the EU, customs duties, import taxes and carrier fees may apply. These are borne by the recipient.':
+        '(3) Bei Lieferungen in Länder außerhalb der EU können Zölle, Einfuhrabgaben und Gebühren des Transportunternehmens anfallen. Diese trägt der Empfänger.',
     '§ 4 Payment': '§ 4 Zahlung',
     '(1) We offer the following payment methods: credit card, Apple Pay, Google Pay, PayPal and SEPA bank transfer. Payments are processed by the payment service provider Mollie. For SEPA bank transfer, you receive the payment details at checkout; we ship once payment has been received.':
         '(1) Wir bieten folgende Zahlungsarten an: Kreditkarte, Apple Pay, Google Pay, PayPal und SEPA-Überweisung. Die Zahlungen werden vom Zahlungsdienstleister Mollie abgewickelt. Bei SEPA-Überweisung erhalten Sie die Zahlungsdaten an der Kasse; wir versenden nach Zahlungseingang.',

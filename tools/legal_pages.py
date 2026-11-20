@@ -68,7 +68,7 @@ PAGES["terms"] = ("General Terms and Conditions", """
 
 (2) Shipping costs including packaging are added depending on the destination country; they are shown on the "Shipping and payment" page and in the basket before you order.
 
-(3) For deliveries to countries outside the EU, customs duties, import taxes and carrier fees may apply. These are borne by the recipient. Exception: deliveries to the United Kingdom with a value of up to GBP 135, where UK VAT is already included in the final price.
+(3) For deliveries to countries outside the EU, customs duties, import taxes and carrier fees may apply. These are borne by the recipient.
 
 ## § 4 Payment
 
@@ -308,7 +308,7 @@ Credit card, Apple Pay, Google Pay, PayPal, SEPA bank transfer (processed by Mol
 
 ## Customs and taxes
 
-For deliveries outside the EU, import duties and carrier fees may apply and are borne by the recipient. United Kingdom up to GBP 135: UK VAT is already included in the price.
+For deliveries outside the EU, import duties and carrier fees may apply and are borne by the recipient.
 
 ## Returns
 
