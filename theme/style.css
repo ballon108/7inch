@@ -485,6 +485,12 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .shop-page #order_review>#payment{order:4}
 .shop-page #order_review>.wc-gzd-checkbox-placeholder{order:5}
 .shop-page #order_review>.wc-gzd-order-submit{order:6}
+/* payment methods list only: two columns (one on phones); a selected method with extra fields spans the full row */
+.shop-page #payment ul.payment_methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.shop-page #payment ul.payment_methods::before,.shop-page #payment ul.payment_methods::after{display:none}
+.shop-page #payment ul.payment_methods>li{margin:0}
+.shop-page #payment ul.payment_methods>li:has(>input:checked):has(>.payment_box:not(:empty)){grid-column:1/-1}
+@media(max-width:600px){.shop-page #payment ul.payment_methods{grid-template-columns:minmax(0,1fr)}}
 .shop-page .woocommerce-billing-fields,.shop-page .woocommerce-shipping-fields,.shop-page .woocommerce-additional-fields{margin:0 0 24px;padding:clamp(18px,3vw,28px);border:1px solid var(--line);border-radius:20px;background:var(--card)}
 .shop-page .woocommerce-billing-fields h3,.shop-page .woocommerce-shipping-fields h3,.shop-page .woocommerce-additional-fields h3{margin:0 0 18px;font-size:22px;font-weight:400;letter-spacing:-.03em}
 .shop-page #ship-to-different-address{margin:0}
