@@ -64,8 +64,8 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .site-header .lang-switch{padding:4px;margin-right:0}
 .site-header .lang-switch a{font-size:14px;padding:9px 14px}
 @media(max-width:600px){.site-header .lang-switch a{font-size:13px;padding:8px 11px}}
-/* the cart icon sits 11px inside its 44px button: pull it out so the visible gaps are all 20px and it ends flush with the layout edge */
-@media(min-width:783px){.site-header .tools .cart-icon{margin-inline:-11px}}
+/* the cart icon (28px) sits 8px inside its 44px button: pull it out so the visible gaps are all 20px and it ends flush with the layout edge */
+@media(min-width:783px){.site-header .tools .cart-icon{margin-inline:-8px}}
 
 /* ── bands ──────────────────────────────────────────────────────── */
 .band{padding-block:80px;border-top:1px solid var(--line)}
@@ -233,8 +233,8 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .cart-icon{display:inline-flex;align-items:center}
 .cart-icon .wc-block-mini-cart__button{color:var(--ink);padding:8px;border-radius:100px;min-width:44px;min-height:44px;justify-content:center}
 .cart-icon .wc-block-mini-cart__button:hover{background:color-mix(in srgb,var(--ink) 8%,transparent)}
-.cart-icon .wc-block-mini-cart__icon{color:var(--ink);width:22px;height:22px}
-.cart-icon .wc-block-mini-cart__badge{background:var(--ink);color:var(--bg);font:500 10px/1 Inter,sans-serif}
+.cart-icon .wc-block-mini-cart__icon{color:var(--ink);width:28px;height:28px}
+.cart-icon .wc-block-mini-cart__badge{background:var(--mp)!important;color:#0A0F0D!important;font:600 11px/1 Inter,sans-serif;min-width:18px;height:18px;padding:0 4px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center}
 
 /* ── partner button + application page ────────────────────────── */
 .partner-btn{display:inline-flex;align-items:center;min-height:42px;padding:0 20px;border-radius:100px;background:var(--ink);color:var(--bg);font-size:14px;font-weight:500;text-decoration:none;white-space:nowrap}
