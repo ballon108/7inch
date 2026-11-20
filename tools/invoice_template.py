@@ -83,8 +83,6 @@ def total_row(t, heading, extra=''):
 TOTALS = ('<!-- wp:storeabill/item-totals {"hasDenseLayout":false} --><div class="wp-block-storeabill-item-totals">'
           + total_row('line_subtotal_net', 'Subtotal goods (net)')
           + total_row('shipping_net', 'Shipping', ',"hideIfEmpty":true')
-          + total_row('discount', 'Discount', ',"hideIfEmpty":true')
-          + total_row('vouchers', 'Voucher', ',"hideIfEmpty":true')
           + total_row('net', 'Net total')
           + '<!-- wp:storeabill/item-total-row {"totalType":"taxes","hideIfEmpty":true,"heading":"%s"} /-->' % (
               '\\u003cspan class=\\u0022document-shortcode sab-tooltip\\u0022 data-tooltip=\\u0022Tax Rate\\u0022 data-shortcode=\\u0022document_total?data=rate\\u0026amp;total_type=taxes\\u0022\\u003e\\u003cspan class=\\u0022editor-placeholder\\u0022\\u003e\\u003c/span\\u003e19\\u003c/span\\u003e % VAT')
