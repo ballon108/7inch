@@ -81,8 +81,8 @@ def total_row(t, heading, extra=''):
     return '<!-- wp:storeabill/item-total-row {"totalType":"%s","heading":"%s"%s} /-->' % (t, heading, extra)
 
 TOTALS = ('<!-- wp:storeabill/item-totals {"hasDenseLayout":false} --><div class="wp-block-storeabill-item-totals">'
-          + total_row('line_subtotal', 'Subtotal goods (net)')
-          + total_row('shipping', 'Shipping', ',"hideIfEmpty":true')
+          + total_row('line_subtotal_net', 'Subtotal goods (net)')
+          + total_row('shipping_net', 'Shipping', ',"hideIfEmpty":true')
           + total_row('discount', 'Discount', ',"hideIfEmpty":true')
           + total_row('vouchers', 'Voucher', ',"hideIfEmpty":true')
           + total_row('net', 'Net total')
@@ -91,7 +91,7 @@ TOTALS = ('<!-- wp:storeabill/item-totals {"hasDenseLayout":false} --><div class
           + '<!-- wp:storeabill/item-total-row {"content":"\\u003cstrong\\u003e{total}\\u003c/strong\\u003e","totalType":"total","borders":["top","bottom"],"customBorderColor":"#a9a9a9","customFontSize":"16","heading":"\\u003cstrong\\u003eTOTAL INVOICE VALUE\\u003c/strong\\u003e"} /-->'
           + '</div><!-- /wp:storeabill/item-totals -->')
 
-NOTICES = ('<!-- wp:storeabill/reverse-charge-notice --><p class="has-text-align-left">Tax-free intra-Community supply (§ 4 No. 1b i.V.m. § 6a UStG); the recipient is liable for VAT (reverse charge).</p><!-- /wp:storeabill/reverse-charge-notice -->'
+NOTICES = ('<!-- wp:storeabill/reverse-charge-notice --><p class="has-text-align-left">Tax-free intra-Community supply (steuerfreie innergemeinschaftliche Lieferung, \u00a7 4 Nr. 1b i.V.m. \u00a7 6a UStG). VAT to be accounted for by the recipient in the country of destination.</p><!-- /wp:storeabill/reverse-charge-notice -->'
            '<!-- wp:storeabill/third-country-notice --><p class="has-text-align-left">VAT-exempt export delivery – steuerfreie Ausfuhrlieferung gem. § 4 Nr. 1a i. V. m. § 6 UStG.</p><!-- /wp:storeabill/third-country-notice -->')
 
 PAY = (spacer(10)
