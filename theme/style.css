@@ -799,3 +799,20 @@ body.woocommerce-checkout .shop-page .woocommerce,body.woocommerce-checkout .sho
 .i7-price-note{display:inline-block;margin-left:.5em;font-family:var(--wp--preset--font-family--body,inherit);font-size:12px;font-weight:400;letter-spacing:0;line-height:1.3;color:var(--ink);opacity:.55;white-space:nowrap;vertical-align:baseline}
 .buy .i7-price-note{display:block;margin:8px 0 0}
 .i7-price-note-cart{display:block;margin:12px 0 0}
+
+/* ── Cookie banner (Cookie Notice, dark card) ───────────────────── */
+#cookie-notice{left:50%!important;right:auto!important;bottom:20px!important;top:auto!important;transform:translateX(-50%);width:min(780px,calc(100% - 32px))!important;min-width:0!important;
+ background:var(--card)!important;color:var(--ink)!important;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.55);padding:0!important;font-family:inherit;z-index:99999}
+#cookie-notice .cookie-notice-container{color:var(--ink)!important;display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;padding:20px 24px!important;text-align:left}
+#cookie-notice .cn-text-container{flex:1 1 320px;margin:0!important;font-size:14px;line-height:1.55;color:var(--ash)}
+#cookie-notice .cn-buttons-container{display:flex;flex-wrap:wrap;align-items:center;gap:10px;flex:0 0 auto;margin:0!important}
+#cookie-notice .cn-button{font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.01em;line-height:1;margin:0!important;padding:13px 20px!important;border-radius:999px!important;border:1px solid var(--mp)!important;background:var(--mp)!important;color:#0A0F0D!important;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+#cookie-notice .cn-button:hover{filter:brightness(1.08)}
+#cookie-notice #cn-refuse-cookie{background:transparent!important;color:var(--ink)!important;border-color:var(--halo)!important}
+#cookie-notice #cn-refuse-cookie:hover{border-color:var(--ink)!important}
+#cookie-notice .cn-more-info{background:transparent!important;border-color:transparent!important;color:var(--mute)!important;padding:13px 6px!important;text-decoration:underline;text-underline-offset:3px}
+#cookie-notice .cn-more-info:hover{color:var(--ink)!important}
+#cookie-notice .cn-close-icon{display:none!important}  /* closing must not count as consent */
+#cookie-notice .cookie-revoke-container{color:var(--ash)!important;padding:16px 24px!important}
+#cookie-notice .cookie-revoke-container .cn-text-container{font-size:14px}
+@media(max-width:600px){#cookie-notice{bottom:12px!important}#cookie-notice .cookie-notice-container{padding:18px!important}#cookie-notice .cn-buttons-container{width:100%}#cookie-notice .cn-set-cookie{flex:1 1 auto;text-align:center}}
