@@ -308,7 +308,7 @@ Credit card, Apple Pay, Google Pay, PayPal, SEPA bank transfer (processed by Mol
 
 ## Customs and taxes
 
-For deliveries outside the EU, import duties and carrier fees may apply and are borne by the recipient.
+For deliveries outside the EU, import duties and carrier fees may apply and are borne by the recipient. USA: no import duties on vinyl records; the carrier fee is already included in the shipping price.
 
 ## Returns
 

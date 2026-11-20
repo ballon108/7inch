@@ -102,8 +102,8 @@ PAGES = {
     'Credit card, Apple Pay, Google Pay, PayPal, SEPA bank transfer (processed by Mollie). No surcharges.':
         'Kreditkarte, Apple Pay, Google Pay, PayPal, SEPA-Überweisung (abgewickelt über Mollie). Keine Aufpreise.',
     'Customs and taxes': 'Zoll und Steuern',
-    'For deliveries outside the EU, import duties and carrier fees may apply and are borne by the recipient.':
-        'Bei Lieferungen außerhalb der EU können Einfuhrzölle und Gebühren des Transportunternehmens anfallen; diese trägt der Empfänger.',
+    'For deliveries outside the EU, import duties and carrier fees may apply and are borne by the recipient. USA: no import duties on vinyl records; the carrier fee is already included in the shipping price.':
+        'Bei Lieferungen außerhalb der EU können Einfuhrzölle und Gebühren des Transportunternehmens anfallen; diese trägt der Empfänger. USA: Für Schallplatten fällt kein Zoll an; die Gebühr des Versanddienstleisters ist bereits im Versandpreis enthalten.',
     'Returns': 'Rücksendungen', 'Returns only to: ' + RN + '.': 'Rücksendungen nur an: ' + RN_DE + '.',
  })),
  97: ('widerrufsbelehrung', 'Widerrufsbelehrung', dict(LEGAL, **{
