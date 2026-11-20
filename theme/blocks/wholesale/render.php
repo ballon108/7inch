@@ -1,6 +1,8 @@
 <?php
 /** Wholesale call-to-action. */
-$email = i7_field( 'email', 'peet@7inchrare.com' );
+/* The button leads to the partner page (login + registration), in the current language. */
+$partners = get_page_by_path( 'partners' );
+$href     = $partners ? get_permalink( function_exists( 'pll_get_post' ) ? ( pll_get_post( $partners->ID ) ?: $partners->ID ) : $partners->ID ) : home_url( '/partners/' );
 $stats = get_field( 'stats' );
 if ( ! $stats ) { $stats = array( array( 'number' => '50', 'label' => 'copies minimum for record shops' ), array( 'number' => '100', 'label' => 'copies minimum for distributors' ) ); }
 ?>
@@ -16,7 +18,6 @@ if ( ! $stats ) { $stats = array( array( 'number' => '50', 'label' => 'copies mi
 	<?php endforeach; ?>
 	</div>
 	<div class="wp-block-group ctas-row">
-		<div class="wp-block-buttons ctas"><div class="wp-block-button btn-fill"><a class="wp-block-button__link wp-element-button" href="mailto:<?php echo esc_attr( antispambot( $email ) ); ?>"><?php echo esc_html( i7_field( 'button_label', 'Request the wholesale list' ) ); ?></a></div></div>
-		<p class="mail"><?php echo esc_html( $email ); ?></p>
+		<div class="wp-block-buttons ctas"><div class="wp-block-button btn-fill"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( $href ); ?>"><?php echo esc_html( i7_field( 'button_label', 'Request the wholesale list' ) ); ?></a></div></div>
 	</div>
 </div></section>
