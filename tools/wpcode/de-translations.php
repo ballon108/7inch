@@ -25,40 +25,49 @@ if ( ! function_exists( 'i7de_on' ) ) {
 		if ( null !== $d ) { return $d; }
 		$d = array(
 			// Header / footer.
-			'Releases' => 'Releases', 'Series' => 'Serien', 'Wholesale' => 'Großhandel', 'About' => 'Über uns',
+			'Releases' => 'Releases', 'Series' => 'Serien', 'Wholesale' => 'Händler', 'About' => 'Über uns',
 			'Contact' => 'Kontakt', 'Partners' => 'Partner', 'Account' => 'Konto', 'Menu' => 'Menü', 'Main' => 'Hauptmenü',
 			'Imprint' => 'Impressum', 'Privacy' => 'Datenschutz', 'Terms' => 'AGB', 'Withdrawal' => 'Widerruf',
 			'Shipping & payment' => 'Versand & Zahlung',
 			// 404.
-			'Error 404' => 'Fehler 404', 'This track skipped.' => 'Dieser Track hat gesprungen.',
-			'The page you are looking for doesn’t exist or has moved. Let’s put the needle back on a record that does.' => 'Die gesuchte Seite existiert nicht oder wurde verschoben. Setzen wir die Nadel zurück auf eine Platte, die es gibt.',
+			'Error 404' => 'Fehler 404', 'This track skipped.' => 'Hier ist die Nadel gesprungen.',
+			'The page you are looking for doesn’t exist or has moved. Let’s put the needle back on a record that does.' => 'Diese Seite gibt es nicht (mehr) oder sie ist umgezogen. Legen wir die Nadel lieber auf eine Platte, die läuft.',
 			'Back to home' => 'Zurück zur Startseite', 'Browse releases' => 'Releases ansehen',
 			// Cart / checkout / order templates.
-			'Your order' => 'Ihre Bestellung',
+			'Your order' => 'Deine Bestellung', 'Cart' => 'Warenkorb', 'Your cart is empty' => 'Dein Warenkorb ist leer', 'Return to shop' => 'Zurück zum Shop', 'Checkout' => 'Kasse',
 			// Product page.
-			'Record shop or distributor?' => 'Plattenladen oder Vertrieb?', 'Login or Register' => 'Anmelden oder Registrieren',
+			'Record shop or distributor?' => 'Plattenladen oder Vertrieb?', 'Login or Register' => 'Anmelden oder registrieren',
 			'Format' => 'Format', 'Edition' => 'Auflage', 'Year' => 'Jahr', 'Cat. no.' => 'Kat.-Nr.', 'Pressed in' => 'Gepresst in',
-			'7" vinyl' => '7" Vinyl',
-			'In stock' => 'Auf Lager', 'Sold out' => 'Ausverkauft', 'Pre-order' => 'Vorbestellung', 'Out now' => 'Jetzt erhältlich',
-			'Pre-order now' => 'Jetzt vorbestellen', 'Add to cart' => 'In den Warenkorb', 'View release' => 'Release ansehen',
+			'7" vinyl' => '7"-Vinyl', 'Germany' => 'Deutschland',
+			'In stock' => 'Auf Lager', 'Sold out' => 'Ausverkauft', 'Pre-order' => 'Vorbestellung', 'Out now' => 'Neu erschienen', 'Out of stock' => 'Ausverkauft', 'Available on backorder' => 'Vorbestellbar',
+			'Pre-order now' => 'Jetzt vorbestellen', 'Add to cart' => 'In den Warenkorb', 'View release' => 'Zur Platte',
 			'All releases' => 'Alle Releases', 'Log in to buy' => 'Zum Kauf anmelden', 'Not available' => 'Nicht verfügbar',
 			'Decrease quantity' => 'Menge verringern', 'Increase quantity' => 'Menge erhöhen',
 			'Play preview' => 'Vorschau abspielen', 'Pause' => 'Pause',
 			'Side A' => 'Seite A', 'Side B' => 'Seite B', 'Front' => 'Vorderseite', 'Back' => 'Rückseite',
 			'Pull out the record' => 'Platte herausziehen', 'Spin' => 'Drehen', 'View' => 'Ansicht',
 			'3D view of the record. Drag to rotate, pinch to zoom, double-click to reset.' => '3D-Ansicht der Platte. Zum Drehen ziehen, zum Zoomen zwei Finger auseinanderziehen, zum Zurücksetzen doppelklicken.',
-			'Drag to turn · pinch to zoom · double-click to reset' => 'Ziehen zum Drehen · Zwei Finger zum Zoomen · Doppelklick zum Zurücksetzen',
+			'Drag to turn · pinch to zoom · double-click to reset' => 'Ziehen zum Drehen · Zoomen mit zwei Fingern · Doppelklick zum Zurücksetzen',
 			// Catalogue / home blocks.
-			'Catalogue' => 'Katalog', 'All' => 'Alle', 'Keep digging' => 'Weiterstöbern', 'More from the series' => 'Mehr aus der Serie',
-			'Two series' => 'Zwei Serien', 'Pick your side of the map.' => 'Wählen Sie Ihre Seite der Karte.',
+			'Catalogue' => 'Katalog', 'All' => 'Alle', 'Keep digging' => 'Weiter diggen', 'More from the series' => 'Mehr aus der Serie',
+			'Two series' => 'Zwei Serien', 'Pick your side of the map.' => 'Welche Seite der Karte ist deine?',
 			'For record shops & distributors' => 'Für Plattenläden & Vertriebe',
-			'Stock the series in your shop.' => 'Führen Sie die Serie in Ihrem Laden.',
-			'Wholesale price list, pre-order windows and shipping options on request. We ship worldwide; the buyer pays freight.' => 'Großhandelspreisliste, Vorbestellfenster und Versandoptionen auf Anfrage. Wir liefern weltweit; die Fracht trägt der Käufer.',
-			'copies minimum for record shops' => 'Exemplare Mindestabnahme für Plattenläden',
-			'copies minimum for distributors' => 'Exemplare Mindestabnahme für Vertriebe',
-			'Request the wholesale list' => 'Großhandelsliste anfordern',
+			'Stock the series in your shop.' => 'Hol dir die Serien in deinen Laden.',
+			'Wholesale price list, pre-order windows and shipping options on request. We ship worldwide; the buyer pays freight.' => 'Händlerpreise, Vorbestellfristen und Versandoptionen auf Anfrage. Wir liefern weltweit, die Frachtkosten trägt der Käufer.',
+			'copies minimum for record shops' => 'Exemplare Mindestmenge für Plattenläden',
+			'copies minimum for distributors' => 'Exemplare Mindestmenge für Vertriebe',
+			'Request the wholesale list' => 'Händlerpreisliste anfordern',
 			'Minimum order for your account:' => 'Mindestbestellmenge für Ihr Konto:',
 			'in total, across all titles. Your trade prices apply automatically in the basket.' => 'insgesamt, über alle Titel. Ihre Händlerpreise werden automatisch im Warenkorb angewendet.',
+			// Series blurbs, leads and story (series data).
+			'Series 01 · 90s Hip Hop & R&B' => 'Serie 01 · 90er Hip-Hop & R&B', 'Series 02 · West Coast / G-Funk' => 'Serie 02 · West Coast / G-Funk',
+			'Two sides of 90s Hip Hop & R&B, re-edited and pressed on 7".' => 'Zwei Seiten 90er Hip-Hop & R&B – neu editiert und auf 7" gepresst.',
+			'Two West Coast classics, re-edited for the boulevard and cut to 7".' => 'Zwei West-Coast-Klassiker, neu editiert für den Boulevard und auf 7" gepresst.',
+			'Known and lesser-known classics, one episode at a time. Small numbered runs.' => 'Bekannte und fast vergessene Klassiker, Episode für Episode. Kleine, nummerierte Auflagen.',
+			'West Coast and G-Funk only, re-edited for the boulevard. Full-colour picture sleeves.' => 'Nur West Coast und G-Funk, neu editiert für den Boulevard. In vollfarbigen Bildhüllen.',
+			'The philosophy behind it' => 'Die Philosophie dahinter', 'Built for Sunday cruising' => 'Gemacht fürs Sonntags-Cruisen',
+			'Every episode pairs two songs that belong together: well-known classics and cuts only diggers carry in their record bag, as a limited 7" with its own label colour.' => 'Jede Episode bringt zwei Songs zusammen, die zusammengehören: bekannte Klassiker und Tracks, die nur echte Digger in der Plattentasche haben – als limitierte 7" mit eigener Labelfarbe.',
+			'LOWRIDER ANTHEMS is the West Coast side of 7inch.rare: G-Funk and West Coast Hip Hop only, the soundtrack of chrome, hydraulics and slow rides down palm-lined streets.' => 'LOWRIDER ANTHEMS ist die West-Coast-Seite von 7inch.rare: nur G-Funk und West-Coast-Hip-Hop – der Soundtrack zu Chrom, Hydraulik und langsamen Runden über palmengesäumte Boulevards.',
 			// Login / registration shortcodes and buttons.
 			'You are logged in.' => 'Sie sind angemeldet.', 'You already have an account.' => 'Sie haben bereits ein Konto.',
 			'Go to My account' => 'Zu Mein Konto', 'Log out' => 'Abmelden',
@@ -121,7 +130,7 @@ if ( ! function_exists( 'i7de_on' ) ) {
 		}
 		// Sentences embedded in longer text (hero / product lead).
 		$subs = array(
-			'Pre-orders are open. Secure your copy before the run is pressed.' => 'Vorbestellungen sind geöffnet. Sichern Sie sich Ihr Exemplar, bevor die Auflage gepresst wird.',
+			'Pre-orders are open. Secure your copy before the run is pressed.' => 'Die Vorbestellung läuft. Sichere dir dein Exemplar, bevor die Auflage gepresst wird.',
 		);
 		$out = str_replace( array_keys( $subs ), array_values( $subs ), $key );
 		$out = preg_replace( '/Limited to (\d+) copies\./u', 'Limitiert auf $1 Exemplare.', $out );

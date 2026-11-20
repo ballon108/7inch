@@ -27,39 +27,39 @@ PAGES = {
  # id: (german slug, german title, {text: german})
  93: ('ueber-uns', 'Über uns', {
     'About': 'Über uns',
-    'A crate under a single light.': 'Eine Kiste unter einem einzigen Licht.',
+    'A crate under a single light.': 'Eine Plattenkiste unter einer einzigen Lampe.',
     '7inch.rare releases limited 7" records in two series. Every title is a small, numbered run: when it is gone, it is gone.':
-        '7inch.rare veröffentlicht limitierte 7"-Schallplatten in zwei Serien. Jeder Titel ist eine kleine, nummerierte Auflage: Ist sie weg, ist sie weg.',
+        '7inch.rare veröffentlicht limitierte 7″-Platten in zwei Serien. Jeder Titel erscheint in kleiner, nummerierter Auflage: Weg ist weg.',
     '90s Hip Hop &amp; R&amp;B, one episode at a time. Each record pairs two songs that belong together: well-known classics and cuts only diggers carry in their record bag, re-edited and pressed on 7" with its own label colour.':
-        '90er Hip Hop &amp; R&amp;B, Episode für Episode. Jede Platte kombiniert zwei Songs, die zusammengehören: bekannte Klassiker und Cuts, die nur Digger in der Plattentasche haben, neu editiert und auf 7" gepresst, jeweils mit eigener Labelfarbe.',
+        '90er Hip-Hop &amp; R&amp;B, Episode für Episode. Jede Platte bringt zwei Songs zusammen, die zusammengehören: bekannte Klassiker und Tracks, die nur echte Digger in der Plattentasche haben – neu editiert und auf 7″ gepresst, mit eigener Labelfarbe.',
     'West Coast and G-Funk only, re-edited for the boulevard and released in full-colour picture sleeves. The soundtrack of chrome, hydraulics and slow rides down palm-lined streets.':
-        'Nur West Coast und G-Funk, neu editiert für den Boulevard und veröffentlicht in vollfarbigen Picture-Sleeves. Der Soundtrack für Chrom, Hydraulik und langsame Fahrten durch palmengesäumte Straßen.',
-    'How it works': 'So funktioniert’s',
-    'Small editions, stock shown live. First come, first served.': 'Kleine Auflagen, der Bestand wird live angezeigt. Wer zuerst kommt, mahlt zuerst.',
-    'Pre-orders are shipped together as soon as the run arrives.': 'Vorbestellungen werden gemeinsam versandt, sobald die Auflage eintrifft.',
-    'We ship worldwide from Germany.': 'Wir versenden weltweit ab Deutschland.',
-    'Record shops and distributors can order wholesale from a partner account.': 'Plattenläden und Vertriebe können mit einem Partnerkonto im Großhandel bestellen.',
+        'Nur West Coast und G-Funk, neu editiert für den Boulevard und in vollfarbigen Bildhüllen. Der Soundtrack zu Chrom, Hydraulik und langsamen Runden über palmengesäumte Straßen.',
+    'How it works': 'So läuft\'s',
+    'Small editions, stock shown live. First come, first served.': 'Kleine Auflagen, Bestand live. Wer zuerst kommt, mahlt zuerst.',
+    'Pre-orders are shipped together as soon as the run arrives.': 'Vorbestellungen verschicken wir gesammelt, sobald die Auflage da ist.',
+    'We ship worldwide from Germany.': 'Wir versenden weltweit aus Deutschland.',
+    'Record shops and distributors can order wholesale from a partner account.': 'Plattenläden und Vertriebe bestellen zu Händlerpreisen über ein Partnerkonto.',
     'Browse releases': 'Releases ansehen', 'For partners': 'Für Partner', 'Questions?': 'Fragen?',
  }),
  89: ('partner', 'Für Partner', {
-    'Wholesale &amp; distribution': 'Großhandel &amp; Vertrieb',
+    'Wholesale &amp; distribution': 'Handel &amp; Vertrieb',
     'For record shops &amp; distributors': 'Für Plattenläden &amp; Vertriebe',
     'Record shops order from 50 copies, distributors from 100. Log in to see wholesale prices.':
-        'Plattenläden bestellen ab 50 Exemplaren, Vertriebe ab 100. Melden Sie sich an, um die Großhandelspreise zu sehen.',
-    'Partner login': 'Partner-Login', 'New partner?': 'Neuer Partner?', 'Register new account': 'Neues Konto registrieren',
+        'Plattenläden bestellen ab 50 Exemplaren, Vertriebe ab 100. Melde dich an, um die Händlerpreise zu sehen.',
+    'Partner login': 'Partner-Login', 'New partner?': 'Neu hier?', 'Register new account': 'Partnerkonto anlegen',
  }),
  102: ('kontakt', 'Kontakt', {
-    'Contact': 'Kontakt', 'Get in touch': 'Schreiben Sie uns',
+    'Contact': 'Kontakt', 'Get in touch': 'Schreib uns',
     'Questions about an order, shipping or a release? Write to us and we will get back to you as soon as we can.':
-        'Fragen zu einer Bestellung, zum Versand oder zu einem Release? Schreiben Sie uns, wir melden uns so schnell wie möglich.',
+        'Fragen zu einer Bestellung, zum Versand oder zu einer Platte? Schreib uns – wir melden uns so schnell wie möglich.',
     '48163 Münster, Germany': '48163 Münster, Deutschland',
     'EU VAT number:': 'USt-IdNr.:', 'Bank account:': 'Bankverbindung:', 'Shop &amp; orders:': 'Shop &amp; Bestellungen:',
     'Returns only to: 7inch.rare, Birkenweg 16 B, 48155 Münster, Germany. Faulty record? Please send your order number, a short description and photos. See our':
-        'Rücksendungen nur an: 7inch.rare, Birkenweg 16 B, 48155 Münster, Deutschland. Fehlerhafte Platte? Bitte senden Sie uns Ihre Bestellnummer, eine kurze Beschreibung und Fotos. Siehe unsere',
+        'Rücksendungen nur an: 7inch.rare, Birkenweg 16 B, 48155 Münster, Deutschland. Platte beschädigt oder fehlerhaft? Schick uns bitte deine Bestellnummer, eine kurze Beschreibung und Fotos. Mehr dazu in unseren',
     'terms': 'AGB', 'Send a message': 'Nachricht senden',
  }),
  147: ('partner-registrierung', 'Partnerkonto registrieren', {
-    'Wholesale &amp; distribution': 'Großhandel &amp; Vertrieb',
+    'Wholesale &amp; distribution': 'Handel &amp; Vertrieb',
     'Register a partner account': 'Partnerkonto registrieren',
     'Fill in the form below. We review every application and activate your account within 48 hours.':
         'Füllen Sie das Formular aus. Wir prüfen jede Anfrage und aktivieren Ihr Konto innerhalb von 48 Stunden.',
@@ -360,18 +360,18 @@ PAGES = {
 
 # Home: ACF block data (JSON strings inside block comments). Keys are quoted JSON values.
 HOME = {
-    '"Out now"': '"Jetzt erhältlich"', '"Pre-order"': '"Vorbestellung"',
-    '"Pre-orders are open. Secure your copy before the run is pressed."': '"Vorbestellungen sind geöffnet. Sichern Sie sich Ihr Exemplar, bevor die Auflage gepresst wird."',
-    '"View release"': '"Release ansehen"', '"Pre-order now"': '"Jetzt vorbestellen"', '"All releases"': '"Alle Releases"',
-    '"Two series"': '"Zwei Serien"', '"Pick your side of the map."': '"Wählen Sie Ihre Seite der Karte."',
+    '"Out now"': '"Neu erschienen"', '"Pre-order"': '"Vorbestellung"',
+    '"Pre-orders are open. Secure your copy before the run is pressed."': '"Die Vorbestellung läuft. Sichere dir dein Exemplar, bevor die Auflage gepresst wird."',
+    '"View release"': '"Zur Platte"', '"Pre-order now"': '"Jetzt vorbestellen"', '"All releases"': '"Alle Releases"',
+    '"Two series"': '"Zwei Serien"', '"Pick your side of the map."': '"Welche Seite der Karte ist deine?"',
     '"Catalogue"': '"Katalog"', '"All"': '"Alle"',
     '"For record shops \\u0026 distributors"': '"Für Plattenläden \\u0026 Vertriebe"',
-    '"Stock the series in your shop."': '"Führen Sie die Serie in Ihrem Laden."',
+    '"Stock the series in your shop."': '"Hol dir die Serien in deinen Laden."',
     '"Wholesale price list, pre-order windows and shipping options on request. We ship worldwide; the buyer pays freight."':
-        '"Großhandelspreisliste, Vorbestellfenster und Versandoptionen auf Anfrage. Wir liefern weltweit; die Fracht trägt der Käufer."',
-    '"copies minimum for record shops"': '"Exemplare Mindestabnahme für Plattenläden"',
-    '"copies minimum for distributors"': '"Exemplare Mindestabnahme für Vertriebe"',
-    '"Request the wholesale list"': '"Großhandelsliste anfordern"',
+        '"Händlerpreise, Vorbestellfristen und Versandoptionen auf Anfrage. Wir liefern weltweit, die Frachtkosten trägt der Käufer."',
+    '"copies minimum for record shops"': '"Exemplare Mindestmenge für Plattenläden"',
+    '"copies minimum for distributors"': '"Exemplare Mindestmenge für Vertriebe"',
+    '"Request the wholesale list"': '"Händlerpreisliste anfordern"',
 }
 
 # Titles / small replacements for pages that otherwise keep the English markup (Woo pages).
