@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Create/update the DHL shipping zones and their rates (podatki.md, EUR). Idempotent: missing zones are created,
 existing ones (matched by name) get their rates and locations refreshed. Editable later in WooCommerce > Settings > Shipping.
-Per zone: consumer 1-5 records, consumer 6+ (or tracked 1-5), partner parcel 5 kg, partner parcel 10 kg."""
+Germany and USA ship tracked even for 1-5 records (label 'tracked'). Per zone: consumer 1-5 records, consumer 6+ (or tracked 1-5), partner parcel 5 kg, partner parcel 10 kg."""
 import os, sys
 sys.path.insert(0, os.path.dirname(__file__)); import deploy
 print(deploy.php(r"""
@@ -30,7 +30,7 @@ foreach ($zones as $i => [$name,$locs,$small,$large,$b5,$b10]) {
   $zone->save();
   $ms = $zone->get_shipping_methods();
   $iid = $ms ? array_values($ms)[0]->instance_id : $zone->add_shipping_method('i7_dhl');
-  update_option('woocommerce_i7_dhl_'.$iid.'_settings', ['title'=>'DHL','cost_small'=>$small,'cost_large'=>$large,'small_label'=>'untracked','large_label'=>'tracked','b2b_5kg'=>$b5,'b2b_10kg'=>$b10]);
+  update_option('woocommerce_i7_dhl_'.$iid.'_settings', ['title'=>'DHL','cost_small'=>$small,'cost_large'=>$large,'small_label'=>in_array($name,['DHL Germany','DHL USA'],true)?'tracked':'untracked','large_label'=>'tracked','b2b_5kg'=>$b5,'b2b_10kg'=>$b10]);
   $out[] = [$name, $iid];
 }
 update_option('woocommerce_calc_shipping', 'yes');
