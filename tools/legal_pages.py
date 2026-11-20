@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create/update the legal pages from "7inchrare.com – Legal texts (EN)" (Nov 17, 2026) and wire them into
+"""Create/update the legal pages from "7inchrare.com – Legal texts (EN)" (Nov 17, 2026; PDF of 2026-11-20) and wire them into
 WooCommerce (terms, privacy). Idempotent. Internal notes of the source PDF (draft remark, shop notes) are not published.
 Open placeholders in [square brackets] are kept as in the source: delivery times, log retention."""
 import base64, html, os, re, sys
@@ -68,7 +68,7 @@ PAGES["terms"] = ("General Terms and Conditions", """
 
 (2) Shipping costs including packaging are added depending on the destination country; they are shown on the "Shipping and payment" page and in the basket before you order.
 
-(3) For deliveries to countries outside the EU, customs duties, import taxes and carrier fees may apply. These are borne by the recipient.
+(3) For deliveries to countries outside the EU, customs duties, import taxes and carrier fees may apply. These are borne by the recipient. For deliveries to the USA, no customs duty applies to vinyl records, and the carrier fee is already included in the shipping costs. We currently cannot deliver to consumers in the United Kingdom.
 
 ## § 4 Payment
 
@@ -184,11 +184,11 @@ Access to the trade area requires an application and our approval. We verify bus
 
 ## § 3 Order and conclusion of contract
 
-An order in the trade area is a binding offer. The contract is concluded with our order confirmation or pro-forma invoice. The minimum order quantity is 50 records per order; titles can be combined freely. We reserve ordered quantities for up to 7 days pending receipt of payment; after that we may cancel the reservation.
+An order in the trade area is a binding offer. The contract is concluded with our order confirmation or pro-forma invoice. The minimum order quantity is 50 records per order for record stores and 100 records per order for distributors; titles can be combined freely. We reserve ordered quantities for up to 7 days pending receipt of payment; after that we may cancel the reservation.
 
 ## § 4 Prices and quantity tiers
 
-The prices shown in the trade area for the respective country apply. They depend on the total quantity of the order (50–99, 100–249, 250+ units). Prices are net plus statutory VAT where applicable. Deliveries to businesses in other EU member states with a valid VAT ID are tax-exempt (reverse charge); without a VAT ID, 19% German VAT applies. Export deliveries to non-EU countries are tax-exempt. Where "carriage paid" is stated, shipping costs are included.
+The prices shown in the trade area apply: one price for record stores (from 50 units) and one price for distributors (from 100 units), the same worldwide and in euros. Prices are net plus statutory VAT where applicable. Deliveries to businesses in other EU member states with a valid VAT ID are tax-exempt (reverse charge); without a VAT ID, 19% German VAT applies. Export deliveries to non-EU countries are tax-exempt. Shipping costs are added per parcel depending on the destination (e.g. Germany €9.90 up to 5 kg, €12.90 up to 10 kg); they are shown in the trade area or on the pro-forma invoice. Where "carriage paid" is stated, shipping costs are included.
 
 ## § 5 Payment
 
@@ -257,11 +257,11 @@ For delivery, we pass your name and delivery address to the shipping provider, c
 
 If you contact us, we process your details to handle your enquiry (Art. 6 (1) (b) or (f) GDPR) and delete them when they are no longer needed and no retention obligations apply.
 
-## 7. Cookies and local storage
+## 7. Cookies, local storage and Meta Pixel
 
-We use only technically necessary cookies and local storage (§ 25 (2) TDDDG, Art. 6 (1) (f) GDPR). We do not use analytics, advertising or tracking cookies, and fonts are loaded locally from our server, not from Google. Because only necessary cookies are used, no cookie consent banner is required. You can block or delete cookies in your browser settings; the basket, login and checkout may then no longer work.
+We use technically necessary cookies and local storage (basket, login, language setting, light/dark mode) without consent (§ 25 (2) TDDDG). Fonts are loaded locally from our server, not from Google. We use any other services only if you have consented via our cookie banner. You can change or withdraw your choice at any time via the “Cookie settings” link in the footer. You can also block or delete cookies in your browser settings; the basket, login and checkout may then no longer work.
 
-The following cookies and storage entries are set by the shop:
+The following technically necessary cookies and storage entries are set by the shop:
 
 | Name | Purpose | Duration |
 | woocommerce_cart_hash, woocommerce_items_in_cart | Detect changes to the basket so that it is displayed correctly | Session |
@@ -273,6 +273,8 @@ The following cookies and storage entries are set by the shop:
 | theme (local storage) | Stores your light/dark mode choice; stays in your browser and is not sent to us | Until deleted |
 
 Payment is made on the page of the payment provider (see section 4), which may set its own cookies there.
+
+Meta Pixel (only with consent): With your consent (Art. 6 (1) (a) GDPR, § 25 (1) TDDDG), we use the Meta Pixel of Meta Platforms Ireland Ltd., Merrion Road, Dublin 4, D04 X2K5, Ireland. It lets us measure how visitors use our shop, for example visitors who come from ads on Instagram or Facebook (page views, items added to the basket, checkout started, purchase with order value), and show ads to people who are interested in our records. In particular, your IP address, browser and device information, the pages visited, the events mentioned and an identifier stored in a cookie are transmitted to Meta. We and Meta are joint controllers for the collection and transmission of this data (Art. 26 GDPR); the agreement is available at <a href="https://www.facebook.com/legal/controller_addendum" rel="noopener" target="_blank">https://www.facebook.com/legal/controller_addendum</a>. Meta may transfer data to the USA; Meta Platforms, Inc. is certified under the EU-US Data Privacy Framework. The Meta Pixel is not loaded without your consent. You can withdraw your consent at any time with effect for the future via the cookie settings. More information: <a href="https://www.facebook.com/privacy/policy" rel="noopener" target="_blank">https://www.facebook.com/privacy/policy</a>
 
 ## 8. Links to social networks
 
