@@ -292,7 +292,7 @@ November 2026
 PAGES["shipping-and-payment"] = ("Shipping and Payment", """
 Shipping costs including packaging, per order. Items in stock ship within 3 days of receipt of payment; pre-orders by the date stated on the product page.
 
-Outside Germany, orders of 1–5 records ship untracked; you can choose tracked shipping at the price shown for 6 or more records. Other countries on request. No shipping to Russia. At the moment we cannot deliver to consumers in the United Kingdom.
+Orders to Germany and the USA always ship tracked. Outside Germany and the USA, orders of 1–5 records ship untracked; you can choose tracked shipping at the price shown for 6 or more records. Other countries on request. No shipping to Russia. At the moment we cannot deliver to consumers in the United Kingdom.
 
 | Destination | 1–5 records | 6 or more records | Delivery within |
 | Germany | €4.90 | €6.90 | up to 4 days |
