@@ -476,6 +476,15 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .shop-page #customer_details .col-1,.shop-page #customer_details .col-2{float:none;width:auto;max-width:none}
 .shop-page #order_review_heading{grid-column:2;grid-row:2;margin:0 0 16px;font-weight:400;letter-spacing:-.03em;font-size:22px}
 .shop-page #order_review{grid-column:2;grid-row:3;float:none;width:auto;padding:clamp(18px,3vw,28px);border:1px solid var(--line);border-radius:20px;background:var(--card)}
+/* checkout right column order: Your order (table) > payment methods > agreement > captcha > button */
+.shop-page #order_review{display:flex;flex-direction:column}
+.shop-page #order_review>*{order:6}
+.shop-page #order_review>#order_review_heading{order:1}
+.shop-page #order_review>table.woocommerce-checkout-review-order-table{order:2;width:100%}
+.shop-page #order_review>#order_payment_heading{order:3;margin:28px 0 16px}
+.shop-page #order_review>#payment{order:4}
+.shop-page #order_review>.wc-gzd-checkbox-placeholder{order:5}
+.shop-page #order_review>.wc-gzd-order-submit{order:6}
 .shop-page .woocommerce-billing-fields,.shop-page .woocommerce-shipping-fields,.shop-page .woocommerce-additional-fields{margin:0 0 24px;padding:clamp(18px,3vw,28px);border:1px solid var(--line);border-radius:20px;background:var(--card)}
 .shop-page .woocommerce-billing-fields h3,.shop-page .woocommerce-shipping-fields h3,.shop-page .woocommerce-additional-fields h3{margin:0 0 18px;font-size:22px;font-weight:400;letter-spacing:-.03em}
 .shop-page #ship-to-different-address{margin:0}
