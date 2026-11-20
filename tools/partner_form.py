@@ -11,8 +11,9 @@ country_opts = " ".join(f'"{c}"' for c in COUNTRIES)
 FORM = f"""<div class="pf">
 <fieldset class="pf-type"><legend>I am applying as</legend>[radio apply_as use_label_element default:1 "Record shop" "Distributor"]</fieldset>
 
-<div><label>Company name *[text* company autocomplete:organization]</label></div>
-<div><label>Contact person *[text* contact autocomplete:name]</label></div>
+<div class="pf-wide"><label>Company name *[text* company autocomplete:organization]</label></div>
+<div><label>First name *[text* first_name autocomplete:given-name]</label></div>
+<div><label>Last name *[text* last_name autocomplete:family-name]</label></div>
 <div><label>E-mail *[email* your-email autocomplete:email]</label></div>
 <div><label>Phone[tel phone autocomplete:tel]</label></div>
 
@@ -31,9 +32,12 @@ FORM = f"""<div class="pf">
 
 MAIL_BODY = """New partner application
 
+Status: the applicant was e-mailed a summary to verify. The account is created automatically once the applicant
+confirms the link (you will get a separate "Partner account created" e-mail).
+
 Type: [apply_as]
 Company: [company]
-Contact person: [contact]
+Contact person: [first_name] [last_name]
 E-mail: [your-email]
 Phone: [phone]
 EU VAT number: [vat]
@@ -90,7 +94,7 @@ $props['mail'] = array_merge($props['mail'], [
   'use_html' => 0, 'exclude_blank' => 0,
 ]);
 $props['messages'] = array_merge($props['messages'], [
-  'mail_sent_ok' => "Thank you. We'll review your application and get back to you within 48 hours.",
+  'mail_sent_ok' => "Thank you. We have sent you an e-mail: please check your details and confirm them with the link in the message. After that your account is created and you can log in.",
   'validation_error' => 'Please check the highlighted fields and try again.',
   'accept_terms' => 'Please confirm that we may process your details.',
 ]);
@@ -152,10 +156,6 @@ PAGE_REGISTER = '''<!-- wp:group {"className":"wrap partner-page","layout":{"typ
 <!-- wp:heading {"level":1,"className":"pp-title"} -->
 <h1 class="wp-block-heading pp-title">Register a partner account</h1>
 <!-- /wp:heading -->
-
-<!-- wp:paragraph {"className":"pp-lead"} -->
-<p class="pp-lead">Fill in the form below. We review every application and activate your account within 48 hours.</p>
-<!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"pp-apply pp-boxed","layout":{"type":"default"}} -->
 <div class="wp-block-group pp-apply pp-boxed"><!-- wp:shortcode -->
