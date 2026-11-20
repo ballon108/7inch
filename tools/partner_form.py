@@ -16,9 +16,13 @@ FORM = f"""<div class="pf">
 <div><label>E-mail *[email* your-email autocomplete:email]</label></div>
 <div><label>Phone[tel phone autocomplete:tel]</label></div>
 
+<div class="pf-wide"><label>Street and house number *[text* address_1 autocomplete:address-line1]</label></div>
+<div class="pf-wide"><label>Address line 2 (optional)[text address_2 autocomplete:address-line2]</label></div>
+<div><label>Postal code *[text* postcode autocomplete:postal-code]</label></div>
+<div><label>City *[text* city autocomplete:address-level2]</label></div>
 <div><label>Country *[select* country include_blank {country_opts}]</label></div>
-<div><label>EU VAT number (optional)[text vat]</label></div>
-<div class="pf-wide"><label>Company address *[textarea* address 4x2 autocomplete:street-address]</label></div>
+<div><label>State / province (optional)[text state autocomplete:address-level1]</label></div>
+<div class="pf-wide"><label>EU VAT number (optional)[text vat]</label></div>
 
 
 <div class="pf-check">[acceptance consent] I accept the <a href="/trade-terms/" target="_blank" rel="noopener">Trade Terms</a> and the <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>, and agree that 7inch.rare may process my details to handle this application. *[/acceptance]</div>
@@ -32,10 +36,15 @@ Company: [company]
 Contact person: [contact]
 E-mail: [your-email]
 Phone: [phone]
-Country: [country]
 EU VAT number: [vat]
-Address:
-[address]
+
+Billing address (WooCommerce billing fields):
+Street: [address_1]
+Address line 2: [address_2]
+Postal code: [postcode]
+City: [city]
+State / province: [state]
+Country: [country]
 
 
 --
@@ -95,8 +104,8 @@ print(deploy.php(code))
 if "--pages" not in sys.argv:
     sys.exit(0)  # pass --pages to also (re)write /partners and /partners-register
 
-PAGE_LOGIN = '''<!-- wp:group {"className":"wrap partner-page","layout":{"type":"default"}} -->
-<div class="wp-block-group wrap partner-page"><!-- wp:paragraph {"className":"eyebrow"} -->
+PAGE_LOGIN = '''<!-- wp:group {"className":"wrap partner-page pp-wide","layout":{"type":"default"}} -->
+<div class="wp-block-group wrap partner-page pp-wide"><!-- wp:paragraph {"className":"eyebrow"} -->
 <p class="eyebrow">Wholesale &amp; distribution</p>
 <!-- /wp:paragraph -->
 
@@ -104,11 +113,8 @@ PAGE_LOGIN = '''<!-- wp:group {"className":"wrap partner-page","layout":{"type":
 <h1 class="wp-block-heading pp-title">For record shops &amp; distributors</h1>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph {"className":"pp-lead"} -->
-<p class="pp-lead">Record shops order from 50 copies, distributors from 100. Log in to see wholesale prices.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:group {"className":"pp-login pp-boxed","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"pp-grid","layout":{"type":"default"}} -->
+<div class="wp-block-group pp-grid"><!-- wp:group {"className":"pp-login pp-boxed","layout":{"type":"default"}} -->
 <div class="wp-block-group pp-login pp-boxed"><!-- wp:heading {"level":2} -->
 <h2 class="wp-block-heading">Partner login</h2>
 <!-- /wp:heading -->
@@ -118,9 +124,24 @@ PAGE_LOGIN = '''<!-- wp:group {"className":"wrap partner-page","layout":{"type":
 <!-- /wp:shortcode --></div>
 <!-- /wp:group -->
 
-<!-- wp:paragraph {"className":"pp-note pp-register-link"} -->
-<p class="pp-note pp-register-link">New partner? <a href="/partners-register/">Register new account</a></p>
-<!-- /wp:paragraph --></div>
+<!-- wp:group {"className":"pp-side","layout":{"type":"default"}} -->
+<div class="wp-block-group pp-side"><!-- wp:group {"className":"pp-register pp-boxed","layout":{"type":"default"}} -->
+<div class="wp-block-group pp-register pp-boxed"><!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">New partner?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"pp-lead"} -->
+<p class="pp-lead">Record shops order from 50 copies, distributors from 100.<br>To see wholesale prices, register to become a partner.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"className":"ctas"} -->
+<div class="wp-block-buttons ctas"><!-- wp:button {"className":"btn-fill"} -->
+<div class="wp-block-button btn-fill"><a class="wp-block-button__link wp-element-button" href="/partners-register/">Register new account</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->'''
 
 PAGE_REGISTER = '''<!-- wp:group {"className":"wrap partner-page","layout":{"type":"default"}} -->

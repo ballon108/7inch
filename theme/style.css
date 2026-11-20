@@ -259,6 +259,8 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .pf-form .pf-check label{display:flex;gap:10px;align-items:flex-start;font-size:13px;margin:0}
 .pf-form .pf-check input{margin-top:3px;accent-color:var(--ink)}
 .pf-form .pf-check .wpcf7-list-item{margin:0}
+/* grid row gap is 16px; +4px = 20px between the consent checkbox and the Turnstile widget */
+.pf-form .pf-check{margin-bottom:4px}
 .pf-form .wpcf7-submit{min-height:50px;padding:0 28px;border:0;border-radius:100px;background:var(--ink);color:var(--bg);font:500 15px Inter,system-ui,sans-serif;cursor:pointer}
 .pf-form .wpcf7-submit:hover{opacity:.88}
 .pf-form .wpcf7-spinner{margin-inline:12px}
@@ -367,8 +369,16 @@ h3.wp-block-heading{font-size:clamp(28px,3vw,38px);line-height:1.04;letter-spaci
 .pp-login .woocommerce-form-login__rememberme input{accent-color:var(--ink)}
 .pp-login .woocommerce-form-login__submit,.pp-login button[type=submit]{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 26px;border:0;border-radius:100px;background:var(--ink);color:var(--bg);font:500 15px Inter,system-ui,sans-serif;cursor:pointer}
 .pp-login .lost_password{margin:16px 0 0;font-size:14px}
+/* more room between the password field and the Turnstile widget in login forms */
+.woocommerce-form-login p:has(#password){margin-bottom:24px}
 .pp-login .woocommerce-form-login .clear{display:none}
 @media(max-width:860px){.pp-grid{grid-template-columns:minmax(0,1fr)}}
+/* partners login page: right column = threshold lead + register card */
+.pp-wide:has(.pp-side) .pp-title{padding-bottom:40px}
+.pp-side{display:flex;flex-direction:column;gap:24px}
+.pp-side .pp-lead{margin:0 0 24px;max-width:none;font-size:20px;line-height:1.4}
+.pp-register.pp-boxed{padding:0;border:0;border-radius:0;background:none}
+.pp-register h2{font-size:clamp(22px,2.6vw,28px);font-weight:400;letter-spacing:-.03em;line-height:1.1;margin:0 0 16px}
 .pp-login .form-row-first,.pp-login .form-row-last,.pp-login .form-row{float:none!important;width:100%!important;display:block;margin-right:0}
 .about-page h2{font-size:clamp(24px,3vw,32px);font-weight:400;letter-spacing:-.03em;margin:40px 0 12px}
 .about-page p,.about-page li{font-size:17px;line-height:1.55;color:var(--ash)}
