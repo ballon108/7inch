@@ -68,6 +68,12 @@ if ( ! function_exists( 'i7de_on' ) ) {
 			'The philosophy behind it' => 'Die Philosophie dahinter', 'Built for Sunday cruising' => 'Gemacht fürs Sonntags-Cruisen',
 			'Every episode pairs two songs that belong together: well-known classics and cuts only diggers carry in their record bag, as a limited 7" with its own label colour.' => 'Jede Episode bringt zwei Songs zusammen, die zusammengehören: bekannte Klassiker und Tracks, die nur echte Digger in der Plattentasche haben – als limitierte 7" mit eigener Labelfarbe.',
 			'LOWRIDER ANTHEMS is the West Coast side of 7inch.rare: G-Funk and West Coast Hip Hop only, the soundtrack of chrome, hydraulics and slow rides down palm-lined streets.' => 'LOWRIDER ANTHEMS ist die West-Coast-Seite von 7inch.rare: nur G-Funk und West-Coast-Hip-Hop – der Soundtrack zu Chrom, Hydraulik und langsamen Runden über palmengesäumte Boulevards.',
+			// Contact form + partner login (CSV table, "Kontakt" / "Partner").
+			'Your name *' => 'Dein Name *', 'Topic' => 'Thema', 'Order question' => 'Frage zur Bestellung', 'Shipping' => 'Versand',
+			'Returns and warranty' => 'Rücksendung & Gewährleistung', 'Wholesale / distribution' => 'Händler / Vertrieb', 'Other' => 'Sonstiges',
+			'Order number (optional)' => 'Bestellnummer (optional)', 'Message *' => 'Nachricht *', 'E-mail *' => 'E-Mail *', 'Send a message' => 'Nachricht senden',
+			'Username or email *' => 'Benutzername oder E-Mail *', 'Required' => 'Pflichtfeld', 'Password *' => 'Passwort *', 'Remember me' => 'Angemeldet bleiben',
+			'Login' => 'Anmelden', 'Lost your password?' => 'Passwort vergessen?', 'Partner login' => 'Partner-Login',
 			// Login / registration shortcodes and buttons.
 			'You are logged in.' => 'Sie sind angemeldet.', 'You already have an account.' => 'Sie haben bereits ein Konto.',
 			'Go to My account' => 'Zu Mein Konto', 'Log out' => 'Abmelden',

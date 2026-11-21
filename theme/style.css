@@ -850,3 +850,27 @@ body.woocommerce-checkout .shop-page .woocommerce,body.woocommerce-checkout .sho
 #cookie-notice .cookie-revoke-container{color:var(--ash)!important;padding:16px 24px!important}
 #cookie-notice .cookie-revoke-container .cn-text-container{font-size:14px}
 @media(max-width:600px){#cookie-notice{bottom:12px!important}#cookie-notice .cookie-notice-container{padding:18px!important}#cookie-notice .cn-buttons-container{width:100%}#cookie-notice .cn-set-cookie{flex:1 1 auto;text-align:center}}
+
+/* Checkout shipping methods: name and price on one line where it fits, price never breaks ("DHL – untracked: €6.64"). */
+.shop-page .wc-block-components-shipping-rates-control .wc-block-components-radio-control__label-group{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;column-gap:12px;width:100%}
+.shop-page .wc-block-components-shipping-rates-control .wc-block-components-radio-control__label{flex:1 1 auto;min-width:0}
+.shop-page .wc-block-components-shipping-rates-control .wc-block-components-radio-control__secondary-label{flex:0 0 auto;white-space:nowrap}
+
+/* ── Hero on phones: cover smaller so title + "View release" fit the first screen ── */
+@media(max-width:960px){.hero-slide{gap:14px;padding-block:14px 44px}.hero-slide .scene{width:min(100%,420px);margin-inline:auto}}
+@media(max-width:600px){.hero-slide .scene{width:min(74%,300px)}.hero-slide .htext{gap:12px}.hero-slide h1{font-size:clamp(34px,10vw,48px)}.hero-slide .lead{font-size:15px;line-height:1.45}}
+@media(max-width:600px){.hero-slide .scene{margin-bottom:-18px}.hero-slide .badge{margin:0}.hero-slide h1{margin:12px 0 10px}.hero-slide .wp-block-buttons.ctas{margin-top:18px}.hero-slide .dots{margin-top:22px}}
+
+/* Cookie notice: once a choice is stored the (empty) banner must not leave a 2px line at the bottom. */
+body.cookies-set #cookie-notice,#cookie-notice.cookie-notice-hidden{display:none!important}
+
+/* Series panels: same frame + background on both (frame drawn above the photo, not under it). */
+.panel{box-shadow:none}
+.panel::after{content:"";position:absolute;inset:0;z-index:3;border-radius:inherit;box-shadow:inset 0 0 0 1px var(--halo);pointer-events:none}
+.panel.mp{background:#06090A}
+
+/* Buy box: VAT/shipping note under the price (not glued to it); button never wraps. */
+.buy .woocommerce-price-suffix{display:block;margin:8px 0 0;font-size:14px;line-height:1.3;letter-spacing:0;color:var(--mute);white-space:normal}
+.buy .wc-block-components-product-price{display:block}
+.buy .single_add_to_cart_button,.buy .wp-element-button{white-space:nowrap;min-width:max-content}
+@media(max-width:600px){.buy{padding:20px}.buy .wp-block-woocommerce-product-price,.buy .price{flex:1 1 100%}.buy form.cart{flex:1 1 100%}}

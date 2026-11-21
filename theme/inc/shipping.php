@@ -57,8 +57,12 @@ add_action( 'woocommerce_shipping_init', function () {
 			foreach ( $rates as $r ) {
 				$cost = $r[0];
 				// Consumer shipping costs are gross (VAT included): split the VAT out so the customer pays exactly the listed amount.
-				if ( $cost > 0 && wc_tax_enabled() && wc_prices_include_tax() ) {
-					$trates = function_exists( 'i7_is_vat_exempt' ) && i7_is_vat_exempt() ? WC_Tax::get_base_tax_rates( '' ) : WC_Tax::get_shipping_tax_rates();
+				// Germanized ("shipping costs include tax") already splits the VAT out of the cost of every method, VAT-exempt customers included;
+				// doing it here as well would divide twice (7.90 → 5.58 instead of 6.64).
+				$exempt = function_exists( 'i7_is_vat_exempt' ) && i7_is_vat_exempt();
+				$gzd    = function_exists( 'wc_gzd_additional_costs_include_tax' ) && wc_gzd_additional_costs_include_tax();
+				if ( $cost > 0 && wc_tax_enabled() && wc_prices_include_tax() && ! $gzd ) {
+					$trates = $exempt ? WC_Tax::get_base_tax_rates( '' ) : WC_Tax::get_shipping_tax_rates();
 					$cost  -= array_sum( WC_Tax::calc_inclusive_tax( $cost, $trates ) );
 				}
 				$this->add_rate( array( 'id' => $this->get_rate_id( $r[2] ), 'label' => 'DHL – ' . $r[1], 'cost' => $cost ) );
