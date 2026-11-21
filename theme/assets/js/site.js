@@ -2,6 +2,23 @@
   'use strict';
   var root = document.documentElement;
 
+  /* ── Day / Night (default Night; choice saved in localStorage) ─ */
+  var themeBtns = document.querySelectorAll('#themes button');
+  function curTheme() { return root.dataset.theme === 'light' ? 'light' : 'dark'; }
+  function paintTheme() {
+    var c = curTheme();
+    themeBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.th === c); });
+    window.dispatchEvent(new Event('themechange'));
+  }
+  themeBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      root.dataset.theme = b.dataset.th;
+      try { localStorage.setItem('theme', b.dataset.th); } catch (e) {}
+      paintTheme();
+    });
+  });
+  paintTheme();
+
   /* ── Hero carousel ───────────────────────────────────────────── */
   var hero = document.getElementById('home');
   var slides = hero ? Array.prototype.slice.call(hero.querySelectorAll('.hero-slide')) : [];

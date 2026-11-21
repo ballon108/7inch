@@ -14,7 +14,7 @@ $releases = i7_releases( array(
 ) );
 if ( ! $releases ) { echo '<p class="i7-empty">Mark releases as “Show in hero carousel” to fill this block.</p>'; return; }
 ?>
-<section id="home" class="wp-block-group hero"><div class="wp-block-group wrap"><div class="wp-block-group hero-slides">
+<section id="home" class="wp-block-group hero"><h1 class="screen-reader-text">7inch.rare - Music Shop</h1><div class="wp-block-group wrap"><div class="wp-block-group hero-slides">
 <?php foreach ( $releases as $i => $r ) :
 	$term = i7_series_of( $r->ID );
 	$s    = i7_accent( $term );
@@ -29,7 +29,7 @@ if ( ! $releases ) { echo '<p class="i7-empty">Mark releases as “Show in hero 
 	<div class="wp-block-group hero-slide <?php echo esc_attr( $s ); ?>" data-title="<?php echo esc_attr( $title ); ?>">
 		<div class="wp-block-group htext">
 			<p class="badge has-<?php echo esc_attr( $s ); ?>-color has-text-color"><?php echo esc_html( $badge ); ?></p>
-			<h1 class="wp-block-heading"><?php echo esc_html( $title ); ?></h1>
+			<h2 class="wp-block-heading"><?php echo esc_html( $title ); ?></h2>
 			<p class="lead"><?php echo esc_html( trim( $lead ) ); ?></p>
 			<div class="wp-block-buttons ctas">
 				<div class="wp-block-button btn-fill"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $ispre ? $cp : $cv ); ?></a></div>

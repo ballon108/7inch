@@ -86,7 +86,7 @@ stage.addEventListener('dblclick', e => { if (!matchMedia('(hover: hover) and (p
 stage.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') rotY -= 0.2; if (e.key === 'ArrowRight') rotY += 0.2; });
 function resize() { const w = stage.clientWidth, h = stage.clientHeight; if (!w) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(stage); resize();
-const isDark = () => true; // dark mode only
+const isDark = () => document.documentElement.dataset.theme !== 'light';
 function themeEdge() { const dark = isDark(); edge.color.set(dark ? 0xd9d2c4 : 0xf1ebdf); shadePod(dark); scene.fog = new THREE.Fog(dark ? 0x06090a : 0xf4f2ee, 6.6, 8.4); }
 addEventListener('themechange', themeEdge); themeEdge();
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; const clock = new THREE.Clock();

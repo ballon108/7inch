@@ -18,8 +18,9 @@ add_action( 'wp_head', function () {
 	foreach ( array( 'inter-latin-400', 'inter-latin-500' ) as $font ) {
 		echo '<link rel="preload" href="' . esc_url( $f . $font . '.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
 	}
-	// Dark mode only.
-	echo '<meta name="color-scheme" content="dark">' . "\n";
+	// Default Night; apply a saved Day/Night choice before first paint.
+	echo '<meta name="color-scheme" content="dark light">' . "\n";
+	echo '<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>' . "\n";
 }, 1 );
 
 /* ── SCF / ACF integration ─────────────────────────────────────────
@@ -135,7 +136,7 @@ add_action( 'woocommerce_after_customer_login_form', function () {
 } );
 
 
-/* Dark mode only: no Day/Night switch, the theme is fixed. */
+/* Default theme is Night; the Day/Night switch in the header overrides it (head script above). */
 add_filter( 'language_attributes', function ( $out ) { return $out . ' data-theme="dark"'; } );
 
 
